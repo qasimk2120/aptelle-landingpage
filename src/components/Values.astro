@@ -1,0 +1,29 @@
+---
+import { Icon } from "astro-icon/components";
+import { t, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+const icons = ["lucide:user-round", "lucide:waypoints", "lucide:gauge"];
+---
+<section class="values wrap" aria-label="How Aptelle works">
+  <div class="vgrid">
+    {s.values.map((v, idx) => (
+      <article class="v">
+        <div class="ic" aria-hidden="true"><Icon name={icons[idx]} /></div>
+        <h3 class="serif">{v.t}</h3>
+        <p>{v.p}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: 0.2 });
+  document.querySelectorAll(".v").forEach((el, i) => {
+    (el as HTMLElement).style.transitionDelay = i * 0.1 + "s";
+    io.observe(el);
+  });
+</script>

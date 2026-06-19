@@ -1,0 +1,51 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+const lang = "en" as const;
+---
+<Base
+  lang={lang}
+  path="privacy"
+  localized={false}
+  title="Privacy Policy | Aptelle"
+  description="How Aptelle collects, uses, and protects the information you share, including waitlist email addresses."
+>
+  <Header lang={lang} path="privacy" />
+  <main id="main">
+    <article class="wrap legal">
+      <h1 class="serif">Privacy Policy</h1>
+      <p class="updated">Last updated 19 June 2026</p>
+
+      <p>This policy explains what Aptelle ("we", "us") collects and how we handle it. Aptelle is pre-launch, so today this site mainly collects waitlist sign-ups.</p>
+
+      <h2>What we collect</h2>
+      <ul>
+        <li>The email address you submit to the waitlist.</li>
+        <li>Basic, non-identifying technical data your browser sends to our hosting and network providers (such as IP address and request logs), used for security and reliability.</li>
+      </ul>
+
+      <h2>Why we collect it</h2>
+      <p>We use your email only to tell you when early access opens and to send occasional updates about Aptelle. We do not sell your data, and we do not share it for advertising.</p>
+
+      <h2>Where it is stored</h2>
+      <p>Waitlist entries are stored using Google Firebase (Firestore). The site is delivered through GitHub Pages and Cloudflare. Acknowledgement and update emails may be sent through a third-party email provider. These providers process data on our behalf under their own security and privacy terms.</p>
+
+      <h2>How long we keep it</h2>
+      <p>We keep your email until you ask us to remove it or until we decide it is no longer needed for the waitlist, whichever comes first.</p>
+
+      <h2>Your choices</h2>
+      <p>You can ask us to access or delete your information at any time by emailing <a href="mailto:hello@aptelle.com">hello@aptelle.com</a>. Every email we send will also include a way to unsubscribe.</p>
+
+      <h2>Children</h2>
+      <p>Aptelle is not directed to children under 16, and we do not knowingly collect their data.</p>
+
+      <h2>Changes</h2>
+      <p>We may update this policy as the product grows. Material changes will be reflected by the date above.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about privacy can go to <a href="mailto:hello@aptelle.com">hello@aptelle.com</a>.</p>
+    </article>
+  </main>
+  <Footer lang={lang} />
+</Base>

@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+functions/node_modules/
+.legacy-static/
+.env
+.env.*
+.DS_Store
+*.log
+.firebase/

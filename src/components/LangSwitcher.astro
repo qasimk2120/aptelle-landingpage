@@ -1,0 +1,18 @@
+---
+import { languages, localeHref, type Lang } from "../i18n/ui";
+interface Props { lang: Lang; path?: string }
+const { lang, path = "" } = Astro.props;
+const locales: Lang[] = ["en", "fr", "de", "ar"];
+---
+<details class="lang">
+  <summary aria-label="Change language">
+    <span>{languages[lang]}</span>
+  </summary>
+  <ul>
+    {locales.map((l) => (
+      <li>
+        <a href={localeHref(l, path)} hreflang={l} aria-current={l === lang ? "true" : "false"}>{languages[l]}</a>
+      </li>
+    ))}
+  </ul>
+</details>

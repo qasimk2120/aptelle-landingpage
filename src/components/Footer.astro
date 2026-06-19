@@ -1,0 +1,19 @@
+---
+import { t, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+const year = new Date().getFullYear();
+---
+<footer>
+  <div class="wrap frow">
+    <div>&copy; {year} Apt<span class="elle">Elle</span>. {s.rights}</div>
+    <nav class="fnav" aria-label="Footer">
+      <a href="/privacy">{s.privacy}</a>
+      <a href="/terms">{s.terms}</a>
+      <a href="mailto:hello@aptelle.com">hello@aptelle.com</a>
+      <a href="https://instagram.com/aptelle" rel="me noopener">Instagram</a>
+      <a href="https://x.com/iqasim_explores" rel="me noopener">X</a>
+    </nav>
+  </div>
+</footer>

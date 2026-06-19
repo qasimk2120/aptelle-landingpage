@@ -1,0 +1,9 @@
+---
+import { t, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+---
+<section class="vision wrap">
+  <p class="serif">{s.visionPre}<span class="em">{s.visionEm}</span>{s.visionPost}</p>
+</section>

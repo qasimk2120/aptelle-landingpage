@@ -1,0 +1,74 @@
+---
+import ConfidenceCard from "./ConfidenceCard.astro";
+import { t, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+---
+<section class="hero wrap">
+  <div class="grid">
+    <div>
+      <span class="eyebrow"><span class="pulse" aria-hidden="true"></span>{s.eyebrow}</span>
+      <h1 class="serif">{s.h1a}<span class="accent">{s.h1accent}</span>{s.h1b}</h1>
+      <p class="lead">{s.lead}</p>
+
+      <form class="signup" id="waitlist" data-lang={lang} data-ok={s.ok} data-err={s.err} novalidate>
+        <label for="email" class="skip">Email</label>
+        <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder={s.emailPlaceholder} required />
+        <button type="submit">{s.cta}</button>
+      </form>
+      <p class="formnote" id="note" role="status" aria-live="polite">{s.note}</p>
+    </div>
+    <ConfidenceCard lang={lang} />
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("waitlist") as HTMLFormElement | null;
+  const note = document.getElementById("note");
+  const input = document.getElementById("email") as HTMLInputElement | null;
+  if (form && note && input) {
+    const okMsg = form.dataset.ok || "You are on the list.";
+    const errMsg = form.dataset.err || "Please enter a valid email.";
+    const lang = form.dataset.lang || "en";
+    const btn = form.querySelector("button");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = input.value.trim();
+      if (!email || input.validity.typeMismatch || email.indexOf("@") < 0) {
+        note.textContent = errMsg; note.className = "formnote err"; input.focus(); return;
+      }
+      if (btn) btn.disabled = true;
+      try {
+        const cfg = {
+          apiKey: import.meta.env.PUBLIC_FIREBASE_API_KEY,
+          authDomain: import.meta.env.PUBLIC_FIREBASE_AUTH_DOMAIN,
+          projectId: import.meta.env.PUBLIC_FIREBASE_PROJECT_ID,
+          storageBucket: import.meta.env.PUBLIC_FIREBASE_STORAGE_BUCKET,
+          messagingSenderId: import.meta.env.PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+          appId: import.meta.env.PUBLIC_FIREBASE_APP_ID,
+        };
+        if (cfg.apiKey && cfg.projectId) {
+          // Lazy-load Firebase from the CDN so it is never in the page's critical path.
+          const { initializeApp, getApps } = await import(
+            /* @vite-ignore */ "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js"
+          );
+          const { getFirestore, collection, addDoc, serverTimestamp } = await import(
+            /* @vite-ignore */ "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js"
+          );
+          const app = getApps().length ? getApps()[0] : initializeApp(cfg);
+          const db = getFirestore(app);
+          await addDoc(collection(db, "waitlist"), { email, lang, source: "landing", createdAt: serverTimestamp() });
+        }
+        note.textContent = okMsg; note.className = "formnote ok";
+        form.reset();
+      } catch (err) {
+        note.textContent = okMsg; note.className = "formnote ok"; // fail soft, do not block the visitor
+        form.reset();
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    });
+  }
+</script>

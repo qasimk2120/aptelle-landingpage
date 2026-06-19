@@ -1,0 +1,16 @@
+---
+import LangSwitcher from "./LangSwitcher.astro";
+import { t, localeHref, type Lang } from "../i18n/ui";
+interface Props { lang: Lang; path?: string }
+const { lang, path = "" } = Astro.props;
+const s = t(lang);
+---
+<header>
+  <div class="wrap nav">
+    <a class="brand serif" href={localeHref(lang)} aria-label="Aptelle home"><span class="dot" aria-hidden="true"></span>Apt<span class="elle">Elle</span></a>
+    <div class="navright">
+      <LangSwitcher lang={lang} path={path} />
+      <a class="navcta" href="#waitlist">{s.navCta}</a>
+    </div>
+  </div>
+</header>

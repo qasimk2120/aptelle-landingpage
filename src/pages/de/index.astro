@@ -1,0 +1,18 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Hero from "../../components/Hero.astro";
+import Values from "../../components/Values.astro";
+import Vision from "../../components/Vision.astro";
+import Footer from "../../components/Footer.astro";
+const lang = "de" as const;
+---
+<Base lang={lang}>
+  <Header lang={lang} />
+  <main id="main">
+    <Hero lang={lang} />
+    <Values lang={lang} />
+    <Vision lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</Base>
