@@ -14,9 +14,12 @@ body{
 }
 .serif{font-family:"Fraunces",Georgia,"Times New Roman",serif}
 a{color:inherit}
+a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--clay);outline-offset:2px;border-radius:6px}
 .wrap{
   width:100%; max-width:var(--maxw); margin-inline:auto;
-  padding-inline:clamp(20px,5vw,24px);
+  padding-left:max(clamp(20px,5vw,24px), env(safe-area-inset-left));
+  padding-right:max(clamp(20px,5vw,24px), env(safe-area-inset-right));
 }
 .skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--bg);padding:10px 16px;z-index:100}
 .skip:focus{left:12px;top:12px}
@@ -34,7 +37,7 @@ a{color:inherit}
 
 header{position:sticky;top:0;z-index:20;backdrop-filter:saturate(140%) blur(8px);
   background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:14px;height:68px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px;padding-block:10px;flex-wrap:wrap}
 .brand{font-size:1.45rem;font-weight:600;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;text-decoration:none}
 .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--clay);box-shadow:0 0 0 4px color-mix(in srgb,var(--clay) 22%,transparent)}
 .brand .elle,.frow .elle{font-style:italic}
@@ -57,7 +60,7 @@ header{position:sticky;top:0;z-index:20;backdrop-filter:saturate(140%) blur(8px)
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:6px 14px;border-radius:999px;background:var(--card)}
 .eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2.2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:.4;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
-h1{font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.04;letter-spacing:-.02em;font-weight:500;margin:22px 0 18px;overflow-wrap:break-word}
+h1{font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.04;letter-spacing:-.02em;font-weight:500;margin:22px 0 18px;overflow-wrap:break-word;text-wrap:balance}
 h1 .accent{font-style:italic;color:var(--clay)}
 .lead{font-size:1.16rem;color:var(--muted);max-width:36ch;margin-bottom:30px}
 
@@ -94,7 +97,7 @@ form.signup{display:flex;gap:10px;max-width:460px;flex-wrap:wrap}
 .v.in{opacity:1;transform:none}
 .v .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:#fff;border:1px solid var(--line);margin-bottom:16px;color:var(--clay)}
 .v .ic svg{width:24px;height:24px}
-.v h3{font-size:1.18rem;font-weight:600;margin-bottom:8px}
+.v h2{font-size:1.18rem;font-weight:600;margin-bottom:8px}
 .v p{color:var(--muted);font-size:.98rem}
 
 .vision{padding:64px 0}
@@ -121,9 +124,20 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
   .vgrid{grid-template-columns:1fr;gap:22px}
   .hero{padding:48px 0 20px}
 }
+@media(max-width:560px){
+  .nav{gap:10px}
+  .brand{font-size:1.3rem}
+  .navcta{padding:11px 14px;font-size:.9rem}
+  .lang summary{padding:11px 12px}
+}
 @media(max-width:430px){
-  .navcta{padding:8px 14px;font-size:.9rem}
   .card{padding:22px}
+  .signup button{flex:1 0 100%}
+  .hero{padding:40px 0 16px}
+  h1{font-size:clamp(2.1rem,8vw,3rem)}
+}
+@media(max-width:360px){
+  .navcta{display:none}
 }
 @media(prefers-reduced-motion:reduce){
   .blob{animation:none}
