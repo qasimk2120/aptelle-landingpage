@@ -1,0 +1,17 @@
+# Aptelle
+
+> Aptelle helps you find the right size in any brand before you buy, powered by your body profile and real fit data.
+
+Aptelle is a fit intelligence platform for online clothing. It recommends the right clothing size across different brands using a personalized body profile, the sizes you already wear, fit preferences, and real fit outcomes from similar shoppers. Every recommendation comes with a confidence score.
+
+## What Aptelle does
+- Builds a fit profile from your body and the sizes you already own
+- Maps how brands actually fit through a cross-brand fit graph
+- Recommends your size in a new brand with a confidence score
+- Learns continuously from real purchase and fit outcomes
+
+## Status
+- Pre-launch. Waitlist open at https://aptelle.com/
+
+## Contact
+- hello@aptelle.com
