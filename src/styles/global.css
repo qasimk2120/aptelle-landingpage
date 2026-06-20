@@ -18,8 +18,8 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 :focus-visible{outline:2px solid var(--clay);outline-offset:2px;border-radius:6px}
 .wrap{
   width:100%; max-width:var(--maxw); margin-inline:auto;
-  padding-left:max(clamp(22px,6vw,28px), env(safe-area-inset-left));
-  padding-right:max(clamp(22px,6vw,28px), env(safe-area-inset-right));
+  padding-left:max(clamp(24px,6vw,32px), env(safe-area-inset-left));
+  padding-right:max(clamp(24px,6vw,32px), env(safe-area-inset-right));
 }
 .skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--bg);padding:10px 16px;z-index:100}
 .skip:focus{left:12px;top:12px}
