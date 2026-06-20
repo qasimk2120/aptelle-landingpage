@@ -87,7 +87,7 @@ form.signup{display:flex;gap:10px;max-width:460px;flex-wrap:wrap}
 .ring .pct{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .ring .pct b{font-size:1.6rem;font-weight:600}
 .ring .pct span{font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.sizeline{margin-top:26px;padding-top:22px;border-top:1px solid var(--line);display:flex;align-items:baseline;gap:12px}
+.sizeline{margin-top:26px;padding-top:22px;border-top:1px solid var(--line);display:flex;align-items:center;gap:14px}
 .sizeline .big{font-size:2.6rem;font-weight:600;line-height:1}
 .sizeline .small{color:var(--muted);font-size:.95rem}
 .chips{margin-top:20px;display:flex;gap:8px;flex-wrap:wrap}
