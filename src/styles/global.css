@@ -18,8 +18,8 @@ a,button,summary{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 :focus-visible{outline:2px solid var(--clay);outline-offset:2px;border-radius:6px}
 .wrap{
   width:100%; max-width:var(--maxw); margin-inline:auto;
-  padding-left:max(clamp(20px,5vw,24px), env(safe-area-inset-left));
-  padding-right:max(clamp(20px,5vw,24px), env(safe-area-inset-right));
+  padding-left:max(clamp(22px,6vw,28px), env(safe-area-inset-left));
+  padding-right:max(clamp(22px,6vw,28px), env(safe-area-inset-right));
 }
 .skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--bg);padding:10px 16px;z-index:100}
 .skip:focus{left:12px;top:12px}
@@ -40,8 +40,7 @@ header{position:sticky;top:0;z-index:20;backdrop-filter:saturate(140%) blur(8px)
 .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px;padding-block:10px;flex-wrap:wrap}
 .brand{font-size:1.45rem;font-weight:600;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;text-decoration:none}
 .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--clay);box-shadow:0 0 0 4px color-mix(in srgb,var(--clay) 22%,transparent)}
-.brand .elle,.frow .elle{font-style:italic}
-.frow .elle{font-family:"Fraunces",Georgia,serif}
+.brand .elle,.frow .elle{color:var(--clay)}
 .navright{display:flex;align-items:center;gap:14px}
 .navcta{font-size:.95rem;text-decoration:none;border:1px solid var(--ink);padding:9px 18px;border-radius:999px;transition:background .2s,color .2s;white-space:nowrap}
 .navcta:hover{background:var(--ink);color:var(--bg)}
@@ -57,9 +56,13 @@ header{position:sticky;top:0;z-index:20;backdrop-filter:saturate(140%) blur(8px)
 
 .hero{padding:72px 0 40px}
 .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:6px 14px;border-radius:999px;background:var(--card)}
-.eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2.2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:.4;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
+.kicker{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.kicker .kdot{position:relative;width:8px;height:8px;border-radius:50%;background:var(--green);flex:none}
+.kicker .kdot::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid var(--green);animation:ping 2.4s ease-out infinite}
+.kicker .ktext{font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.kicker .kline{height:1px;flex:1;min-width:24px;background:linear-gradient(to right,var(--line),transparent)}
+[dir="rtl"] .kicker .kline{background:linear-gradient(to left,var(--line),transparent)}
+@keyframes ping{0%{transform:scale(.5);opacity:.7}100%{transform:scale(1.7);opacity:0}}
 h1{font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.04;letter-spacing:-.02em;font-weight:500;margin:22px 0 18px;overflow-wrap:break-word;text-wrap:balance}
 h1 .accent{font-style:italic;color:var(--clay)}
 .lead{font-size:1.16rem;color:var(--muted);max-width:36ch;margin-bottom:30px}
@@ -141,7 +144,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
 }
 @media(prefers-reduced-motion:reduce){
   .blob{animation:none}
-  .pulse{animation:none}
+  .kicker .kdot::after{animation:none}
   html{scroll-behavior:auto}
   *{transition:none !important}
 }
