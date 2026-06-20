@@ -126,6 +126,18 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
   .grid{grid-template-columns:1fr;gap:36px}
   .vgrid{grid-template-columns:1fr;gap:22px}
   .hero{padding:48px 0 20px}
+  /* center text on mobile, desktop stays left-aligned */
+  .hero .grid > div:first-child{text-align:center}
+  .kicker{justify-content:center}
+  .kicker .kline{display:none}
+  .lead{margin-inline:auto}
+  form.signup{margin-inline:auto;justify-content:center}
+  .formnote{text-align:center}
+  .v{text-align:center}
+  .v .ic{margin-inline:auto}
+  .vision p{margin-inline:auto;text-align:center}
+  .frow{justify-content:center;text-align:center}
+  .fnav{justify-content:center}
 }
 @media(max-width:560px){
   .nav{gap:10px}
