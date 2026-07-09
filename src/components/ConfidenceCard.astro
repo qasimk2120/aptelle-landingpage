@@ -8,18 +8,21 @@ const s = t(lang);
   <div class="row">
     <div>
       <div class="label">{s.cardLabel}</div>
-      <div class="brandname serif" id="bn">Zara</div>
+      <div class="brandrow">
+        <span class="bbadge" id="bb" aria-hidden="true">Z</span>
+        <span class="brandname" id="bn">Zara</span>
+      </div>
     </div>
     <div class="ring" role="img" aria-label={s.confidence}>
       <svg width="118" height="118" viewBox="0 0 118 118" aria-hidden="true">
-        <circle cx="59" cy="59" r="52" fill="none" stroke="rgba(23,19,14,.10)" stroke-width="10"></circle>
-        <circle id="prog" cx="59" cy="59" r="52" fill="none" stroke="#2F6F57" stroke-width="10" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7"></circle>
+        <circle cx="59" cy="59" r="52" fill="none" stroke="#2D2D31" stroke-width="10"></circle>
+        <circle id="prog" cx="59" cy="59" r="52" fill="none" stroke="#C09047" stroke-width="10" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7"></circle>
       </svg>
       <div class="pct"><b id="pct">0%</b><span>{s.confidence}</span></div>
     </div>
   </div>
   <div class="sizeline">
-    <span class="big serif" id="size">M</span>
+    <span class="big" id="size">M</span>
     <span class="small">{s.cardNote}</span>
   </div>
   <div class="chips" aria-hidden="true">
@@ -40,6 +43,7 @@ const s = t(lang);
   const prog = document.getElementById("prog") as unknown as SVGCircleElement | null;
   const pctEl = document.getElementById("pct");
   const bn = document.getElementById("bn");
+  const bb = document.getElementById("bb");
   const sizeEl = document.getElementById("size");
   let i = 0;
   function setRing(target: number) {
@@ -59,7 +63,7 @@ const s = t(lang);
   }
   function render() {
     const d = data[i];
-    if (bn) { bn.style.opacity = "0"; setTimeout(() => { bn.textContent = d.brand; if (sizeEl) sizeEl.textContent = d.size; bn.style.opacity = "1"; }, 220); }
+    if (bn) { bn.style.opacity = "0"; if (bb) bb.style.opacity = "0"; setTimeout(() => { bn.textContent = d.brand; if (bb) { bb.textContent = d.brand.charAt(0).toUpperCase(); bb.style.opacity = "1"; } if (sizeEl) sizeEl.textContent = d.size; bn.style.opacity = "1"; }, 220); }
     setRing(d.pct);
   }
   render();

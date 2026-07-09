@@ -39,6 +39,7 @@ type Strings = {
   cardNote: string;
   confidence: string;
   chips: [string, string, string];
+  featuresTitle: string;
   values: { t: string; p: string }[];
   visionPre: string;
   visionEm: string;
@@ -57,7 +58,7 @@ export const ui: Record<Lang, Strings> = {
     eyebrow: "Fit intelligence, launching soon",
     h1a: "Your ",
     h1accent: "right size",
-    h1b: " in any brand.",
+    h1b: " in any brand",
     lead: "Aptelle helps you find the right size in any brand before you buy, powered by your body profile and real fit data.",
     navCta: "Join the waitlist",
     emailPlaceholder: "you@email.com",
@@ -69,6 +70,7 @@ export const ui: Record<Lang, Strings> = {
     cardNote: "recommended, based on your profile and shoppers like you",
     confidence: "confidence",
     chips: ["Body profile", "Sizes you own", "Similar shoppers"],
+    featuresTitle: "Core features",
     values: [
       { t: "A profile that learns you", p: "Tell us a little about your body and the sizes you already wear. Aptelle builds a fit profile that gets sharper over time." },
       { t: "A cross-brand fit graph", p: "Sizing is different at every label. Aptelle maps how brands actually fit, so a size in one place translates to the right size in another." },
@@ -89,7 +91,7 @@ export const ui: Record<Lang, Strings> = {
     eyebrow: "Intelligence d'ajustement, bientôt disponible",
     h1a: "Votre ",
     h1accent: "bonne taille",
-    h1b: " dans chaque marque.",
+    h1b: " dans chaque marque",
     lead: "Aptelle vous aide à trouver la bonne taille dans chaque marque avant d'acheter, grâce à votre profil corporel et à des données d'ajustement réelles.",
     navCta: "Rejoindre la liste d'attente",
     emailPlaceholder: "vous@email.com",
@@ -101,6 +103,7 @@ export const ui: Record<Lang, Strings> = {
     cardNote: "recommandée, d'après votre profil et des acheteurs comme vous",
     confidence: "confiance",
     chips: ["Profil corporel", "Tailles que vous portez", "Acheteurs similaires"],
+    featuresTitle: "Fonctionnalités clés",
     values: [
       { t: "Un profil qui vous apprend", p: "Indiquez quelques informations sur votre corps et les tailles que vous portez déjà. Aptelle construit un profil d'ajustement qui s'affine avec le temps." },
       { t: "Un graphe d'ajustement multi-marques", p: "Chaque marque taille différemment. Aptelle cartographie la façon dont les marques taillent vraiment, pour qu'une taille se traduise par la bonne taille ailleurs." },
@@ -121,7 +124,7 @@ export const ui: Record<Lang, Strings> = {
     eyebrow: "Passform-Intelligenz, bald verfügbar",
     h1a: "Deine ",
     h1accent: "richtige Größe",
-    h1b: " in jeder Marke.",
+    h1b: " in jeder Marke",
     lead: "Aptelle hilft dir, in jeder Marke die richtige Größe zu finden, bevor du kaufst, auf Basis deines Körperprofils und echter Passform-Daten.",
     navCta: "Zur Warteliste",
     emailPlaceholder: "du@email.com",
@@ -133,6 +136,7 @@ export const ui: Record<Lang, Strings> = {
     cardNote: "empfohlen, basierend auf deinem Profil und ähnlichen Käufern",
     confidence: "Konfidenz",
     chips: ["Körperprofil", "Größen, die du trägst", "Ähnliche Käufer"],
+    featuresTitle: "Kernfunktionen",
     values: [
       { t: "Ein Profil, das dich kennenlernt", p: "Sag uns ein wenig über deinen Körper und die Größen, die du bereits trägst. Aptelle baut ein Passform-Profil, das mit der Zeit schärfer wird." },
       { t: "Ein markenübergreifender Passform-Graph", p: "Jede Marke fällt anders aus. Aptelle bildet ab, wie Marken wirklich sitzen, damit eine Größe sich anderswo in die richtige Größe übersetzt." },
@@ -153,7 +157,7 @@ export const ui: Record<Lang, Strings> = {
     eyebrow: "ذكاء المقاسات، قريبًا",
     h1a: "",
     h1accent: "مقاسك الصحيح",
-    h1b: " في أي علامة تجارية.",
+    h1b: " في أي علامة تجارية",
     lead: "يساعدك Aptelle على معرفة المقاس الصحيح في أي علامة تجارية قبل الشراء، اعتمادًا على ملف جسمك وبيانات قياس حقيقية.",
     navCta: "انضم إلى قائمة الانتظار",
     emailPlaceholder: "you@email.com",
@@ -165,6 +169,7 @@ export const ui: Record<Lang, Strings> = {
     cardNote: "موصى به، بناءً على ملفك ومتسوّقين مثلك",
     confidence: "الثقة",
     chips: ["ملف الجسم", "المقاسات التي ترتديها", "متسوّقون مشابهون"],
+    featuresTitle: "الميزات الأساسية",
     values: [
       { t: "ملف يتعرّف عليك", p: "أخبرنا قليلًا عن جسمك والمقاسات التي ترتديها بالفعل. يبني Aptelle ملف قياس يزداد دقة مع الوقت." },
       { t: "رسم بياني للمقاسات عبر العلامات", p: "كل علامة تجارية تختلف في المقاس. يرسم Aptelle كيف تناسب العلامات فعليًا، ليتحوّل مقاسك في مكان إلى المقاس الصحيح في مكان آخر." },

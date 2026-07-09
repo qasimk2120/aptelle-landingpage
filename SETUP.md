@@ -1,60 +1,71 @@
-# Aptelle waitlist + email setup
+# Aptelle waitlist setup
 
-The landing page captures waitlist emails into Firebase Firestore, and a Cloud Function sends an acknowledgement email through Resend. The code and config are all in this repo. The steps below need your Google and Resend accounts, so they are yours to run. I cannot create the Firebase project or enable billing on your behalf.
+The landing page stores waitlist emails in Supabase. The browser uses the public Supabase anon key to insert into a locked `waitlist` table. No Firebase project, Blaze plan, Cloud Function, or Firebase secrets are needed.
 
-## Do I need a new email address for Aptelle?
+## 1. Create the Supabase project
 
-No new mailbox is required. Sending is done at the domain level: you verify aptelle.com with an email provider (Resend below) and then send as `hello@aptelle.com` (or `noreply@aptelle.com`). Replies come back to `hello@aptelle.com`, which already forwards to your Gmail through the Cloudflare Email Routing you set up. If you prefer a no-reply sender, add `noreply@aptelle.com` as a routing address in Cloudflare too. That is optional.
+1. Go to `supabase.com`, create a project for Aptelle.
+2. Open Project Settings, API.
+3. Copy:
+   - Project URL
+   - anon public key
 
-## 1. Firebase project
+## 2. Create the waitlist table
 
-1. console.firebase.google.com, Add project (e.g. `aptelle`).
-2. Build, Firestore Database, Create database, Production mode, pick a region.
-3. Project settings, General, scroll to "Your apps", add a Web app. Copy the config values. They map to the GitHub secrets in step 4.
-4. Upgrade the project to the Blaze plan (Cloud Functions need it). Low waitlist volume stays within the free allowance.
+In Supabase, open SQL Editor and run:
 
-## 2. Email provider (Resend)
+```sql
+-- See supabase/waitlist.sql for the source-owned copy.
+create table if not exists public.waitlist (
+  id uuid primary key default gen_random_uuid(),
+  email text not null,
+  lang text not null default 'en' check (lang in ('en', 'fr', 'de', 'ar')),
+  source text not null default 'landing' check (source = 'landing'),
+  created_at timestamptz not null default now()
+);
 
-1. resend.com, create an account.
-2. Domains, add `aptelle.com`. Resend shows DKIM, SPF, and return-path records.
-3. Add those records in Cloudflare DNS (DNS only / grey cloud). Wait for Resend to mark the domain Verified.
-4. API Keys, create one. Keep it for step 3.
+create unique index if not exists waitlist_email_lower_key
+  on public.waitlist (lower(email));
 
-This is what lets the function send from `hello@aptelle.com`. No mailbox needed.
+alter table public.waitlist enable row level security;
 
-## 3. Deploy Firestore rules + the function
-
-Install the Firebase CLI once: `npm install -g firebase-tools`.
-
-```bash
-cd F:\COGNIELEVATE-PRODUCTS\APTELLE\aptelle-landingpage
-firebase login
-firebase use --add            # pick your aptelle project
-cd functions && npm install && cd ..
-firebase functions:secrets:set RESEND_API_KEY    # paste the Resend key
-firebase deploy --only firestore:rules,functions
+drop policy if exists "allow public waitlist inserts" on public.waitlist;
+create policy "allow public waitlist inserts"
+  on public.waitlist
+  for insert
+  to anon
+  with check (
+    email ~* '^[^@[:space:]]+@[^@[:space:]]+\.[^@[:space:]]+$'
+    and length(email) < 254
+    and lang in ('en', 'fr', 'de', 'ar')
+    and source = 'landing'
+  );
 ```
 
-## 4. GitHub Actions build secrets
+There are no public select, update, or delete policies. Visitors can only insert a valid waitlist row.
 
-The site reads Firebase config at build time. In the GitHub repo, Settings, Secrets and variables, Actions, add these six (values from step 1):
+## 3. GitHub Actions build secrets
 
-- `PUBLIC_FIREBASE_API_KEY`
-- `PUBLIC_FIREBASE_AUTH_DOMAIN`
-- `PUBLIC_FIREBASE_PROJECT_ID`
-- `PUBLIC_FIREBASE_STORAGE_BUCKET`
-- `PUBLIC_FIREBASE_MESSAGING_SENDER_ID`
-- `PUBLIC_FIREBASE_APP_ID`
+The site reads Supabase config at build time. In the GitHub repo, Settings, Secrets and variables, Actions, add:
 
-Until these exist, the form still works and confirms to the visitor, it just does not store the email yet. Once set, sign-ups write to the `waitlist` collection and trigger the acknowledgement email.
+- `PUBLIC_SUPABASE_URL`
+- `PUBLIC_SUPABASE_ANON_KEY`
 
-## 5. Local development
+Until these exist, the form still confirms to the visitor, but it does not store the email. Once set, sign-ups write to Supabase.
 
-```bash
+## 4. Local development
+
+```powershell
+Set-Location "F:\COGNIELEVATE-PRODUCTS\APTELLE\aptelle-landingpage"
 npm install
-npm run dev        # http://localhost:4321
-npm run build      # outputs dist/
-npm run preview    # serve the built site
+npm.cmd test
+npm.cmd run dev
+npm.cmd run build
+npm.cmd run preview
 ```
 
-For local Firebase testing, create a `.env` with the same `PUBLIC_FIREBASE_*` values (it is gitignored).
+For local Supabase testing, create a `.env` with the same two `PUBLIC_SUPABASE_*` values. `.env` is gitignored.
+
+## 5. Email acknowledgement
+
+Automatic acknowledgement email is not wired in this Supabase version. Keep it deferred unless you want it now. The likely path is a Supabase Edge Function using Resend, triggered after insert or called after a successful signup.

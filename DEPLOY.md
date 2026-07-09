@@ -28,18 +28,17 @@ git push
 Notes:
 - `public/CNAME` (aptelle.com) and `public/.nojekyll` are copied into `dist/` automatically, so the custom domain keeps working.
 - `node_modules`, `dist`, `.astro`, and `.legacy-static` are gitignored. The old static files live in `.legacy-static/` and are not committed. You can delete that folder anytime.
-- Add the six `PUBLIC_FIREBASE_*` build secrets in the repo (see SETUP.md) so the waitlist stores emails. Without them the form still confirms to the visitor.
+- Add `PUBLIC_SUPABASE_URL` and `PUBLIC_SUPABASE_ANON_KEY` in the repo (see SETUP.md) so the waitlist stores emails. Without them the form still confirms to the visitor.
 
 ## DNS (already configured, no change)
 
 - Apex A records to GitHub Pages IPs, www CNAME to qasimk2120.github.io.
 - For Full (Strict) TLS, keep the one-time grey-cloud bootstrap result. Currently proxied with a valid origin cert.
 - Email: MX, SPF, DKIM, DMARC via Cloudflare Email Routing.
-- To send acknowledgement emails, add the Resend domain-verification records (see SETUP.md).
 
 ## Waitlist + acknowledgement email
 
-See SETUP.md. Short version: create a Firebase project (Blaze plan), verify aptelle.com in Resend, set the `RESEND_API_KEY` function secret, `firebase deploy --only firestore:rules,functions`, and add the six build secrets to GitHub.
+See SETUP.md. Short version: create a Supabase project, run `supabase/waitlist.sql`, and add `PUBLIC_SUPABASE_URL` plus `PUBLIC_SUPABASE_ANON_KEY` to GitHub Actions secrets.
 
 ## Multilingual
 

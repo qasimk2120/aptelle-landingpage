@@ -5,15 +5,38 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
 ---
-<section class="hero wrap">
-  <div class="grid">
+<section class="hero">
+  <svg class="sparkfield" viewBox="0 0 1100 620" aria-hidden="true" preserveAspectRatio="xMaxYMid slice">
+    <defs>
+      <path id="st" d="M0-9C.5-3.5 3.5-.5 9 0 3.5.5.5 3.5 0 9-.5 3.5-3.5.5-9 0-3.5-.5-.5-3.5 0-9Z"/>
+    </defs>
+    <g fill="#F2D592">
+      <use href="#st" transform="translate(1042 96) scale(1.6)" class="tw t1"/>
+      <use href="#st" transform="translate(986 210) scale(.8)" class="tw t2"/>
+      <use href="#st" transform="translate(1064 330) scale(1.1)" class="tw t3"/>
+      <use href="#st" transform="translate(920 60) scale(.6)" class="tw t4"/>
+      <use href="#st" transform="translate(1008 470) scale(1.4)" class="tw t5"/>
+      <use href="#st" transform="translate(1078 545) scale(.7)" class="tw t2"/>
+      <use href="#st" transform="translate(872 385) scale(.55)" class="tw t3"/>
+      <use href="#st" transform="translate(948 300) scale(.45)" class="tw t1"/>
+      <use href="#st" transform="translate(64 520) scale(.9)" class="tw t4"/>
+      <use href="#st" transform="translate(150 70) scale(.5)" class="tw t5"/>
+      <circle cx="900" cy="150" r="1.6" class="tw t3"/>
+      <circle cx="1030" cy="255" r="1.3" class="tw t1"/>
+      <circle cx="960" cy="540" r="1.8" class="tw t4"/>
+      <circle cx="820" cy="90" r="1.2" class="tw t2"/>
+      <circle cx="1090" cy="430" r="1.4" class="tw t5"/>
+      <circle cx="110" cy="180" r="1.3" class="tw t2"/>
+    </g>
+  </svg>
+  <div class="wrap grid">
     <div>
       <div class="kicker">
         <span class="kdot" aria-hidden="true"></span>
         <span class="ktext">{s.eyebrow}</span>
         <span class="kline" aria-hidden="true"></span>
       </div>
-      <h1 class="serif">{s.h1a}<span class="accent">{s.h1accent}</span>{s.h1b}</h1>
+      <h1>{s.h1a}<span class="accent">{s.h1accent}</span>{s.h1b}</h1>
       <p class="lead">{s.lead}</p>
 
       <form class="signup" id="waitlist" data-lang={lang} data-ok={s.ok} data-err={s.err} novalidate>
@@ -23,11 +46,44 @@ const s = t(lang);
       </form>
       <p class="formnote" id="note" role="status" aria-live="polite">{s.note}</p>
     </div>
-    <ConfidenceCard lang={lang} />
+    <div class="heroVisual">
+      <svg class="garment" viewBox="0 0 360 440" aria-hidden="true" fill="none">
+        <!-- tailored shirt outline -->
+        <path d="M150 42 Q180 58 210 42 L262 60 Q292 76 300 122 L276 168 L252 150 L252 392 Q216 404 180 404 Q144 404 108 392 L108 150 L84 168 L60 122 Q68 76 98 60 Z" stroke="#C09047" stroke-width="1.4" stroke-linejoin="round"/>
+        <path d="M150 42 Q166 74 180 76 Q194 74 210 42" stroke="#C09047" stroke-width="1.2"/>
+        <path d="M180 84 L180 396" stroke="#C09047" stroke-width="1" stroke-dasharray="1 7" opacity=".7"/>
+        <!-- measurement guides -->
+        <g stroke="#F2D592" stroke-width="1" stroke-dasharray="5 6" opacity=".85">
+          <path d="M108 186 L252 186"/>
+          <path d="M112 296 L248 296"/>
+        </g>
+        <g stroke="#F2D592" stroke-width="1.2" opacity=".9">
+          <path d="M108 180 L108 192"/><path d="M252 180 L252 192"/>
+          <path d="M112 290 L112 302"/><path d="M248 290 L248 302"/>
+        </g>
+        <!-- fit graph nodes -->
+        <g stroke="#C09047" stroke-width=".8" opacity=".65">
+          <path d="M108 186 L52 236"/><path d="M252 186 L316 148"/>
+          <path d="M248 296 L312 336"/><path d="M112 296 L48 348"/>
+          <path d="M316 148 L312 336"/>
+        </g>
+        <g fill="#F2D592">
+          <circle cx="108" cy="186" r="3.2"/><circle cx="252" cy="186" r="3.2"/>
+          <circle cx="112" cy="296" r="3.2"/><circle cx="248" cy="296" r="3.2"/>
+        </g>
+        <g fill="#C09047">
+          <circle cx="52" cy="236" r="2.4"/><circle cx="316" cy="148" r="2.4"/>
+          <circle cx="312" cy="336" r="2.4"/><circle cx="48" cy="348" r="2.4"/>
+        </g>
+      </svg>
+      <ConfidenceCard lang={lang} />
+    </div>
   </div>
 </section>
 
 <script>
+  import { submitWaitlist } from "../scripts/waitlist-client.js";
+
   const form = document.getElementById("waitlist") as HTMLFormElement | null;
   const note = document.getElementById("note");
   const input = document.getElementById("email") as HTMLInputElement | null;
@@ -45,26 +101,11 @@ const s = t(lang);
       }
       if (btn) btn.disabled = true;
       try {
-        const cfg = {
-          apiKey: import.meta.env.PUBLIC_FIREBASE_API_KEY,
-          authDomain: import.meta.env.PUBLIC_FIREBASE_AUTH_DOMAIN,
-          projectId: import.meta.env.PUBLIC_FIREBASE_PROJECT_ID,
-          storageBucket: import.meta.env.PUBLIC_FIREBASE_STORAGE_BUCKET,
-          messagingSenderId: import.meta.env.PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-          appId: import.meta.env.PUBLIC_FIREBASE_APP_ID,
-        };
-        if (cfg.apiKey && cfg.projectId) {
-          // Lazy-load Firebase from the CDN so it is never in the page's critical path.
-          const { initializeApp, getApps } = await import(
-            /* @vite-ignore */ "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js"
-          );
-          const { getFirestore, collection, addDoc, serverTimestamp } = await import(
-            /* @vite-ignore */ "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js"
-          );
-          const app = getApps().length ? getApps()[0] : initializeApp(cfg);
-          const db = getFirestore(app);
-          await addDoc(collection(db, "waitlist"), { email, lang, source: "landing", createdAt: serverTimestamp() });
-        }
+        await submitWaitlist({
+          email,
+          lang,
+          env: import.meta.env,
+        });
         note.textContent = okMsg; note.className = "formnote ok";
         form.reset();
       } catch (err) {

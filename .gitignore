@@ -8,3 +8,7 @@ functions/node_modules/
 .DS_Store
 *.log
 .firebase/
+
+# local agent tooling, not part of the site
+.github/skills/
+.github/hooks/

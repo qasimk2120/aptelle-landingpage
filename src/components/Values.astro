@@ -4,26 +4,36 @@ import { t, type Lang } from "../i18n/ui";
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
-const icons = ["lucide:user-round", "lucide:waypoints", "lucide:gauge"];
+const icons = ["lucide:ruler", "lucide:shirt", "lucide:gauge"];
 ---
-<section class="values wrap" aria-label="How Aptelle works">
-  <div class="vgrid">
-    {s.values.map((v, idx) => (
-      <article class="v">
-        <div class="ic" aria-hidden="true"><Icon name={icons[idx]} /></div>
-        <h2 class="serif">{v.t}</h2>
-        <p>{v.p}</p>
-      </article>
-    ))}
+<section class="values" aria-label="How Aptelle works">
+  <div class="wrap">
+    <h2 class="vtitle">{s.featuresTitle}</h2>
+    <div class="vgrid">
+      {s.values.map((v, idx) => (
+        <article class="v">
+          <div class="ic" aria-hidden="true"><Icon name={icons[idx]} /></div>
+          <h3>{v.t}</h3>
+          <p>{v.p}</p>
+        </article>
+      ))}
+    </div>
   </div>
 </section>
 
 <script>
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
-  }, { threshold: 0.2 });
-  document.querySelectorAll(".v").forEach((el, i) => {
-    (el as HTMLElement).style.transitionDelay = i * 0.1 + "s";
-    io.observe(el);
-  });
+  // Opt-in reveal: content is visible by default; only hide when JS can also reveal it.
+  const section = document.querySelector(".values");
+  if (section && "IntersectionObserver" in window) {
+    section.classList.add("anim");
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.2 });
+    document.querySelectorAll(".v").forEach((el, i) => {
+      (el as HTMLElement).style.transitionDelay = i * 0.1 + "s";
+      io.observe(el);
+    });
+    // Safety net: never leave the band hidden
+    setTimeout(() => document.querySelectorAll(".v:not(.in)").forEach((el) => el.classList.add("in")), 2500);
+  }
 </script>
