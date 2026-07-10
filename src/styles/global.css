@@ -304,8 +304,8 @@ header {
   inset-block-start: -110px;
   inset-inline-start: 50%;
   z-index: 0;
-  width: min(1060px, 118vw);
-  height: 900px;
+  width: min(1180px, 128vw);
+  height: 620px;
   pointer-events: none;
   transform: translateX(-50%);
   -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .8) 52%, transparent 90%);
@@ -337,7 +337,7 @@ header {
 
 .spot.s1 {
   opacity: .6;
-  transform: translateX(-265px) rotate(24deg) scaleX(.82);
+  transform: translateX(-390px) rotate(31deg) scaleX(.82);
   animation:
     spot-left 3.8s cubic-bezier(.16, 1, .3, 1) both,
     sway-left 12s ease-in-out 4s infinite alternate;
@@ -353,35 +353,36 @@ header {
 
 .spot.s3 {
   opacity: .6;
-  transform: translateX(265px) rotate(-24deg) scaleX(.9);
+  transform: translateX(390px) rotate(-31deg) scaleX(.9);
   animation:
     spot-right 3.8s cubic-bezier(.16, 1, .3, 1) both,
     sway-right 11s ease-in-out 4s infinite alternate;
 }
 
-/* Beams open wide in the wings, then close in and converge on center */
+/* Sources sit wide on the rig; beams start aimed outward, sweep in,
+   and land converged on the center of the stage */
 @keyframes spot-left {
-  0% { opacity: 0; transform: translateX(-265px) rotate(-48deg) scaleX(.82); }
+  0% { opacity: 0; transform: translateX(-390px) rotate(-24deg) scaleX(.82); }
   24% { opacity: .6; }
-  100% { opacity: .6; transform: translateX(-265px) rotate(24deg) scaleX(.82); }
+  100% { opacity: .6; transform: translateX(-390px) rotate(31deg) scaleX(.82); }
 }
 
 @keyframes spot-mid {
-  0% { opacity: 0; transform: rotate(34deg) scaleX(1.06); }
+  0% { opacity: 0; transform: rotate(20deg) scaleX(1.06); }
   24% { opacity: .72; }
   100% { opacity: .72; transform: rotate(0deg) scaleX(1.06); }
 }
 
 @keyframes spot-right {
-  0% { opacity: 0; transform: translateX(265px) rotate(48deg) scaleX(.9); }
+  0% { opacity: 0; transform: translateX(390px) rotate(24deg) scaleX(.9); }
   24% { opacity: .6; }
-  100% { opacity: .6; transform: translateX(265px) rotate(-24deg) scaleX(.9); }
+  100% { opacity: .6; transform: translateX(390px) rotate(-31deg) scaleX(.9); }
 }
 
 /* Idle haze drift after the beams settle, biased further inward */
 @keyframes sway-left {
-  from { transform: translateX(-265px) rotate(24deg) scaleX(.82); }
-  to { transform: translateX(-265px) rotate(27deg) scaleX(.86); }
+  from { transform: translateX(-390px) rotate(31deg) scaleX(.82); }
+  to { transform: translateX(-390px) rotate(33.5deg) scaleX(.86); }
 }
 
 @keyframes sway-mid {
@@ -390,8 +391,8 @@ header {
 }
 
 @keyframes sway-right {
-  from { transform: translateX(265px) rotate(-24deg) scaleX(.9); }
-  to { transform: translateX(265px) rotate(-27deg) scaleX(.85); }
+  from { transform: translateX(390px) rotate(-31deg) scaleX(.9); }
+  to { transform: translateX(390px) rotate(-33.5deg) scaleX(.85); }
 }
 
 @media (prefers-reduced-motion: reduce) {
