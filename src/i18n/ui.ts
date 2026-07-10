@@ -51,6 +51,15 @@ type Strings = {
   terms: string;
   projectPre: string;
   projectPost: string;
+  joinedTitle: string;
+  joinedH1: string;
+  joinedBody: string;
+  backHome: string;
+  contactNav: string;
+  contactTitle: string;
+  contactH1: string;
+  contactBody: string;
+  contactCta: string;
 };
 
 export const ui: Record<Lang, Strings> = {
@@ -99,6 +108,15 @@ export const ui: Record<Lang, Strings> = {
     terms: "Terms",
     projectPre: "A ",
     projectPost: " project",
+    joinedTitle: "Aptelle | You are on the list",
+    joinedH1: "You are on the list",
+    joinedBody: "One email when early access opens, nothing else until then. Your right size in any brand is on its way",
+    backHome: "Back to home",
+    contactNav: "Contact",
+    contactTitle: "Aptelle | Contact",
+    contactH1: "Contact",
+    contactBody: "Questions, feedback or press. One inbox, read by the founder",
+    contactCta: "Write to us",
   },
   fr: {
     title: "Aptelle | Trouvez votre bonne taille dans chaque marque",
@@ -149,6 +167,15 @@ export const ui: Record<Lang, Strings> = {
     terms: "Conditions",
     projectPre: "Un projet ",
     projectPost: "",
+    joinedTitle: "Aptelle | Vous êtes sur la liste",
+    joinedH1: "Vous êtes sur la liste",
+    joinedBody: "Un seul e-mail à l'ouverture de l'accès anticipé, rien d'autre d'ici là. Votre bonne taille dans chaque marque arrive",
+    backHome: "Retour à l'accueil",
+    contactNav: "Contact",
+    contactTitle: "Aptelle | Contact",
+    contactH1: "Contact",
+    contactBody: "Questions, retours ou presse. Une seule boîte, lue par le fondateur",
+    contactCta: "Écrivez-nous",
   },
   de: {
     title: "Aptelle | Finde deine richtige Größe in jeder Marke",
@@ -195,6 +222,15 @@ export const ui: Record<Lang, Strings> = {
     terms: "AGB",
     projectPre: "Ein Projekt von ",
     projectPost: "",
+    joinedTitle: "Aptelle | Du stehst auf der Liste",
+    joinedH1: "Du stehst auf der Liste",
+    joinedBody: "Genau eine E-Mail, sobald der frühe Zugang startet, bis dahin nichts weiter. Deine richtige Größe in jeder Marke ist unterwegs",
+    backHome: "Zurück zur Startseite",
+    contactNav: "Kontakt",
+    contactTitle: "Aptelle | Kontakt",
+    contactH1: "Kontakt",
+    contactBody: "Fragen, Feedback oder Presse. Ein Postfach, gelesen vom Gründer",
+    contactCta: "Schreib uns",
   },
   ar: {
     title: "Aptelle | اعرف مقاسك الصحيح في أي علامة تجارية",
@@ -241,6 +277,15 @@ export const ui: Record<Lang, Strings> = {
     terms: "الشروط",
     projectPre: "مشروع من ",
     projectPost: "",
+    joinedTitle: "Aptelle | أنت على القائمة",
+    joinedH1: "أنت على القائمة",
+    joinedBody: "رسالة واحدة عند فتح الوصول المبكر ولا شيء آخر قبل ذلك. مقاسك الصحيح في أي علامة تجارية في الطريق",
+    backHome: "العودة إلى الرئيسية",
+    contactNav: "تواصل",
+    contactTitle: "Aptelle | تواصل معنا",
+    contactH1: "تواصل معنا",
+    contactBody: "أسئلة أو ملاحظات أو صحافة. بريد واحد يقرأه المؤسس",
+    contactCta: "راسلنا",
   },
 };
 

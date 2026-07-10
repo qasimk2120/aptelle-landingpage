@@ -8,9 +8,10 @@ interface Props {
   localized?: boolean; // true if the page exists in all locales (home)
   title?: string;
   description?: string;
+  noindex?: boolean; // success/error pages stay out of search results
 }
 
-const { lang, path = "", localized = true, title, description } = Astro.props;
+const { lang, path = "", localized = true, title, description, noindex = false } = Astro.props;
 const s = t(lang);
 const site = "https://aptelle.com";
 const pageTitle = title ?? s.title;
@@ -27,7 +28,7 @@ const ogImage = `${site}/og-image.png`;
     <title>{pageTitle}</title>
     <meta name="description" content={pageDesc} />
     <link rel="canonical" href={canonical} />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large"} />
     <meta name="theme-color" content="#08080B" />
 
     {localized && locales.map((l) => (

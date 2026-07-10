@@ -33,6 +33,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
         )}
       </form>
       <p class="formnote" id="note" role="status" aria-live="polite">{s.note}</p>
+      <div class="veil" id="veil" aria-hidden="true"><div class="spin"></div></div>
       {turnstileSiteKey && (
         <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
       )}
@@ -79,10 +80,12 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
   const note = document.getElementById("note");
   const input = document.getElementById("email") as HTMLInputElement | null;
   if (form && note && input) {
-    const okMsg = form.dataset.ok || "You are on the list.";
     const errMsg = form.dataset.err || "Please enter a valid email.";
     const lang = form.dataset.lang || "en";
     const btn = form.querySelector("button");
+
+    const veil = document.getElementById("veil");
+    const joinedHref = lang === "en" ? "/joined" : `/${lang}/joined`;
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -91,6 +94,8 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
         note.textContent = errMsg; note.className = "formnote err"; input.focus(); return;
       }
       if (btn) btn.disabled = true;
+      if (veil) veil.classList.add("on");
+      const started = Date.now();
       // Turnstile injects a hidden input into the form when the widget is
       // rendered; empty string when the widget is not configured (dev).
       const tokenField = form.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement | null;
@@ -102,15 +107,13 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
           token,
           env: import.meta.env,
         });
-        note.textContent = okMsg; note.className = "formnote ok";
-        form.reset();
       } catch (err) {
-        note.textContent = okMsg; note.className = "formnote ok"; // fail soft, do not block the visitor
-        form.reset();
-      } finally {
-        if (btn) btn.disabled = false;
-        (window as any).turnstile?.reset?.();
+        // fail soft, do not block the visitor
       }
+      // Let the veil breathe for a beat so it never flashes, then hand the
+      // visitor to the joined page. The veil stays up through the navigation.
+      const remaining = Math.max(0, 700 - (Date.now() - started));
+      setTimeout(() => { window.location.assign(joinedHref); }, remaining);
     });
   }
 </script>

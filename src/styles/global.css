@@ -689,6 +689,110 @@ form.signup {
   flex-basis: 100%;
 }
 
+/* Submit loader: blurred dark veil with the gold ring, same language as the
+   confidence ring. Hidden until the form is in flight. */
+.veil {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  background: rgba(8, 8, 11, 0.55);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.veil.on {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.veil .spin {
+  width: 54px;
+  height: 54px;
+  border: 3px solid rgba(192, 144, 71, 0.25);
+  border-top-color: var(--champagne);
+  border-radius: 50%;
+  animation: veilspin 0.9s linear infinite;
+}
+
+@keyframes veilspin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Status pages: joined, contact, 404. Hero canvas, centered column */
+.statusPage {
+  display: grid;
+  min-height: calc(100vh - 120px);
+  align-items: center;
+  padding-block: clamp(150px, 16vw, 210px) clamp(60px, 8vw, 100px);
+  text-align: center;
+}
+
+.statusPage .kicker {
+  justify-content: center;
+  max-width: none;
+}
+
+.statusPage h1 {
+  max-width: none;
+  margin-inline: auto;
+  margin-bottom: 18px;
+  text-wrap: balance;
+}
+
+.statusPage .lead {
+  max-width: 52ch;
+  margin-inline: auto;
+  margin-bottom: 36px;
+}
+
+.statusCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 14px 28px;
+  border: 1px solid rgba(255, 232, 179, 0.5);
+  border-radius: 8px;
+  background: linear-gradient(
+    118deg,
+    var(--bronze) 0%,
+    var(--gold) 52%,
+    var(--soft-gold) 100%
+  );
+  color: var(--bg);
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 34px -14px rgba(192, 144, 71, 0.7);
+  transition:
+    box-shadow 0.18s ease,
+    filter 0.18s ease,
+    transform 0.18s ease;
+}
+
+.statusCta:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 14px 40px -14px rgba(242, 213, 146, 0.8);
+}
+
+.statusCta svg {
+  width: 17px;
+  height: 17px;
+  flex: none;
+}
+
+[dir="rtl"] .statusCta svg {
+  transform: scaleX(-1);
+}
+
 [dir="rtl"] .formnote::before {
   background: linear-gradient(to left, transparent, var(--gold));
 }

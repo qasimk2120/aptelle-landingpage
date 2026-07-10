@@ -1,5 +1,5 @@
 ---
-import { t, type Lang } from "../i18n/ui";
+import { t, localeHref, type Lang } from "../i18n/ui";
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
@@ -12,7 +12,7 @@ const year = new Date().getFullYear();
     <nav class="fnav" aria-label="Footer">
       <a href="/privacy">{s.privacy}</a>
       <a href="/terms">{s.terms}</a>
-      <a href="mailto:hello@aptelle.com">hello@aptelle.com</a>
+      <a href={localeHref(lang, "contact")}>{s.contactNav}</a>
     </nav>
   </div>
 </footer>

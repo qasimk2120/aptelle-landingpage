@@ -1,0 +1,24 @@
+---
+// GitHub Pages serves 404.html for any unknown path, one page for the whole
+// site, so this stays in English.
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import StatusPage from "../components/StatusPage.astro";
+import Footer from "../components/Footer.astro";
+const lang = "en" as const;
+---
+<Base lang={lang} localized={false} title="Aptelle | Page not found" description="This page does not exist" noindex>
+  <Header lang={lang} />
+  <main id="main">
+    <StatusPage
+      eyebrow="404"
+      h1="This page does not"
+      h1accent="exist"
+      body="The address may be mistyped or the page has moved. Your right size is still waiting on the homepage"
+      ctaHref="/"
+      ctaLabel="Back to home"
+      icon="lucide:arrow-left"
+    />
+  </main>
+  <Footer lang={lang} />
+</Base>

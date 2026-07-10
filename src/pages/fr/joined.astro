@@ -1,0 +1,23 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import StatusPage from "../../components/StatusPage.astro";
+import Footer from "../../components/Footer.astro";
+import { t, localeHref } from "../../i18n/ui";
+const lang = "fr" as const;
+const s = t(lang);
+---
+<Base lang={lang} path="joined" title={s.joinedTitle} description={s.joinedBody} noindex>
+  <Header lang={lang} path="joined" />
+  <main id="main">
+    <StatusPage
+      eyebrow={s.eyebrow}
+      h1={s.joinedH1}
+      body={s.joinedBody}
+      ctaHref={localeHref(lang)}
+      ctaLabel={s.backHome}
+      icon="lucide:check"
+    />
+  </main>
+  <Footer lang={lang} />
+</Base>

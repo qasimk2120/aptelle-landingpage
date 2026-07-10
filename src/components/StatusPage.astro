@@ -1,0 +1,26 @@
+---
+// Shared centered page for /joined, /contact and the 404. Same canvas as the
+// hero: kicker, big headline with a gold accent, one line of body copy and a
+// gold CTA. No new visual language, just the existing one.
+import { Icon } from "astro-icon/components";
+interface Props {
+  eyebrow: string;
+  h1: string;
+  h1accent?: string;
+  body: string;
+  ctaHref: string;
+  ctaLabel: string;
+  icon?: string;
+}
+const { eyebrow, h1, h1accent = "", body, ctaHref, ctaLabel, icon = "lucide:arrow-left" } = Astro.props;
+---
+<section class="statusPage">
+  <div class="wrap">
+    <div class="kicker">
+      <span class="ktext">{eyebrow}</span>
+    </div>
+    <h1>{h1}{h1accent && <span class="accent"> {h1accent}</span>}</h1>
+    <p class="lead">{body}</p>
+    <a class="statusCta" href={ctaHref}><Icon name={icon} aria-hidden="true" />{ctaLabel}</a>
+  </div>
+</section>
