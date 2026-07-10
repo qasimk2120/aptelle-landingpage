@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import ConfidenceCard from "./ConfidenceCard.astro";
 import { t, type Lang } from "../i18n/ui";
 interface Props { lang: Lang }
@@ -19,7 +20,7 @@ const s = t(lang);
       <form class="signup" id="waitlist" data-lang={lang} data-ok={s.ok} data-err={s.err} novalidate>
         <label for="email" class="skip">Email</label>
         <input id="email" name="email" type="email" inputmode="email" autocomplete="email" spellcheck="false" autocapitalize="off" placeholder={s.emailPlaceholder} required />
-        <button type="submit">{s.cta}</button>
+        <button type="submit"><Icon name="lucide:bell" aria-hidden="true" />{s.cta}</button>
       </form>
       <p class="formnote" id="note" role="status" aria-live="polite">{s.note}</p>
     </div>

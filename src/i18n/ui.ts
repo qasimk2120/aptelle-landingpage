@@ -49,6 +49,8 @@ type Strings = {
   skip: string;
   privacy: string;
   terms: string;
+  projectPre: string;
+  projectPost: string;
 };
 
 export const ui: Record<Lang, Strings> = {
@@ -95,6 +97,8 @@ export const ui: Record<Lang, Strings> = {
     skip: "Skip to content",
     privacy: "Privacy",
     terms: "Terms",
+    projectPre: "A ",
+    projectPost: " project",
   },
   fr: {
     title: "Aptelle | Trouvez votre bonne taille dans chaque marque",
@@ -143,6 +147,8 @@ export const ui: Record<Lang, Strings> = {
     skip: "Aller au contenu",
     privacy: "Confidentialité",
     terms: "Conditions",
+    projectPre: "Un projet ",
+    projectPost: "",
   },
   de: {
     title: "Aptelle | Finde deine richtige Größe in jeder Marke",
@@ -187,6 +193,8 @@ export const ui: Record<Lang, Strings> = {
     skip: "Zum Inhalt springen",
     privacy: "Datenschutz",
     terms: "AGB",
+    projectPre: "Ein Projekt von ",
+    projectPost: "",
   },
   ar: {
     title: "Aptelle | اعرف مقاسك الصحيح في أي علامة تجارية",
@@ -231,6 +239,8 @@ export const ui: Record<Lang, Strings> = {
     skip: "تخطَّ إلى المحتوى",
     privacy: "الخصوصية",
     terms: "الشروط",
+    projectPre: "مشروع من ",
+    projectPost: "",
   },
 };
 
