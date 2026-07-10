@@ -145,11 +145,13 @@ summary {
   right: 12px;
 }
 
+/* Floating header: overlays the hero so the backdrop runs edge to edge from y=0 */
 header {
-  position: sticky;
+  position: absolute;
   top: 0;
+  inset-inline: 0;
   z-index: 20;
-  padding-block: clamp(18px, 2.4vw, 30px) 0;
+  padding-block: clamp(20px, 2.6vw, 34px) 0;
   background: transparent;
 }
 
@@ -209,8 +211,8 @@ header {
   align-items: center;
   padding-inline: 2px;
   color: var(--champagne);
-  font-size: .92rem;
-  font-weight: 500;
+  font-size: 1.04rem;
+  font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
   transition: color .18s ease, transform .18s ease;
@@ -243,8 +245,8 @@ header {
   background: transparent;
   color: var(--champagne);
   cursor: pointer;
-  font-size: .92rem;
-  font-weight: 500;
+  font-size: 1.04rem;
+  font-weight: 600;
   list-style: none;
   white-space: nowrap;
   transition: color .18s ease, transform .18s ease;
@@ -292,8 +294,7 @@ header {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  margin-top: clamp(-54px, -3.6vw, -28px);
-  padding-block: clamp(102px, 10vw, 144px) clamp(54px, 7vw, 92px);
+  padding-block: clamp(132px, 12vw, 190px) clamp(54px, 7vw, 92px);
   background: radial-gradient(80% 110% at 50% -30%, rgba(192, 144, 71, .24), transparent 60%);
 }
 
@@ -873,7 +874,7 @@ footer {
 
 .legal {
   max-width: 760px;
-  padding-block: 56px 78px;
+  padding-block: clamp(128px, 12vw, 168px) 78px;
 }
 
 .legal h1 {
@@ -980,12 +981,12 @@ footer {
   .navlink,
   .navcta,
   .lang summary {
-    font-size: .84rem;
+    font-size: .92rem;
     min-width: 0;
   }
 
   .hero {
-    padding-block: 46px 28px;
+    padding-block: 148px 28px;
   }
 
   .heroCopy,
