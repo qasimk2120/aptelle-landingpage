@@ -53,19 +53,31 @@ const s = t(lang);
     const from = parseFloat(pctEl.textContent || "0") || 0;
     function step(ts: number) {
       if (!start) start = ts;
-      const tt = Math.min((ts - start) / 700, 1);
-      const val = Math.round(from + (target - from) * tt);
+      const tt = Math.min((ts - start) / 900, 1);
+      const eased = 1 - Math.pow(1 - tt, 3); // ease-out cubic: decelerates into the target
+      const val = Math.round(from + (target - from) * eased);
       pctEl!.textContent = val + "%";
       prog!.style.strokeDashoffset = String(C * (1 - val / 100));
       if (tt < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
   }
-  function render() {
+  const swapEls = [bn, bb, sizeEl].filter(Boolean) as HTMLElement[];
+  function setText(d: (typeof data)[number]) {
+    if (bn) bn.textContent = d.brand;
+    if (bb) bb.textContent = d.brand.charAt(0).toUpperCase();
+    if (sizeEl) sizeEl.textContent = d.size;
+  }
+  function render(first = false) {
     const d = data[i];
-    if (bn) { bn.style.opacity = "0"; if (bb) bb.style.opacity = "0"; setTimeout(() => { bn.textContent = d.brand; if (bb) { bb.textContent = d.brand.charAt(0).toUpperCase(); bb.style.opacity = "1"; } if (sizeEl) sizeEl.textContent = d.size; bn.style.opacity = "1"; }, 220); }
+    if (first || reduce) { setText(d); setRing(d.pct); return; }
+    swapEls.forEach((el) => el.classList.add("swap"));
+    setTimeout(() => {
+      setText(d);
+      swapEls.forEach((el) => el.classList.remove("swap"));
+    }, 300);
     setRing(d.pct);
   }
-  render();
-  if (!reduce) setInterval(() => { i = (i + 1) % data.length; render(); }, 2800);
+  render(true);
+  if (!reduce) setInterval(() => { i = (i + 1) % data.length; render(); }, 3400);
 </script>

@@ -2,35 +2,38 @@ function cleanBaseUrl(value) {
   return String(value || "").trim().replace(/\/+$/, "");
 }
 
-export function buildSupabaseInsertRequest({ email, lang, env }) {
+// The browser never writes to the waitlist table directly. All signups go
+// through the waitlist-signup Edge Function, which verifies the Turnstile
+// token server-side and owns the only insert path.
+export function buildWaitlistRequest({ email, lang, token, env }) {
   const supabaseUrl = cleanBaseUrl(env.PUBLIC_SUPABASE_URL);
   const anonKey = String(env.PUBLIC_SUPABASE_ANON_KEY || "").trim();
 
-  if (!supabaseUrl || !anonKey) {
+  if (!supabaseUrl) {
     return null;
   }
 
+  const headers = { "Content-Type": "application/json" };
+  if (anonKey) {
+    headers.apikey = anonKey;
+  }
+
   return {
-    url: `${supabaseUrl}/rest/v1/waitlist`,
+    url: `${supabaseUrl}/functions/v1/waitlist-signup`,
     init: {
       method: "POST",
-      headers: {
-        apikey: anonKey,
-        Authorization: `Bearer ${anonKey}`,
-        "Content-Type": "application/json",
-        Prefer: "return=minimal",
-      },
+      headers,
       body: JSON.stringify({
         email,
         lang,
-        source: "landing",
+        token: token || "",
       }),
     },
   };
 }
 
-export async function submitWaitlist({ email, lang, env, fetchImpl = fetch }) {
-  const request = buildSupabaseInsertRequest({ email, lang, env });
+export async function submitWaitlist({ email, lang, token, env, fetchImpl = fetch }) {
+  const request = buildWaitlistRequest({ email, lang, token, env });
 
   if (!request) {
     return { stored: false, skipped: true };
@@ -39,7 +42,7 @@ export async function submitWaitlist({ email, lang, env, fetchImpl = fetch }) {
   const response = await fetchImpl(request.url, request.init);
   if (!response.ok) {
     const body = typeof response.text === "function" ? await response.text() : "";
-    throw new Error(`Supabase waitlist insert failed: ${response.status} ${body}`.trim());
+    throw new Error(`Waitlist signup failed: ${response.status} ${body}`.trim());
   }
 
   return { stored: true, skipped: false };

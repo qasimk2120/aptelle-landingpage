@@ -28,7 +28,7 @@ git push
 Notes:
 - `public/CNAME` (aptelle.com) and `public/.nojekyll` are copied into `dist/` automatically, so the custom domain keeps working.
 - `node_modules`, `dist`, `.astro`, and `.legacy-static` are gitignored. The old static files live in `.legacy-static/` and are not committed. You can delete that folder anytime.
-- Add `PUBLIC_SUPABASE_URL` and `PUBLIC_SUPABASE_ANON_KEY` in the repo (see SETUP.md) so the waitlist stores emails. Without them the form still confirms to the visitor.
+- Add `PUBLIC_SUPABASE_URL`, `PUBLIC_SUPABASE_ANON_KEY` and `PUBLIC_TURNSTILE_SITE_KEY` in the repo (see SETUP.md) so the waitlist stores emails behind Turnstile. Without them the form still confirms to the visitor.
 
 ## DNS (already configured, no change)
 

@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import LangSwitcher from "./LangSwitcher.astro";
 import { t, localeHref, type Lang } from "../i18n/ui";
 interface Props { lang: Lang; path?: string }
@@ -12,6 +13,32 @@ const s = t(lang);
       <a class="navlink" href={localeHref(lang)}>{s.home ?? "Home"}</a>
       <LangSwitcher lang={lang} path={path} />
       <a class="navcta" href="#waitlist">{s.navCta}</a>
+      <button class="menubtn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu">
+        <Icon name="lucide:menu" aria-hidden="true" />
+      </button>
     </div>
   </div>
+  <nav id="mnav" class="mnav" aria-label="Mobile">
+    <a href={localeHref(lang)}>{s.home ?? "Home"}</a>
+    <a href="#waitlist">{s.navCta}</a>
+  </nav>
 </header>
+
+<script>
+  const btn = document.querySelector(".menubtn") as HTMLButtonElement | null;
+  const menu = document.getElementById("mnav");
+  if (btn && menu) {
+    const close = () => { btn.setAttribute("aria-expanded", "false"); menu.classList.remove("open"); };
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = menu.classList.toggle("open");
+      btn.setAttribute("aria-expanded", String(open));
+    });
+    menu.addEventListener("click", (e) => { if ((e.target as HTMLElement).closest("a")) close(); });
+    document.addEventListener("click", (e) => {
+      const t = e.target as Node;
+      if (!menu.contains(t) && !btn.contains(t)) close();
+    });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+  }
+</script>

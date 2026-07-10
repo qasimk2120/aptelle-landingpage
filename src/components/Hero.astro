@@ -5,6 +5,7 @@ import { t, type Lang } from "../i18n/ui";
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
 ---
 <section class="hero">
   <div class="wrap grid">
@@ -21,8 +22,20 @@ const s = t(lang);
         <label for="email" class="skip">Email</label>
         <input id="email" name="email" type="email" inputmode="email" autocomplete="email" spellcheck="false" autocapitalize="off" placeholder={s.emailPlaceholder} required />
         <button type="submit"><Icon name="lucide:bell" aria-hidden="true" />{s.cta}</button>
+        {turnstileSiteKey && (
+          <div
+            class="cf-turnstile"
+            data-sitekey={turnstileSiteKey}
+            data-theme="dark"
+            data-size="flexible"
+            data-appearance="interaction-only"
+          ></div>
+        )}
       </form>
       <p class="formnote" id="note" role="status" aria-live="polite">{s.note}</p>
+      {turnstileSiteKey && (
+        <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+      )}
     </div>
     <div class="heroVisual">
       <svg class="garment" viewBox="0 0 360 440" aria-hidden="true" fill="none">
@@ -78,10 +91,15 @@ const s = t(lang);
         note.textContent = errMsg; note.className = "formnote err"; input.focus(); return;
       }
       if (btn) btn.disabled = true;
+      // Turnstile injects a hidden input into the form when the widget is
+      // rendered; empty string when the widget is not configured (dev).
+      const tokenField = form.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement | null;
+      const token = tokenField ? tokenField.value : "";
       try {
         await submitWaitlist({
           email,
           lang,
+          token,
           env: import.meta.env,
         });
         note.textContent = okMsg; note.className = "formnote ok";
@@ -91,6 +109,7 @@ const s = t(lang);
         form.reset();
       } finally {
         if (btn) btn.disabled = false;
+        (window as any).turnstile?.reset?.();
       }
     });
   }

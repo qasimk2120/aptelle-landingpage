@@ -348,6 +348,71 @@ header {
   color: var(--text);
 }
 
+/* Hamburger: mobile only, desktop nav stays untouched */
+.menubtn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--champagne);
+  cursor: pointer;
+}
+
+.menubtn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.menubtn:hover {
+  color: var(--soft-gold);
+}
+
+/* Mobile menu panel: sits under the header row, right aligned */
+.mnav {
+  position: absolute;
+  top: calc(100% + 10px);
+  inset-inline-end: max(18px, env(safe-area-inset-right));
+  z-index: 30;
+  display: none;
+  min-width: 200px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #111114;
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition:
+    opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mnav a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 6px;
+  color: var(--champagne);
+  font-size: 0.98rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.mnav a:hover {
+  background: rgba(255, 232, 179, 0.08);
+  color: var(--soft-gold);
+}
+
+.mnav.open {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
 /* Open, full-width hero on the gold-washed canvas */
 .hero {
   position: relative;
@@ -592,11 +657,40 @@ form.signup {
   transform: none;
 }
 
+/* Centered under the input + button, with a short gold line leading in.
+   flex-start + em offset keeps the line beside "No spam" even when the
+   text wraps to two lines on narrow screens (Galaxy Fold etc). */
 .formnote {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  max-width: 488px;
   min-height: 1.25em;
   margin-top: 13px;
   color: var(--muted);
   font-size: 0.9rem;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.formnote::before {
+  content: "";
+  height: 1px;
+  width: 32px;
+  flex: none;
+  margin-top: 0.7em;
+  background: linear-gradient(to right, transparent, var(--gold));
+}
+
+/* Turnstile: interaction-only, so it stays invisible unless Cloudflare needs
+   a challenge. When it does appear, give it the full form width. */
+.signup .cf-turnstile {
+  flex-basis: 100%;
+}
+
+[dir="rtl"] .formnote::before {
+  background: linear-gradient(to left, transparent, var(--gold));
 }
 
 .formnote.ok,
@@ -897,10 +991,10 @@ form.signup {
 /* Reveal is opt-in via JS (.anim); without JS the band is simply visible */
 .values.anim .v {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(16px);
   transition:
-    opacity 0.55s ease,
-    transform 0.55s ease;
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .values.anim .v.in {
@@ -1234,34 +1328,60 @@ footer {
     padding-block-start: 8px;
   }
 
+  /* One row: brand left, language icon + hamburger right */
   .nav {
-    display: grid;
-    grid-template-columns: 1fr;
-    align-items: flex-start;
-    gap: 6px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
     min-height: auto;
-    border-radius: 16px;
   }
 
   .navright {
     display: flex;
-    width: min(100%, calc(100vw - 36px));
-    max-width: 100%;
+    width: auto;
     min-width: 0;
-    flex: initial;
-    justify-content: flex-start;
-    gap: clamp(20px, 6vw, 28px);
+    flex: none;
+    justify-content: flex-end;
+    gap: 6px;
   }
 
-  .navlink,
-  .navcta,
+  .navright .navlink,
+  .navright .navcta {
+    display: none;
+  }
+
+  .lang summary span {
+    display: none;
+  }
+
   .lang summary {
-    font-size: 0.92rem;
-    min-width: 0;
+    width: 40px;
+    justify-content: center;
   }
 
+  .lang summary svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .lang ul {
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+  }
+
+  .menubtn {
+    display: inline-flex;
+  }
+
+  .mnav {
+    display: block;
+  }
+
+  /* Header is a single compact row now, so the old 148px two-row clearance
+     left a dead band above the kicker */
   .hero {
-    padding-block: 148px 28px;
+    padding-block: 96px 28px;
   }
 
   .heroCopy,
@@ -1281,17 +1401,20 @@ footer {
     overflow-wrap: break-word;
   }
 
+  /* Dot and text sit on one centered baseline, line still trails after */
   .kicker {
-    align-items: flex-start;
+    align-items: center;
+    gap: 10px;
   }
 
   .kicker .kline {
-    display: none;
+    min-width: 20px;
   }
 
+  /* Let the headline breathe across the full width instead of a narrow column */
   h1 {
-    max-width: 9.8ch;
-    font-size: clamp(2.45rem, 12.2vw, 3.35rem);
+    max-width: none;
+    font-size: clamp(2.45rem, 11vw, 3.35rem);
   }
 
   form.signup,
@@ -1329,8 +1452,18 @@ footer {
     margin-inline-start: 0;
   }
 
+  /* Shirt schematic stays on mobile: peeks out above the card, scaled down.
+     heroVisual gets top room so the shirt doesn't sit on the form note. */
+  .heroVisual {
+    margin-top: 64px;
+  }
+
   .heroVisual .garment {
-    display: none;
+    display: block;
+    top: -30%;
+    inset-inline-end: -4%;
+    width: 62%;
+    opacity: 0.3;
   }
 
   .ring {
@@ -1355,8 +1488,21 @@ footer {
     max-width: 22ch;
   }
 
+  /* Footer stacks centered: copyright, credit, then links, evenly spaced */
+  .frow {
+    row-gap: 12px;
+    text-align: center;
+  }
+
+  .fcopy,
+  .fproj,
   .fnav {
-    justify-content: flex-start;
+    justify-self: center;
+  }
+
+  .fnav {
+    justify-content: center;
+    gap: 22px;
   }
 }
 
@@ -1386,6 +1532,77 @@ footer {
   .card::before {
     display: none;
   }
+
+  /* Galaxy Fold class widths: keep the note on one line as long as possible */
+  .formnote {
+    gap: 8px;
+    font-size: 0.78rem;
+  }
+
+  .formnote::before {
+    width: 20px;
+  }
+}
+
+/* Synced card swap: brand, badge and size fade as one unit.
+   Standard decelerate curve so the incoming value settles softly. */
+.brandname,
+.bbadge,
+.sizeline .big {
+  transition:
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.brandname.swap,
+.bbadge.swap,
+.sizeline .big.swap {
+  opacity: 0;
+  transform: translateY(5px);
+}
+
+/* Gentle entrance: transform+opacity only, GPU-composited, no layout work.
+   Long ease-out tail (easeOutQuint-ish) reads as smooth, never snappy. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.heroCopy .kicker {
+  animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.heroCopy h1 {
+  animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+}
+
+.heroCopy .lead {
+  animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both;
+}
+
+.heroCopy .signup,
+.heroCopy .formnote {
+  animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both;
+}
+
+.heroVisual {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+
+/* Scroll smoothness: the fixed grain and gold-dust layers repaint on every
+   scroll frame unless promoted to their own compositor layers. translateZ(0)
+   keeps the exact same look while moving them off the main paint path,
+   which is what stuttered on Mac trackpads. */
+body::before,
+body::after {
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {

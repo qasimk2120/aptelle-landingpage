@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
-  buildSupabaseInsertRequest,
+  buildWaitlistRequest,
   submitWaitlist,
 } from "../src/scripts/waitlist-client.js";
 
@@ -11,31 +11,46 @@ const env = {
   PUBLIC_SUPABASE_ANON_KEY: "anon-key",
 };
 
-test("builds a Supabase REST insert request for waitlist signups", () => {
-  const request = buildSupabaseInsertRequest({
+test("builds an Edge Function request for waitlist signups", () => {
+  const request = buildWaitlistRequest({
     email: "qasim@example.com",
     lang: "en",
+    token: "turnstile-token",
     env,
   });
 
-  assert.equal(request.url, "https://aptelle.supabase.co/rest/v1/waitlist");
+  assert.equal(
+    request.url,
+    "https://aptelle.supabase.co/functions/v1/waitlist-signup",
+  );
   assert.equal(request.init.method, "POST");
+  assert.equal(request.init.headers["Content-Type"], "application/json");
   assert.equal(request.init.headers.apikey, "anon-key");
-  assert.equal(request.init.headers.Authorization, "Bearer anon-key");
-  assert.equal(request.init.headers.Prefer, "return=minimal");
   assert.deepEqual(JSON.parse(request.init.body), {
     email: "qasim@example.com",
     lang: "en",
-    source: "landing",
+    token: "turnstile-token",
   });
 });
 
-test("skips remote storage when Supabase env vars are not configured", async () => {
+test("omits the apikey header when no anon key is configured", () => {
+  const request = buildWaitlistRequest({
+    email: "qasim@example.com",
+    lang: "en",
+    token: "t",
+    env: { PUBLIC_SUPABASE_URL: "https://aptelle.supabase.co" },
+  });
+
+  assert.equal(request.init.headers.apikey, undefined);
+});
+
+test("skips remote storage when the Supabase URL is not configured", async () => {
   let called = false;
 
   const result = await submitWaitlist({
     email: "qasim@example.com",
     lang: "en",
+    token: "t",
     env: {},
     fetchImpl: async () => {
       called = true;
@@ -47,14 +62,15 @@ test("skips remote storage when Supabase env vars are not configured", async () 
   assert.deepEqual(result, { stored: false, skipped: true });
 });
 
-test("throws when Supabase rejects the waitlist insert", async () => {
+test("throws when the waitlist function rejects the signup", async () => {
   await assert.rejects(
     submitWaitlist({
       email: "qasim@example.com",
       lang: "en",
+      token: "t",
       env,
       fetchImpl: async () => ({ ok: false, status: 403, text: async () => "denied" }),
     }),
-    /Supabase waitlist insert failed: 403 denied/,
+    /Waitlist signup failed: 403 denied/,
   );
 });
