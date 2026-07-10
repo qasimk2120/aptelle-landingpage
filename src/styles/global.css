@@ -1,17 +1,17 @@
 :root {
-  --bg: #08080B;
-  --surface: #1A1A1D;
+  --bg: #08080b;
+  --surface: #1a1a1d;
   --surface-2: #111114;
-  --line: #2D2D31;
-  --line-soft: rgba(255, 255, 255, .08);
-  --text: #FFFFFF;
-  --muted: rgba(255, 255, 255, .72);
-  --muted-strong: rgba(255, 255, 255, .84);
-  --bronze: #86511C;
-  --gold: #C09047;
-  --champagne: #F2D592;
-  --soft-gold: #FFE8B3;
-  --danger: #F2D592;
+  --line: #2d2d31;
+  --line-soft: rgba(255, 255, 255, 0.08);
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.72);
+  --muted-strong: rgba(255, 255, 255, 0.84);
+  --bronze: #86511c;
+  --gold: #c09047;
+  --champagne: #f2d592;
+  --soft-gold: #ffe8b3;
+  --danger: #f2d592;
   --maxw: 1760px;
 }
 
@@ -35,13 +35,38 @@ body {
 body {
   min-height: 100vh;
   background:
-    radial-gradient(1100px 560px at 50% -10%, rgba(192, 144, 71, .32), transparent 60%),
-    radial-gradient(900px 520px at 92% 22%, rgba(134, 81, 28, .20), transparent 62%),
-    radial-gradient(900px 620px at 50% 56%, rgba(134, 81, 28, .1), transparent 70%),
-    radial-gradient(780px 500px at 0% 94%, rgba(134, 81, 28, .24), transparent 60%),
-    linear-gradient(180deg, #0B0A07 0%, #08080B 46%, #0B0906 100%);
+    radial-gradient(
+      1100px 560px at 50% -10%,
+      rgba(192, 144, 71, 0.32),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 520px at 92% 22%,
+      rgba(134, 81, 28, 0.2),
+      transparent 62%
+    ),
+    radial-gradient(
+      900px 620px at 50% 56%,
+      rgba(134, 81, 28, 0.1),
+      transparent 70%
+    ),
+    radial-gradient(
+      780px 500px at 0% 94%,
+      rgba(134, 81, 28, 0.24),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #0b0a07 0%, #08080b 46%, #0b0906 100%);
   color: var(--text);
-  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
   line-height: 1.62;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -56,9 +81,14 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E") repeat,
-    radial-gradient(130% 100% at 50% 0%, transparent 52%, rgba(5, 5, 7, .5) 100%);
-  opacity: .07;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E")
+      repeat,
+    radial-gradient(
+      130% 100% at 50% 0%,
+      transparent 52%,
+      rgba(5, 5, 7, 0.5) 100%
+    );
+  opacity: 0.07;
 }
 
 /* Gold dust along both edges, full page height (fixed, so it lives at every scroll depth) */
@@ -69,10 +99,17 @@ body::after {
   z-index: -1;
   pointer-events: none;
   background:
-    url("/gold-dust.svg"),
-    url("/gold-dust-r.svg"),
-    radial-gradient(300px 520px at 0% 12%, rgba(242, 213, 146, .16), transparent 72%),
-    radial-gradient(300px 520px at 100% 12%, rgba(242, 213, 146, .14), transparent 72%);
+    url("/gold-dust.svg"), url("/gold-dust-r.svg"),
+    radial-gradient(
+      300px 520px at 0% 12%,
+      rgba(242, 213, 146, 0.16),
+      transparent 72%
+    ),
+    radial-gradient(
+      300px 520px at 100% 12%,
+      rgba(242, 213, 146, 0.14),
+      transparent 72%
+    );
   background-size:
     480px auto,
     480px auto,
@@ -83,14 +120,26 @@ body::after {
     right -140px top 160px,
     left top,
     right top;
-  background-repeat:
-    repeat-y,
-    repeat-y,
-    no-repeat,
-    no-repeat;
-  opacity: .5;
-  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 16%, transparent 34%, transparent 66%, #000 84%, #000 100%);
-  mask-image: linear-gradient(90deg, #000 0%, #000 16%, transparent 34%, transparent 66%, #000 84%, #000 100%);
+  background-repeat: repeat-y, repeat-y, no-repeat, no-repeat;
+  opacity: 0.5;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    #000 0%,
+    #000 16%,
+    transparent 34%,
+    transparent 66%,
+    #000 84%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    #000 0%,
+    #000 16%,
+    transparent 34%,
+    transparent 66%,
+    #000 84%,
+    #000 100%
+  );
 }
 
 a {
@@ -209,7 +258,9 @@ header {
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
-  transition: color .18s ease, transform .18s ease;
+  transition:
+    color 0.18s ease,
+    transform 0.18s ease;
 }
 
 .navlink:hover,
@@ -243,7 +294,9 @@ header {
   font-weight: 600;
   list-style: none;
   white-space: nowrap;
-  transition: color .18s ease, transform .18s ease;
+  transition:
+    color 0.18s ease,
+    transform 0.18s ease;
 }
 
 .lang summary::-webkit-details-marker {
@@ -268,18 +321,18 @@ header {
   padding: 8px 10px;
   border-radius: 6px;
   color: var(--muted-strong);
-  font-size: .95rem;
+  font-size: 0.95rem;
   text-decoration: none;
 }
 
 .lang li a[aria-current="true"] {
-  background: rgba(192, 144, 71, .16);
+  background: rgba(192, 144, 71, 0.16);
   color: var(--soft-gold);
   font-weight: 600;
 }
 
 .lang li a:hover {
-  background: rgba(255, 232, 179, .08);
+  background: rgba(255, 232, 179, 0.08);
   color: var(--text);
 }
 
@@ -289,7 +342,11 @@ header {
   isolation: isolate;
   overflow: hidden;
   padding-block: clamp(132px, 12vw, 190px) clamp(24px, 4vw, 48px);
-  background: radial-gradient(80% 110% at 50% -30%, rgba(192, 144, 71, .24), transparent 60%);
+  background: radial-gradient(
+    80% 110% at 50% -30%,
+    rgba(192, 144, 71, 0.24),
+    transparent 60%
+  );
 }
 
 .hero::after {
@@ -298,119 +355,32 @@ header {
   pointer-events: none;
 }
 
-/* Cinematic spotlights: three beams swing in from the wings, then settle on center */
-.hero .spots {
-  position: absolute;
-  inset-block-start: -110px;
-  inset-inline-start: 50%;
-  z-index: 0;
-  width: min(1180px, 128vw);
-  height: 620px;
-  pointer-events: none;
-  transform: translateX(-50%);
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .8) 52%, transparent 90%);
-  mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .8) 52%, transparent 90%);
-}
-
-.spot {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 430px;
-  height: 116%;
-  margin-left: -215px;
-  background:
-    repeating-linear-gradient(90deg,
-      transparent 0 22px,
-      rgba(255, 244, 207, .15) 30px 46px,
-      transparent 54px 84px,
-      rgba(242, 213, 146, .11) 92px 106px,
-      transparent 114px 146px),
-    linear-gradient(180deg, rgba(255, 244, 207, .3) 0%, rgba(242, 213, 146, .14) 48%, transparent 80%);
-  clip-path: polygon(46.5% 0, 53.5% 0, 114% 100%, -14% 100%);
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 9%, #000 56%, transparent 93%);
-  mask-image: linear-gradient(180deg, transparent 0%, #000 9%, #000 56%, transparent 93%);
-  filter: blur(17px);
-  transform-origin: 50% -70px;
-  will-change: transform, opacity;
-}
-
-.spot.s1 {
-  opacity: .6;
-  transform: translateX(-390px) rotate(31deg) scaleX(.82);
-  animation:
-    spot-left 3.8s cubic-bezier(.16, 1, .3, 1) both,
-    sway-left 12s ease-in-out 4s infinite alternate;
-}
-
-.spot.s2 {
-  opacity: .72;
-  transform: rotate(0deg) scaleX(1.06);
-  animation:
-    spot-mid 3.8s cubic-bezier(.16, 1, .3, 1) both,
-    sway-mid 14s ease-in-out 4s infinite alternate;
-}
-
-.spot.s3 {
-  opacity: .6;
-  transform: translateX(390px) rotate(-31deg) scaleX(.9);
-  animation:
-    spot-right 3.8s cubic-bezier(.16, 1, .3, 1) both,
-    sway-right 11s ease-in-out 4s infinite alternate;
-}
-
-/* Sources sit wide on the rig; beams start aimed outward, sweep in,
-   and land converged on the center of the stage */
-@keyframes spot-left {
-  0% { opacity: 0; transform: translateX(-390px) rotate(-24deg) scaleX(.82); }
-  24% { opacity: .6; }
-  100% { opacity: .6; transform: translateX(-390px) rotate(31deg) scaleX(.82); }
-}
-
-@keyframes spot-mid {
-  0% { opacity: 0; transform: rotate(20deg) scaleX(1.06); }
-  24% { opacity: .72; }
-  100% { opacity: .72; transform: rotate(0deg) scaleX(1.06); }
-}
-
-@keyframes spot-right {
-  0% { opacity: 0; transform: translateX(390px) rotate(24deg) scaleX(.9); }
-  24% { opacity: .6; }
-  100% { opacity: .6; transform: translateX(390px) rotate(-31deg) scaleX(.9); }
-}
-
-/* Idle haze drift after the beams settle, biased further inward */
-@keyframes sway-left {
-  from { transform: translateX(-390px) rotate(31deg) scaleX(.82); }
-  to { transform: translateX(-390px) rotate(33.5deg) scaleX(.86); }
-}
-
-@keyframes sway-mid {
-  from { transform: rotate(0deg) scaleX(1.06); }
-  to { transform: rotate(-2.5deg) scaleX(1); }
-}
-
-@keyframes sway-right {
-  from { transform: translateX(390px) rotate(-31deg) scaleX(.9); }
-  to { transform: translateX(390px) rotate(-33.5deg) scaleX(.85); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .spot {
-    animation: none;
-  }
-}
-
 .hero::after {
   inset: 0;
   z-index: 0;
   background:
     url("/gold-dust.svg") left -90px top -90px / min(46vw, 660px) auto no-repeat,
-    url("/gold-dust-r.svg") right -90px top -90px / min(46vw, 660px) auto no-repeat,
-    radial-gradient(340px 460px at 0% 4%, rgba(255, 232, 179, .34), rgba(192, 144, 71, .15) 42%, transparent 76%),
-    radial-gradient(340px 460px at 100% 4%, rgba(255, 232, 179, .32), rgba(192, 144, 71, .14) 42%, transparent 76%);
-  opacity: .96;
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 78%, transparent 100%);
+    url("/gold-dust-r.svg") right -90px top -90px / min(46vw, 660px) auto
+      no-repeat,
+    radial-gradient(
+      340px 460px at 0% 4%,
+      rgba(255, 232, 179, 0.34),
+      rgba(192, 144, 71, 0.15) 42%,
+      transparent 76%
+    ),
+    radial-gradient(
+      340px 460px at 100% 4%,
+      rgba(255, 232, 179, 0.32),
+      rgba(192, 144, 71, 0.14) 42%,
+      transparent 76%
+    );
+  opacity: 0.96;
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    #000 78%,
+    transparent 100%
+  );
   mask-image: linear-gradient(180deg, #000 0%, #000 78%, transparent 100%);
 }
 
@@ -419,7 +389,7 @@ header {
   z-index: 2;
   display: grid;
   max-width: 1380px;
-  grid-template-columns: minmax(0, .98fr) minmax(410px, .82fr);
+  grid-template-columns: minmax(0, 0.98fr) minmax(410px, 0.82fr);
   gap: clamp(44px, 6vw, 92px);
   align-items: center;
 }
@@ -438,7 +408,11 @@ header {
   inset: -18% -12% -20%;
   z-index: 0;
   pointer-events: none;
-  background: radial-gradient(closest-side at 50% 48%, rgba(242, 213, 146, .18), transparent 72%);
+  background: radial-gradient(
+    closest-side at 50% 48%,
+    rgba(242, 213, 146, 0.18),
+    transparent 72%
+  );
   filter: blur(8px);
 }
 
@@ -452,7 +426,7 @@ header {
   top: -40%;
   z-index: 0;
   width: 76%;
-  opacity: .32;
+  opacity: 0.32;
   pointer-events: none;
 }
 
@@ -483,16 +457,16 @@ header {
   content: "";
   position: absolute;
   inset: -5px;
-  border: 1px solid rgba(242, 213, 146, .45);
+  border: 1px solid rgba(242, 213, 146, 0.45);
   border-radius: 50%;
-  opacity: .65;
+  opacity: 0.65;
 }
 
 .kicker .ktext {
   color: var(--champagne);
-  font-size: .78rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -514,7 +488,7 @@ h1 {
   font-size: clamp(2.85rem, 5.4vw, 4.85rem);
   font-weight: 700;
   letter-spacing: 0;
-  line-height: .94;
+  line-height: 0.94;
   overflow-wrap: break-word;
   text-wrap: balance;
 }
@@ -553,7 +527,7 @@ form.signup {
 }
 
 .signup input::placeholder {
-  color: rgba(255, 255, 255, .58);
+  color: rgba(255, 255, 255, 0.58);
 }
 
 .signup input:focus {
@@ -565,26 +539,34 @@ form.signup {
 .signup button {
   min-height: 52px;
   padding: 14px 24px;
-  border: 1px solid rgba(255, 232, 179, .5);
+  border: 1px solid rgba(255, 232, 179, 0.5);
   border-radius: 8px;
-  background: linear-gradient(118deg, var(--bronze) 0%, var(--gold) 52%, var(--soft-gold) 100%);
+  background: linear-gradient(
+    118deg,
+    var(--bronze) 0%,
+    var(--gold) 52%,
+    var(--soft-gold) 100%
+  );
   color: var(--bg);
   cursor: pointer;
   font: inherit;
   font-weight: 700;
-  box-shadow: 0 10px 34px -14px rgba(192, 144, 71, .7);
-  transition: box-shadow .18s ease, filter .18s ease, transform .18s ease;
+  box-shadow: 0 10px 34px -14px rgba(192, 144, 71, 0.7);
+  transition:
+    box-shadow 0.18s ease,
+    filter 0.18s ease,
+    transform 0.18s ease;
 }
 
 .signup button:hover {
   transform: translateY(-1px);
   filter: brightness(1.08);
-  box-shadow: 0 14px 40px -14px rgba(242, 213, 146, .8);
+  box-shadow: 0 14px 40px -14px rgba(242, 213, 146, 0.8);
 }
 
 .signup button:disabled {
   cursor: default;
-  opacity: .6;
+  opacity: 0.6;
   transform: none;
 }
 
@@ -592,7 +574,7 @@ form.signup {
   min-height: 1.25em;
   margin-top: 13px;
   color: var(--muted);
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .formnote.ok,
@@ -609,14 +591,23 @@ form.signup {
   border: 0;
   border-radius: 14px;
   background:
-    radial-gradient(120% 120% at 96% 0%, rgba(242, 213, 146, .16), transparent 46%),
-    linear-gradient(120deg, rgba(255, 232, 179, .1), transparent 42%),
-    linear-gradient(160deg, rgba(38, 32, 15, .9) 0%, rgba(18, 16, 11, .92) 52%, rgba(8, 8, 11, .96) 100%);
+    radial-gradient(
+      120% 120% at 96% 0%,
+      rgba(242, 213, 146, 0.16),
+      transparent 46%
+    ),
+    linear-gradient(120deg, rgba(255, 232, 179, 0.1), transparent 42%),
+    linear-gradient(
+      160deg,
+      rgba(38, 32, 15, 0.9) 0%,
+      rgba(18, 16, 11, 0.92) 52%,
+      rgba(8, 8, 11, 0.96) 100%
+    );
   box-shadow:
-    0 0 0 1px rgba(255, 232, 179, .22),
-    inset 0 1px 0 rgba(255, 232, 179, .18),
-    0 34px 90px -42px rgba(242, 213, 146, .62),
-    0 22px 60px -32px rgba(0, 0, 0, .92);
+    0 0 0 1px rgba(255, 232, 179, 0.22),
+    inset 0 1px 0 rgba(255, 232, 179, 0.18),
+    0 34px 90px -42px rgba(242, 213, 146, 0.62),
+    0 22px 60px -32px rgba(0, 0, 0, 0.92);
   backdrop-filter: blur(10px);
 }
 
@@ -625,7 +616,7 @@ form.signup {
   position: absolute;
   inset: 1px;
   border-radius: 13px;
-  box-shadow: inset 0 0 0 1px rgba(255, 232, 179, .08);
+  box-shadow: inset 0 0 0 1px rgba(255, 232, 179, 0.08);
   pointer-events: none;
 }
 
@@ -633,7 +624,12 @@ form.signup {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(115deg, transparent 40%, rgba(255, 232, 179, .07) 50%, transparent 60%);
+  background: linear-gradient(
+    115deg,
+    transparent 40%,
+    rgba(255, 232, 179, 0.07) 50%,
+    transparent 60%
+  );
   pointer-events: none;
 }
 
@@ -648,9 +644,9 @@ form.signup {
 
 .card .label {
   color: var(--muted);
-  font-size: .78rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -670,14 +666,14 @@ form.signup {
   flex: none;
   border: 0;
   border-radius: 8px;
-  background: rgba(255, 232, 179, .06);
+  background: rgba(255, 232, 179, 0.06);
   box-shadow:
-    0 0 0 1px rgba(242, 213, 146, .28),
-    inset 0 1px 0 rgba(255, 232, 179, .12);
+    0 0 0 1px rgba(242, 213, 146, 0.28),
+    inset 0 1px 0 rgba(255, 232, 179, 0.12);
   color: var(--champagne);
   font-size: 1.35rem;
   font-weight: 700;
-  transition: opacity .35s ease;
+  transition: opacity 0.35s ease;
 }
 
 .brandname {
@@ -685,7 +681,7 @@ form.signup {
   font-size: clamp(1.6rem, 3vw, 2.25rem);
   font-weight: 700;
   letter-spacing: 0;
-  transition: opacity .35s ease;
+  transition: opacity 0.35s ease;
 }
 
 .ring {
@@ -721,9 +717,9 @@ form.signup {
 
 .ring .pct span {
   color: var(--muted);
-  font-size: .66rem;
+  font-size: 0.66rem;
   font-weight: 600;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -735,7 +731,7 @@ form.signup {
   gap: 15px;
   margin-top: 28px;
   padding-top: 23px;
-  border-top: 1px solid rgba(255, 232, 179, .12);
+  border-top: 1px solid rgba(255, 232, 179, 0.12);
 }
 
 .sizeline .big {
@@ -743,13 +739,13 @@ form.signup {
   color: var(--text);
   font-size: clamp(2.7rem, 6vw, 4.2rem);
   font-weight: 700;
-  line-height: .92;
+  line-height: 0.92;
 }
 
 .sizeline .small {
   max-width: 28ch;
   color: var(--muted);
-  font-size: .96rem;
+  font-size: 0.96rem;
 }
 
 .chips {
@@ -765,10 +761,10 @@ form.signup {
   padding: 7px 10px;
   border: 0;
   border-radius: 8px;
-  background: rgba(255, 232, 179, .07);
-  box-shadow: 0 0 0 1px rgba(192, 144, 71, .32);
+  background: rgba(255, 232, 179, 0.07);
+  box-shadow: 0 0 0 1px rgba(192, 144, 71, 0.32);
   color: var(--champagne);
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
 /* Feature band: open columns separated by gold hairlines, not boxed cards.
@@ -779,14 +775,52 @@ form.signup {
   margin-top: 0;
   padding-block: clamp(44px, 8vw, 82px);
   background:
-    linear-gradient(90deg, transparent 4%, rgba(192, 144, 71, .34) 32%, rgba(242, 213, 146, .8) 50%, rgba(192, 144, 71, .34) 68%, transparent 96%) top center / 100% 1px no-repeat,
-    radial-gradient(46% 100% at 50% 0%, rgba(242, 213, 146, .15), transparent 72%) top center / 100% 96px no-repeat,
-    linear-gradient(90deg, transparent 4%, rgba(192, 144, 71, .3) 32%, rgba(242, 213, 146, .65) 50%, rgba(192, 144, 71, .3) 68%, transparent 96%) bottom center / 100% 1px no-repeat,
-    radial-gradient(46% 100% at 50% 100%, rgba(242, 213, 146, .11), transparent 72%) bottom center / 100% 96px no-repeat,
-    radial-gradient(620px 320px at 50% 0%, rgba(192, 144, 71, .17), transparent 72%),
-    radial-gradient(420px 520px at 0% 50%, rgba(192, 144, 71, .13), transparent 72%),
-    radial-gradient(420px 520px at 100% 45%, rgba(242, 213, 146, .1), transparent 74%),
-    linear-gradient(180deg, rgba(8, 8, 11, .98), rgba(14, 12, 8, .96));
+    linear-gradient(
+        90deg,
+        transparent 4%,
+        rgba(192, 144, 71, 0.34) 32%,
+        rgba(242, 213, 146, 0.8) 50%,
+        rgba(192, 144, 71, 0.34) 68%,
+        transparent 96%
+      )
+      top center / 100% 1px no-repeat,
+    radial-gradient(
+        46% 100% at 50% 0%,
+        rgba(242, 213, 146, 0.15),
+        transparent 72%
+      )
+      top center / 100% 96px no-repeat,
+    linear-gradient(
+        90deg,
+        transparent 4%,
+        rgba(192, 144, 71, 0.3) 32%,
+        rgba(242, 213, 146, 0.65) 50%,
+        rgba(192, 144, 71, 0.3) 68%,
+        transparent 96%
+      )
+      bottom center / 100% 1px no-repeat,
+    radial-gradient(
+        46% 100% at 50% 100%,
+        rgba(242, 213, 146, 0.11),
+        transparent 72%
+      )
+      bottom center / 100% 96px no-repeat,
+    radial-gradient(
+      620px 320px at 50% 0%,
+      rgba(192, 144, 71, 0.17),
+      transparent 72%
+    ),
+    radial-gradient(
+      420px 520px at 0% 50%,
+      rgba(192, 144, 71, 0.13),
+      transparent 72%
+    ),
+    radial-gradient(
+      420px 520px at 100% 45%,
+      rgba(242, 213, 146, 0.1),
+      transparent 74%
+    ),
+    linear-gradient(180deg, rgba(8, 8, 11, 0.98), rgba(14, 12, 8, 0.96));
 }
 
 /* Dust drifts through the features band, opposite corners */
@@ -798,7 +832,7 @@ form.signup {
   background:
     url("/gold-dust.svg") left -170px top -190px / 470px auto no-repeat,
     url("/gold-dust-r.svg") right -170px bottom -210px / 470px auto no-repeat;
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .vtitle {
@@ -806,9 +840,9 @@ form.signup {
   z-index: 1;
   margin-bottom: clamp(34px, 5vw, 54px);
   color: var(--champagne);
-  font-size: .84rem;
+  font-size: 0.84rem;
   font-weight: 600;
-  letter-spacing: .22em;
+  letter-spacing: 0.22em;
   text-align: center;
   text-transform: uppercase;
 }
@@ -834,14 +868,16 @@ form.signup {
 }
 
 .v + .v {
-  border-inline-start: 1px solid rgba(192, 144, 71, .28);
+  border-inline-start: 1px solid rgba(192, 144, 71, 0.28);
 }
 
 /* Reveal is opt-in via JS (.anim); without JS the band is simply visible */
 .values.anim .v {
   opacity: 0;
   transform: translateY(14px);
-  transition: opacity .55s ease, transform .55s ease;
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease;
 }
 
 .values.anim .v.in {
@@ -875,7 +911,7 @@ form.signup {
 
 .v p {
   color: var(--muted);
-  font-size: .98rem;
+  font-size: 0.98rem;
   line-height: 1.72;
   text-wrap: pretty;
 }
@@ -886,11 +922,27 @@ form.signup {
   overflow: hidden;
   padding-block: clamp(54px, 8vw, 92px);
   background:
-    radial-gradient(680px 360px at 50% -10%, rgba(242, 213, 146, .18), transparent 70%),
-    radial-gradient(560px 300px at 50% 108%, rgba(134, 81, 28, .15), transparent 74%),
-    radial-gradient(480px 360px at 0% 50%, rgba(192, 144, 71, .16), transparent 74%),
-    radial-gradient(480px 360px at 100% 50%, rgba(255, 232, 179, .12), transparent 74%),
-    linear-gradient(180deg, rgba(18, 17, 14, .96), rgba(8, 8, 11, .98));
+    radial-gradient(
+      680px 360px at 50% -10%,
+      rgba(242, 213, 146, 0.18),
+      transparent 70%
+    ),
+    radial-gradient(
+      560px 300px at 50% 108%,
+      rgba(134, 81, 28, 0.15),
+      transparent 74%
+    ),
+    radial-gradient(
+      480px 360px at 0% 50%,
+      rgba(192, 144, 71, 0.16),
+      transparent 74%
+    ),
+    radial-gradient(
+      480px 360px at 100% 50%,
+      rgba(255, 232, 179, 0.12),
+      transparent 74%
+    ),
+    linear-gradient(180deg, rgba(18, 17, 14, 0.96), rgba(8, 8, 11, 0.98));
   color: var(--text);
 }
 
@@ -903,7 +955,7 @@ form.signup {
   background:
     url("/gold-dust-r.svg") right -180px top -170px / 440px auto no-repeat,
     url("/gold-dust.svg") left -180px bottom -190px / 440px auto no-repeat;
-  opacity: .45;
+  opacity: 0.45;
 }
 
 .vision .wrap {
@@ -932,14 +984,34 @@ form.signup {
 
 footer {
   background:
-    linear-gradient(90deg, transparent 4%, rgba(192, 144, 71, .3) 32%, rgba(242, 213, 146, .6) 50%, rgba(192, 144, 71, .3) 68%, transparent 96%) top center / 100% 1px no-repeat,
-    radial-gradient(560px 260px at 50% 0%, rgba(192, 144, 71, .13), transparent 74%),
-    radial-gradient(360px 260px at 0% 0%, rgba(192, 144, 71, .1), transparent 78%),
-    radial-gradient(360px 260px at 100% 0%, rgba(242, 213, 146, .07), transparent 78%),
-    #08080B;
+    linear-gradient(
+        90deg,
+        transparent 4%,
+        rgba(192, 144, 71, 0.3) 32%,
+        rgba(242, 213, 146, 0.6) 50%,
+        rgba(192, 144, 71, 0.3) 68%,
+        transparent 96%
+      )
+      top center / 100% 1px no-repeat,
+    radial-gradient(
+      560px 260px at 50% 0%,
+      rgba(192, 144, 71, 0.13),
+      transparent 74%
+    ),
+    radial-gradient(
+      360px 260px at 0% 0%,
+      rgba(192, 144, 71, 0.1),
+      transparent 78%
+    ),
+    radial-gradient(
+      360px 260px at 100% 0%,
+      rgba(242, 213, 146, 0.07),
+      transparent 78%
+    ),
+    #08080b;
   padding: 34px 0;
   color: var(--muted);
-  font-size: .92rem;
+  font-size: 0.92rem;
 }
 
 .frow {
@@ -982,7 +1054,7 @@ footer {
 .legal .updated {
   margin-bottom: 32px;
   color: var(--muted);
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .legal h2 {
@@ -1037,7 +1109,7 @@ footer {
 
   .v + .v {
     border-inline-start: 0;
-    border-block-start: 1px solid rgba(192, 144, 71, .28);
+    border-block-start: 1px solid rgba(192, 144, 71, 0.28);
   }
 
   .heroVisual {
@@ -1074,7 +1146,7 @@ footer {
   .navlink,
   .navcta,
   .lang summary {
-    font-size: .92rem;
+    font-size: 0.92rem;
     min-width: 0;
   }
 
@@ -1166,7 +1238,7 @@ footer {
   }
 
   .ring .pct span {
-    font-size: .58rem;
+    font-size: 0.58rem;
   }
 
   .sizeline .small {
@@ -1190,12 +1262,12 @@ footer {
 
   .navlink,
   .navcta {
-    font-size: .76rem;
+    font-size: 0.76rem;
   }
 
   .lang summary {
     max-width: 140px;
-    font-size: .76rem;
+    font-size: 0.76rem;
   }
 
   .card {
@@ -1215,8 +1287,8 @@ footer {
   *,
   *::before,
   *::after {
-    transition-duration: .001ms !important;
-    animation-duration: .001ms !important;
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
   }
 }
