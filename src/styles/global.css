@@ -311,11 +311,11 @@ header {
   width: min(760px, 110vw);
   height: 520px;
   background:
-    linear-gradient(74deg, transparent 42%, rgba(255, 232, 179, .19) 49%, transparent 57%),
-    linear-gradient(90deg, transparent 43%, rgba(242, 213, 146, .31) 50%, transparent 57%),
-    linear-gradient(106deg, transparent 42%, rgba(255, 232, 179, .2) 50%, transparent 58%);
+    linear-gradient(74deg, transparent 42%, rgba(255, 232, 179, .26) 49%, transparent 57%),
+    linear-gradient(90deg, transparent 43%, rgba(242, 213, 146, .4) 50%, transparent 57%),
+    linear-gradient(106deg, transparent 42%, rgba(255, 232, 179, .27) 50%, transparent 58%);
   filter: blur(11px);
-  opacity: .72;
+  opacity: .85;
   transform: translateX(-50%);
   -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .74) 48%, transparent 86%);
   mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .74) 48%, transparent 86%);
@@ -325,42 +325,11 @@ header {
   inset: 0;
   z-index: 0;
   background:
-    radial-gradient(circle at 12% 10%, rgba(255, 244, 207, .98) 0 1.15px, transparent 1.9px),
-    radial-gradient(circle at 22% 26%, rgba(242, 213, 146, .78) 0 1px, transparent 1.85px),
-    radial-gradient(circle at 42% 16%, rgba(255, 232, 179, .56) 0 .9px, transparent 1.8px),
-    radial-gradient(circle at 88% 12%, rgba(255, 244, 207, .96) 0 1.15px, transparent 1.9px),
-    radial-gradient(circle at 72% 28%, rgba(242, 213, 146, .76) 0 1px, transparent 1.85px),
-    radial-gradient(circle at 58% 18%, rgba(255, 232, 179, .52) 0 .9px, transparent 1.8px),
-    radial-gradient(300px 430px at 0% 7%, rgba(255, 232, 179, .3), rgba(192, 144, 71, .13) 42%, transparent 76%),
-    radial-gradient(300px 430px at 100% 7%, rgba(255, 232, 179, .28), rgba(192, 144, 71, .12) 42%, transparent 76%);
-  background-size:
-    260px 360px,
-    260px 360px,
-    260px 360px,
-    260px 360px,
-    260px 360px,
-    260px 360px,
-    36% 100%,
-    36% 100%;
-  background-position:
-    left top,
-    left 34px top 18px,
-    left 78px top 42px,
-    right top,
-    right 34px top 18px,
-    right 78px top 42px,
-    left top,
-    right top;
-  background-repeat:
-    repeat-y,
-    repeat-y,
-    repeat-y,
-    repeat-y,
-    repeat-y,
-    repeat-y,
-    no-repeat,
-    no-repeat;
-  opacity: .94;
+    url("/gold-dust.svg") left -90px top -90px / min(46vw, 660px) auto no-repeat,
+    url("/gold-dust-r.svg") right -90px top -90px / min(46vw, 660px) auto no-repeat,
+    radial-gradient(340px 460px at 0% 4%, rgba(255, 232, 179, .34), rgba(192, 144, 71, .15) 42%, transparent 76%),
+    radial-gradient(340px 460px at 100% 4%, rgba(255, 232, 179, .32), rgba(192, 144, 71, .14) 42%, transparent 76%);
+  opacity: .96;
   -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 96%);
   mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 96%);
 }
