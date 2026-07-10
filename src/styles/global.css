@@ -322,53 +322,83 @@ header {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 200px;
-  height: 100%;
-  margin-left: -100px;
-  background: linear-gradient(180deg, rgba(255, 244, 207, .5) 0%, rgba(242, 213, 146, .2) 52%, transparent 82%);
-  clip-path: polygon(43% 0, 57% 0, 97% 100%, 3% 100%);
-  filter: blur(10px);
-  transform-origin: 50% 0;
+  width: 360px;
+  height: 112%;
+  margin-left: -180px;
+  background:
+    repeating-linear-gradient(90deg,
+      transparent 0 18px,
+      rgba(255, 244, 207, .16) 26px 40px,
+      transparent 48px 74px,
+      rgba(242, 213, 146, .12) 82px 96px,
+      transparent 104px 132px),
+    radial-gradient(60% 40% at 50% 0%, rgba(255, 244, 207, .5), transparent 100%),
+    linear-gradient(180deg, rgba(255, 244, 207, .32) 0%, rgba(242, 213, 146, .13) 50%, transparent 78%);
+  clip-path: polygon(34% 0, 66% 0, 128% 100%, -28% 100%);
+  filter: blur(20px);
+  transform-origin: 50% -70px;
   will-change: transform, opacity;
 }
 
 .spot.s1 {
-  opacity: .8;
-  transform: translateX(-215px) rotate(15deg);
-  animation: spot-left 3.6s cubic-bezier(.16, 1, .3, 1) both;
+  opacity: .6;
+  transform: translateX(-265px) rotate(17deg) scaleX(.82);
+  animation:
+    spot-left 3.6s cubic-bezier(.16, 1, .3, 1) both,
+    sway-left 12s ease-in-out 3.8s infinite alternate;
 }
 
 .spot.s2 {
-  opacity: .9;
-  transform: rotate(0deg);
-  animation: spot-mid 3.6s cubic-bezier(.16, 1, .3, 1) both;
+  opacity: .72;
+  transform: rotate(0deg) scaleX(1.06);
+  animation:
+    spot-mid 3.6s cubic-bezier(.16, 1, .3, 1) both,
+    sway-mid 14s ease-in-out 3.8s infinite alternate;
 }
 
 .spot.s3 {
-  opacity: .8;
-  transform: translateX(215px) rotate(-15deg);
-  animation: spot-right 3.6s cubic-bezier(.16, 1, .3, 1) both;
+  opacity: .6;
+  transform: translateX(265px) rotate(-17deg) scaleX(.9);
+  animation:
+    spot-right 3.6s cubic-bezier(.16, 1, .3, 1) both,
+    sway-right 11s ease-in-out 3.8s infinite alternate;
 }
 
 @keyframes spot-left {
-  0% { opacity: 0; transform: translateX(-215px) rotate(-42deg); }
-  22% { opacity: .8; }
-  52% { transform: translateX(-215px) rotate(30deg); }
-  100% { opacity: .8; transform: translateX(-215px) rotate(15deg); }
+  0% { opacity: 0; transform: translateX(-265px) rotate(-44deg) scaleX(.82); }
+  22% { opacity: .6; }
+  52% { transform: translateX(-265px) rotate(31deg) scaleX(.82); }
+  100% { opacity: .6; transform: translateX(-265px) rotate(17deg) scaleX(.82); }
 }
 
 @keyframes spot-mid {
-  0% { opacity: 0; transform: rotate(26deg); }
-  22% { opacity: .9; }
-  56% { transform: rotate(-14deg); }
-  100% { opacity: .9; transform: rotate(0deg); }
+  0% { opacity: 0; transform: rotate(27deg) scaleX(1.06); }
+  22% { opacity: .72; }
+  56% { transform: rotate(-15deg) scaleX(1.06); }
+  100% { opacity: .72; transform: rotate(0deg) scaleX(1.06); }
 }
 
 @keyframes spot-right {
-  0% { opacity: 0; transform: translateX(215px) rotate(42deg); }
-  22% { opacity: .8; }
-  52% { transform: translateX(215px) rotate(-30deg); }
-  100% { opacity: .8; transform: translateX(215px) rotate(-15deg); }
+  0% { opacity: 0; transform: translateX(265px) rotate(44deg) scaleX(.9); }
+  22% { opacity: .6; }
+  52% { transform: translateX(265px) rotate(-31deg) scaleX(.9); }
+  100% { opacity: .6; transform: translateX(265px) rotate(-17deg) scaleX(.9); }
+}
+
+/* Idle haze drift after the beams settle */
+@keyframes sway-left {
+  from { transform: translateX(-265px) rotate(17deg) scaleX(.82); }
+  to { transform: translateX(-265px) rotate(12.5deg) scaleX(.86); }
+}
+
+@keyframes sway-mid {
+  from { transform: rotate(0deg) scaleX(1.06); }
+  to { transform: rotate(3deg) scaleX(1); }
+}
+
+@keyframes sway-right {
+  from { transform: translateX(265px) rotate(-17deg) scaleX(.9); }
+  to { transform: translateX(265px) rotate(-12deg) scaleX(.84); }
 }
 
 @media (prefers-reduced-motion: reduce) {
