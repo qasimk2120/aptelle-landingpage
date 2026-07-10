@@ -76,11 +76,11 @@ function ackHtml(t: AckStrings, dir: "ltr" | "rtl"): string {
   return `<!doctype html>
 <html dir="${dir}">
 <body style="margin:0;padding:0;background-color:#08080b;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#08080b;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#08080b;background-image:radial-gradient(90% 40% at 50% 0%, #191307 0%, #08080b 60%);">
     <tr><td align="center" style="padding:44px 16px 36px;">
       <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;max-width:560px;" dir="${dir}">
         <tr><td align="center" style="padding-bottom:26px;font-family:${font};font-size:26px;font-weight:bold;color:#ffe8b3;" dir="ltr">Apt<em>Elle</em></td></tr>
-        <tr><td style="border:1px solid #4a3a1e;border-radius:14px;background-color:#14110c;padding:42px 36px;" align="center">
+        <tr><td style="border:1px solid #4a3a1e;border-radius:14px;background-color:#14110c;background-image:radial-gradient(120% 90% at 50% 0%, #2a2113 0%, #14110c 55%);padding:42px 36px;" align="center">
           <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
             <tr><td align="center" style="padding-bottom:18px;">
               <table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="height:1px;width:44px;background-color:#c09047;font-size:0;line-height:0;">&nbsp;</td></tr></table>
