@@ -5,6 +5,7 @@ functions/node_modules/
 .legacy-static/
 .env
 .env.*
+!.env.example
 .DS_Store
 *.log
 .firebase/

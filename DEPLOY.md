@@ -38,7 +38,7 @@ Notes:
 
 ## Waitlist + acknowledgement email
 
-See SETUP.md. Short version: create a Supabase project, run `supabase/waitlist.sql`, and add `PUBLIC_SUPABASE_URL` plus `PUBLIC_SUPABASE_ANON_KEY` to GitHub Actions secrets.
+See SETUP.md. Short version: create and link the Supabase project, run `npx supabase db push` to apply the tracked migration, then add `PUBLIC_SUPABASE_URL` plus `PUBLIC_SUPABASE_ANON_KEY` to GitHub Actions secrets.
 
 ## Multilingual
 
