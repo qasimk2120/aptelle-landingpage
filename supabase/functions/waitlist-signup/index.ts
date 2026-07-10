@@ -11,6 +11,9 @@
 // - Duplicate emails are ignored server-side and every accepted request gets
 //   the same generic response, so responses never reveal list membership.
 // - Best-effort per-IP rate limit on top of Turnstile (per-instance memory).
+// - Acknowledgement email via Resend goes to NEW signups only, so repeat
+//   submissions cannot be used to spam an inbox. Sending is best effort and
+//   skipped entirely while RESEND_API_KEY is unset.
 
 const ALLOWED_ORIGINS = new Set([
   "https://aptelle.com",
@@ -21,6 +24,50 @@ const ALLOWED_ORIGINS = new Set([
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const LANGS = new Set(["en", "fr", "de", "ar"]);
+
+const ACK: Record<string, { subject: string; text: string }> = {
+  en: {
+    subject: "You are on the Aptelle waitlist",
+    text: "You are on the list. We will email you once when early access opens and nothing else lands in your inbox until then.\n\nIf this was not you, ignore this email and the address is removed from any further contact.\n\nAptelle\nhttps://aptelle.com",
+  },
+  fr: {
+    subject: "Vous êtes sur la liste d'attente Aptelle",
+    text: "Vous êtes sur la liste. Nous vous écrirons une seule fois à l'ouverture de l'accès anticipé, rien d'autre d'ici là.\n\nSi ce n'était pas vous, ignorez cet e-mail.\n\nAptelle\nhttps://aptelle.com",
+  },
+  de: {
+    subject: "Du stehst auf der Aptelle Warteliste",
+    text: "Du bist auf der Liste. Wir schreiben dir genau einmal, sobald der frühe Zugang startet, bis dahin nichts weiter.\n\nFalls du das nicht warst, ignoriere diese E-Mail.\n\nAptelle\nhttps://aptelle.com",
+  },
+  ar: {
+    subject: "أنت على قائمة انتظار Aptelle",
+    text: "أنت الآن على القائمة. سنراسلك مرة واحدة فقط عند فتح الوصول المبكر ولن يصلك شيء آخر قبل ذلك.\n\nإذا لم تكن أنت من سجّل، تجاهل هذه الرسالة.\n\nAptelle\nhttps://aptelle.com",
+  },
+};
+
+async function sendAcknowledgement(email: string, lang: string): Promise<void> {
+  const apiKey = Deno.env.get("RESEND_API_KEY");
+  if (!apiKey) return; // dormant until Resend is configured
+
+  const t = ACK[lang] || ACK.en;
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Aptelle <hello@aptelle.com>",
+        to: [email],
+        subject: t.subject,
+        text: t.text,
+      }),
+    });
+    if (!res.ok) console.error("ack email failed", res.status);
+  } catch (err) {
+    console.error("ack email failed", err);
+  }
+}
 const MAX_EMAIL_LENGTH = 253;
 const RATE_LIMIT = 5; // requests per window per IP, per instance
 const RATE_WINDOW_MS = 60_000;
@@ -117,14 +164,16 @@ Deno.serve(async (req) => {
   }
 
   // Server owns the source field; duplicates are silently ignored so the
-  // response is identical for new and existing emails.
+  // response is identical for new and existing emails. return=representation
+  // tells us whether a row was actually created (new signup) or skipped
+  // (duplicate) without changing what the caller sees.
   const insert = await fetch(`${supabaseUrl}/rest/v1/waitlist?on_conflict=email`, {
     method: "POST",
     headers: {
       apikey: serviceKey,
       Authorization: `Bearer ${serviceKey}`,
       "Content-Type": "application/json",
-      Prefer: "resolution=ignore-duplicates,return=minimal",
+      Prefer: "resolution=ignore-duplicates,return=representation",
     },
     body: JSON.stringify({ email, lang, source: "landing" }),
   });
@@ -132,6 +181,19 @@ Deno.serve(async (req) => {
   if (!insert.ok) {
     console.error("waitlist insert failed", insert.status);
     return respond(500, false, headers);
+  }
+
+  let isNew = false;
+  try {
+    const rows = await insert.json();
+    isNew = Array.isArray(rows) && rows.length > 0;
+  } catch {
+    // Treat parse issues as duplicate: worst case a new signup misses the
+    // ack email, which is better than mailing on every resubmission.
+  }
+
+  if (isNew) {
+    await sendAcknowledgement(email, lang);
   }
 
   return respond(200, true, headers);

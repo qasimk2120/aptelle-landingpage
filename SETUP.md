@@ -74,6 +74,19 @@ npm.cmd run build
 npm.cmd run dev
 ```
 
-## 7. Email acknowledgement
+## 7. Email acknowledgement (Resend)
 
-Automatic acknowledgement email remains deferred. The likely future path is a Supabase Edge Function using Resend, invoked after a successful signup.
+The `waitlist-signup` function sends one localized acknowledgement from `hello@aptelle.com` to each NEW signup. Duplicates never trigger email, so resubmitting an address cannot spam an inbox. Sending is skipped entirely until `RESEND_API_KEY` exists, and a Resend failure never blocks the signup itself.
+
+Setup, all free tier:
+
+1. Create an account at [resend.com](https://resend.com) and add the domain `aptelle.com` (apex, not a subdomain, so mail comes from hello@aptelle.com). Region does not matter for volume this low.
+2. Add the DNS records Resend shows into Cloudflare as **DNS only** (grey cloud). They live on Resend's own subdomains and do not touch the existing MX/SPF used by Cloudflare Email Routing.
+3. Wait for the domain to verify in Resend, then create an API key and store it:
+
+```powershell
+npx supabase secrets set RESEND_API_KEY=<your-resend-api-key>
+npx supabase functions deploy waitlist-signup --use-api
+```
+
+No mailbox is needed for sending. For replies to hello@aptelle.com, use Cloudflare Email Routing (free) to forward that address to a personal inbox.
