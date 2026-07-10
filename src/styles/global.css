@@ -91,7 +91,9 @@ body::before {
   opacity: 0.07;
 }
 
-/* Gold dust along both edges, full page height (fixed, so it lives at every scroll depth) */
+/* Gold dust along both edges, full page height (fixed, so it lives at every scroll depth).
+   Applied globally via Base.astro -> global.css, so every current and future page
+   (privacy, terms, and anything added later) inherits this automatically. */
 body::after {
   content: "";
   position: fixed;
@@ -101,27 +103,27 @@ body::after {
   background:
     url("/gold-dust.svg"), url("/gold-dust-r.svg"),
     radial-gradient(
-      300px 520px at 0% 12%,
-      rgba(242, 213, 146, 0.16),
-      transparent 72%
+      380px 680px at 0% 12%,
+      rgba(242, 213, 146, 0.24),
+      transparent 76%
     ),
     radial-gradient(
-      300px 520px at 100% 12%,
-      rgba(242, 213, 146, 0.14),
-      transparent 72%
+      380px 680px at 100% 12%,
+      rgba(242, 213, 146, 0.21),
+      transparent 76%
     );
   background-size:
-    480px auto,
-    480px auto,
+    640px auto,
+    640px auto,
     34% 100%,
     34% 100%;
   background-position:
-    left -140px top -60px,
-    right -140px top 160px,
+    left -160px top -80px,
+    right -160px top 180px,
     left top,
     right top;
   background-repeat: repeat-y, repeat-y, no-repeat, no-repeat;
-  opacity: 0.5;
+  opacity: 0.7;
   -webkit-mask-image: linear-gradient(
     90deg,
     #000 0%,
