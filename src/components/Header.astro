@@ -9,6 +9,7 @@ const s = t(lang);
   <div class="wrap nav">
     <a class="brand" href={localeHref(lang)} aria-label="Aptelle home" translate="no"><span class="dot" aria-hidden="true"></span><span class="word">Apt<span class="elle">Elle</span></span></a>
     <div class="navright">
+      <a class="navlink" href={localeHref(lang)}>{s.home ?? "Home"}</a>
       <LangSwitcher lang={lang} path={path} />
       <a class="navcta" href="#waitlist">{s.navCta}</a>
     </div>
