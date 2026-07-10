@@ -121,6 +121,28 @@ async function verifyTurnstile(token: string, ip: string | null): Promise<boolea
   return data.success === true;
 }
 
+// New API-key projects inject SUPABASE_SECRET_KEYS (sb_secret, possibly a
+// JSON array or comma list); legacy projects inject SUPABASE_SERVICE_ROLE_KEY.
+// Prefer the new format because the legacy JWT can be disabled.
+function resolveServiceKey(): string | null {
+  const plural = (Deno.env.get("SUPABASE_SECRET_KEYS") || "").trim();
+  if (plural) {
+    if (plural.startsWith("sb_secret_")) return plural.split(",")[0].trim();
+    try {
+      const parsed = JSON.parse(plural);
+      if (Array.isArray(parsed) && parsed.length) {
+        const first = parsed[0];
+        if (typeof first === "string") return first;
+        if (first && typeof first.api_key === "string") return first.api_key;
+        if (first && typeof first.secret === "string") return first.secret;
+      }
+    } catch {
+      // fall through to legacy
+    }
+  }
+  return Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || null;
+}
+
 Deno.serve(async (req) => {
   const headers = corsHeaders(req.headers.get("Origin"));
 
@@ -155,10 +177,7 @@ Deno.serve(async (req) => {
   }
 
   const supabaseUrl = Deno.env.get("SUPABASE_URL");
-  // Legacy projects inject SUPABASE_SERVICE_ROLE_KEY; new API-key projects
-  // inject the sb_secret equivalent under SUPABASE_SECRET_KEY.
-  const serviceKey =
-    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || Deno.env.get("SUPABASE_SECRET_KEY");
+  const serviceKey = resolveServiceKey();
   if (!supabaseUrl || !serviceKey) {
     return respond(500, false, headers);
   }
@@ -179,7 +198,7 @@ Deno.serve(async (req) => {
   });
 
   if (!insert.ok) {
-    console.error("waitlist insert failed", insert.status);
+    console.error("waitlist insert failed", insert.status, await insert.text());
     return respond(500, false, headers);
   }
 
