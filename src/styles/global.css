@@ -298,28 +298,83 @@ header {
   background: radial-gradient(80% 110% at 50% -30%, rgba(192, 144, 71, .24), transparent 60%);
 }
 
-.hero::before,
 .hero::after {
   content: "";
   position: absolute;
   pointer-events: none;
 }
 
-.hero::before {
-  inset-block-start: -132px;
+/* Cinematic spotlights: three beams swing in from the wings, then settle on center */
+.hero .spots {
+  position: absolute;
+  inset-block-start: -110px;
   inset-inline-start: 50%;
   z-index: 0;
-  width: min(760px, 110vw);
-  height: 520px;
-  background:
-    linear-gradient(74deg, transparent 42%, rgba(255, 232, 179, .26) 49%, transparent 57%),
-    linear-gradient(90deg, transparent 43%, rgba(242, 213, 146, .4) 50%, transparent 57%),
-    linear-gradient(106deg, transparent 42%, rgba(255, 232, 179, .27) 50%, transparent 58%);
-  filter: blur(11px);
-  opacity: .85;
+  width: min(940px, 108vw);
+  height: 620px;
+  pointer-events: none;
   transform: translateX(-50%);
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .74) 48%, transparent 86%);
-  mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .74) 48%, transparent 86%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .8) 52%, transparent 90%);
+  mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .8) 52%, transparent 90%);
+}
+
+.spot {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 200px;
+  height: 100%;
+  margin-left: -100px;
+  background: linear-gradient(180deg, rgba(255, 244, 207, .5) 0%, rgba(242, 213, 146, .2) 52%, transparent 82%);
+  clip-path: polygon(43% 0, 57% 0, 97% 100%, 3% 100%);
+  filter: blur(10px);
+  transform-origin: 50% 0;
+  will-change: transform, opacity;
+}
+
+.spot.s1 {
+  opacity: .8;
+  transform: translateX(-215px) rotate(15deg);
+  animation: spot-left 3.6s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.spot.s2 {
+  opacity: .9;
+  transform: rotate(0deg);
+  animation: spot-mid 3.6s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.spot.s3 {
+  opacity: .8;
+  transform: translateX(215px) rotate(-15deg);
+  animation: spot-right 3.6s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+@keyframes spot-left {
+  0% { opacity: 0; transform: translateX(-215px) rotate(-42deg); }
+  22% { opacity: .8; }
+  52% { transform: translateX(-215px) rotate(30deg); }
+  100% { opacity: .8; transform: translateX(-215px) rotate(15deg); }
+}
+
+@keyframes spot-mid {
+  0% { opacity: 0; transform: rotate(26deg); }
+  22% { opacity: .9; }
+  56% { transform: rotate(-14deg); }
+  100% { opacity: .9; transform: rotate(0deg); }
+}
+
+@keyframes spot-right {
+  0% { opacity: 0; transform: translateX(215px) rotate(42deg); }
+  22% { opacity: .8; }
+  52% { transform: translateX(215px) rotate(-30deg); }
+  100% { opacity: .8; transform: translateX(215px) rotate(-15deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spot {
+    animation: none;
+  }
 }
 
 .hero::after {
