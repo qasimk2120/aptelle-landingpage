@@ -112,18 +112,22 @@ body::after {
       rgba(242, 213, 146, 0.21),
       transparent 76%
     );
+  /* gold-dust.svg is an 800x800 canvas whose speckles only occupy the top-left
+     ~40% — at "auto" height each repeat-y tile drags a large blank gap behind it,
+     which is why the dust barely reads on short pages. Forcing a shorter tile
+     height compresses that gap out so the speckle clusters repeat back-to-back. */
   background-size:
-    640px auto,
-    640px auto,
+    640px 260px,
+    640px 260px,
     34% 100%,
     34% 100%;
   background-position:
-    left -160px top -80px,
-    right -160px top 180px,
+    left -160px top -40px,
+    right -160px top 90px,
     left top,
     right top;
   background-repeat: repeat-y, repeat-y, no-repeat, no-repeat;
-  opacity: 0.7;
+  opacity: 0.85;
   -webkit-mask-image: linear-gradient(
     90deg,
     #000 0%,
@@ -1039,8 +1043,11 @@ footer {
   flex-wrap: wrap;
 }
 
+/* .legal sits inside .wrap (max-width: var(--maxw), same full site width as every
+   other section) — it used to hard-override that down to a boxed 760px column,
+   which is why the page read narrow/centered instead of edge-to-edge like the
+   rest of the site. Reading-length is constrained per-paragraph below instead. */
 .legal {
-  max-width: 760px;
   padding-block: clamp(128px, 12vw, 168px) 78px;
 }
 
@@ -1068,6 +1075,7 @@ footer {
 
 .legal p,
 .legal li {
+  max-width: 720px;
   margin-bottom: 12px;
   color: var(--muted-strong);
   font-size: 1.02rem;
@@ -1075,6 +1083,7 @@ footer {
 }
 
 .legal ul {
+  max-width: 720px;
   margin-bottom: 12px;
   padding-inline-start: 22px;
 }
