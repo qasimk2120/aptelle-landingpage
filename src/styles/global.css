@@ -288,7 +288,7 @@ header {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding-block: clamp(132px, 12vw, 190px) clamp(54px, 7vw, 92px);
+  padding-block: clamp(132px, 12vw, 190px) clamp(24px, 4vw, 48px);
   background: radial-gradient(80% 110% at 50% -30%, rgba(192, 144, 71, .24), transparent 60%);
 }
 
@@ -689,14 +689,14 @@ form.signup {
 
 .ring {
   position: relative;
-  width: 112px;
-  height: 112px;
+  width: 138px;
+  height: 138px;
   flex: none;
 }
 
 .ring svg {
-  width: 112px;
-  height: 112px;
+  width: 138px;
+  height: 138px;
 }
 
 .ring svg {
@@ -770,15 +770,18 @@ form.signup {
   font-size: .8rem;
 }
 
-/* Feature band: open columns separated by gold hairlines, not boxed cards */
+/* Feature band: open columns separated by gold hairlines, not boxed cards.
+   Section seams are light leaks: bright at center, dissolving to the edges. */
 .values {
   position: relative;
   overflow: hidden;
-  margin-top: clamp(28px, 5vw, 56px);
+  margin-top: 0;
   padding-block: clamp(44px, 8vw, 82px);
-  border-top: 1px solid rgba(192, 144, 71, .22);
-  border-bottom: 1px solid rgba(192, 144, 71, .22);
   background:
+    linear-gradient(90deg, transparent 4%, rgba(192, 144, 71, .34) 32%, rgba(242, 213, 146, .8) 50%, rgba(192, 144, 71, .34) 68%, transparent 96%) top center / 100% 1px no-repeat,
+    radial-gradient(46% 100% at 50% 0%, rgba(242, 213, 146, .15), transparent 72%) top center / 100% 96px no-repeat,
+    linear-gradient(90deg, transparent 4%, rgba(192, 144, 71, .3) 32%, rgba(242, 213, 146, .65) 50%, rgba(192, 144, 71, .3) 68%, transparent 96%) bottom center / 100% 1px no-repeat,
+    radial-gradient(46% 100% at 50% 100%, rgba(242, 213, 146, .11), transparent 72%) bottom center / 100% 96px no-repeat,
     radial-gradient(620px 320px at 50% 0%, rgba(192, 144, 71, .17), transparent 72%),
     radial-gradient(420px 520px at 0% 50%, rgba(192, 144, 71, .13), transparent 72%),
     radial-gradient(420px 520px at 100% 45%, rgba(242, 213, 146, .1), transparent 74%),
@@ -887,7 +890,6 @@ form.signup {
     radial-gradient(480px 360px at 0% 50%, rgba(192, 144, 71, .16), transparent 74%),
     radial-gradient(480px 360px at 100% 50%, rgba(255, 232, 179, .12), transparent 74%),
     linear-gradient(180deg, rgba(18, 17, 14, .96), rgba(8, 8, 11, .98));
-  border-block: 1px solid rgba(192, 144, 71, .26);
   color: var(--text);
 }
 
@@ -928,8 +930,8 @@ form.signup {
 }
 
 footer {
-  border-top: 1px solid rgba(192, 144, 71, .26);
   background:
+    linear-gradient(90deg, transparent 4%, rgba(192, 144, 71, .3) 32%, rgba(242, 213, 146, .6) 50%, rgba(192, 144, 71, .3) 68%, transparent 96%) top center / 100% 1px no-repeat,
     radial-gradient(560px 260px at 50% 0%, rgba(192, 144, 71, .13), transparent 74%),
     radial-gradient(360px 260px at 0% 0%, rgba(192, 144, 71, .1), transparent 78%),
     radial-gradient(360px 260px at 100% 0%, rgba(242, 213, 146, .07), transparent 78%),
@@ -1149,13 +1151,13 @@ footer {
   }
 
   .ring {
-    width: 92px;
-    height: 92px;
+    width: 110px;
+    height: 110px;
   }
 
   .ring svg {
-    width: 92px;
-    height: 92px;
+    width: 110px;
+    height: 110px;
   }
 
   .ring .pct b {
