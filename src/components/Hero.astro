@@ -53,17 +53,18 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
           <path d="M108 180 L108 192"/><path d="M252 180 L252 192"/>
           <path d="M112 290 L112 302"/><path d="M248 290 L248 302"/>
         </g>
-        <!-- fit graph nodes -->
-        <g stroke="#C09047" stroke-width=".8" opacity=".65">
+        <!-- fit graph nodes: spread wide of the shirt, hidden on mobile where
+             they poke out around the card -->
+        <g class="fitgraph" stroke="#C09047" stroke-width=".8" opacity=".65">
           <path d="M108 186 L52 236"/><path d="M252 186 L316 148"/>
           <path d="M248 296 L312 336"/><path d="M112 296 L48 348"/>
           <path d="M316 148 L312 336"/>
         </g>
-        <g fill="#F2D592">
+        <g class="fitgraph" fill="#F2D592">
           <circle cx="108" cy="186" r="3.2"/><circle cx="252" cy="186" r="3.2"/>
           <circle cx="112" cy="296" r="3.2"/><circle cx="248" cy="296" r="3.2"/>
         </g>
-        <g fill="#C09047">
+        <g class="fitgraph" fill="#C09047">
           <circle cx="52" cy="236" r="2.4"/><circle cx="316" cy="148" r="2.4"/>
           <circle cx="312" cy="336" r="2.4"/><circle cx="48" cy="348" r="2.4"/>
         </g>

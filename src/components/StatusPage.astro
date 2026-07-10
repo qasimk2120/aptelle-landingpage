@@ -11,8 +11,10 @@ interface Props {
   ctaHref: string;
   ctaLabel: string;
   icon?: string;
+  subHref?: string;
+  subLabel?: string;
 }
-const { eyebrow, h1, h1accent = "", body, ctaHref, ctaLabel, icon = "lucide:arrow-left" } = Astro.props;
+const { eyebrow, h1, h1accent = "", body, ctaHref, ctaLabel, icon = "lucide:arrow-left", subHref = "", subLabel = "" } = Astro.props;
 ---
 <section class="statusPage">
   <div class="wrap">
@@ -22,5 +24,10 @@ const { eyebrow, h1, h1accent = "", body, ctaHref, ctaLabel, icon = "lucide:arro
     <h1>{h1}{h1accent && <span class="accent"> {h1accent}</span>}</h1>
     <p class="lead">{body}</p>
     <a class="statusCta" href={ctaHref}><Icon name={icon} aria-hidden="true" />{ctaLabel}</a>
+    {subLabel && (
+      <p class="statusSub">
+        {subHref ? <a href={subHref}>{subLabel}</a> : subLabel}
+      </p>
+    )}
   </div>
 </section>

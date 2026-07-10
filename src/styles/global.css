@@ -727,11 +727,28 @@ form.signup {
 
 /* Status pages: joined, contact, 404. Hero canvas, centered column */
 .statusPage {
+  position: relative;
+  isolation: isolate;
   display: grid;
   min-height: calc(100vh - 120px);
   align-items: center;
   padding-block: clamp(150px, 16vw, 210px) clamp(60px, 8vw, 100px);
   text-align: center;
+}
+
+.statusSub {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.statusSub a {
+  color: var(--champagne);
+  text-decoration: none;
+}
+
+.statusSub a:hover {
+  color: var(--soft-gold);
 }
 
 .statusPage .kicker {
@@ -1304,7 +1321,8 @@ footer {
   isolation: isolate;
 }
 
-.legal-page::before {
+.legal-page::before,
+.statusPage::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -1334,6 +1352,21 @@ footer {
     transparent 100%
   );
   mask-image: linear-gradient(180deg, #000 0%, #000 72%, transparent 100%);
+}
+
+/* Status pages also get the hero's center glow so the headline sits in the
+   same warm pool of light as the homepage */
+.statusPage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    80% 90% at 50% -20%,
+    rgba(192, 144, 71, 0.22),
+    transparent 62%
+  );
 }
 
 .legal h1 {
@@ -1557,7 +1590,9 @@ footer {
   }
 
   /* Shirt schematic stays on mobile: peeks out above the card, scaled down.
-     heroVisual gets top room so the shirt doesn't sit on the form note. */
+     heroVisual gets top room so the shirt doesn't sit on the form note.
+     The fit-graph spokes spread wide of the shirt and leak out around the
+     card at this size, so only the shirt and measurement guides remain. */
   .heroVisual {
     margin-top: 64px;
   }
@@ -1568,6 +1603,10 @@ footer {
     inset-inline-end: -4%;
     width: 62%;
     opacity: 0.3;
+  }
+
+  .heroVisual .garment .fitgraph {
+    display: none;
   }
 
   .ring {
