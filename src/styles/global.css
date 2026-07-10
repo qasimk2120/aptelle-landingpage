@@ -596,11 +596,18 @@ form.signup {
   min-height: 52px;
   flex: 1;
   padding: 14px 16px;
-  border: 1px solid var(--line);
+  /* Warm gold-tinted edge like the card, not the cold grey hairline. The
+     input was the only cold element in the hero */
+  border: 1px solid rgba(192, 144, 71, 0.35);
   border-radius: 8px;
   background: var(--surface);
   color: var(--text);
   font: inherit;
+  transition: border-color 0.18s ease;
+}
+
+.signup input:hover {
+  border-color: rgba(192, 144, 71, 0.55);
 }
 
 .signup input::placeholder {

@@ -25,30 +25,92 @@ const ALLOWED_ORIGINS = new Set([
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const LANGS = new Set(["en", "fr", "de", "ar"]);
 
-const ACK: Record<string, { subject: string; text: string }> = {
+type AckStrings = {
+  subject: string;
+  eyebrow: string;
+  heading: string;
+  body: string;
+  cta: string;
+  ignore: string;
+};
+
+const ACK: Record<string, AckStrings> = {
   en: {
     subject: "You are on the Aptelle waitlist",
-    text: "You are on the list. We will email you once when early access opens and nothing else lands in your inbox until then.\n\nIf this was not you, ignore this email and the address is removed from any further contact.\n\nAptelle\nhttps://aptelle.com",
+    eyebrow: "FIT INTELLIGENCE, LAUNCHING SOON",
+    heading: "You are on the list",
+    body: "One email when early access opens and nothing else lands in your inbox until then. Your right size in any brand is on its way.",
+    cta: "Visit aptelle.com",
+    ignore: "If this was not you, ignore this email.",
   },
   fr: {
     subject: "Vous êtes sur la liste d'attente Aptelle",
-    text: "Vous êtes sur la liste. Nous vous écrirons une seule fois à l'ouverture de l'accès anticipé, rien d'autre d'ici là.\n\nSi ce n'était pas vous, ignorez cet e-mail.\n\nAptelle\nhttps://aptelle.com",
+    eyebrow: "INTELLIGENCE D'AJUSTEMENT, BIENTÔT DISPONIBLE",
+    heading: "Vous êtes sur la liste",
+    body: "Un seul e-mail à l'ouverture de l'accès anticipé, rien d'autre d'ici là. Votre bonne taille dans chaque marque arrive.",
+    cta: "Visiter aptelle.com",
+    ignore: "Si ce n'était pas vous, ignorez cet e-mail.",
   },
   de: {
     subject: "Du stehst auf der Aptelle Warteliste",
-    text: "Du bist auf der Liste. Wir schreiben dir genau einmal, sobald der frühe Zugang startet, bis dahin nichts weiter.\n\nFalls du das nicht warst, ignoriere diese E-Mail.\n\nAptelle\nhttps://aptelle.com",
+    eyebrow: "PASSFORM-INTELLIGENZ, BALD VERFÜGBAR",
+    heading: "Du stehst auf der Liste",
+    body: "Genau eine E-Mail, sobald der frühe Zugang startet, bis dahin nichts weiter. Deine richtige Größe in jeder Marke ist unterwegs.",
+    cta: "aptelle.com besuchen",
+    ignore: "Falls du das nicht warst, ignoriere diese E-Mail.",
   },
   ar: {
     subject: "أنت على قائمة انتظار Aptelle",
-    text: "أنت الآن على القائمة. سنراسلك مرة واحدة فقط عند فتح الوصول المبكر ولن يصلك شيء آخر قبل ذلك.\n\nإذا لم تكن أنت من سجّل، تجاهل هذه الرسالة.\n\nAptelle\nhttps://aptelle.com",
+    eyebrow: "ذكاء المقاسات، قريبًا",
+    heading: "أنت على القائمة",
+    body: "رسالة واحدة عند فتح الوصول المبكر ولا شيء آخر قبل ذلك. مقاسك الصحيح في أي علامة تجارية في الطريق.",
+    cta: "زيارة aptelle.com",
+    ignore: "إذا لم تكن أنت من سجّل، تجاهل هذه الرسالة.",
   },
 };
+
+// Black and gold, table based, all styles inline so it renders the same in
+// Gmail, Outlook and Apple Mail. No remote images, so nothing to block.
+function ackHtml(t: AckStrings, dir: "ltr" | "rtl"): string {
+  const font = "Arial, Helvetica, sans-serif";
+  return `<!doctype html>
+<html dir="${dir}">
+<body style="margin:0;padding:0;background-color:#08080b;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#08080b;">
+    <tr><td align="center" style="padding:44px 16px 36px;">
+      <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;max-width:560px;" dir="${dir}">
+        <tr><td align="center" style="padding-bottom:26px;font-family:${font};font-size:26px;font-weight:bold;color:#ffe8b3;" dir="ltr">Apt<em>Elle</em></td></tr>
+        <tr><td style="border:1px solid #4a3a1e;border-radius:14px;background-color:#14110c;padding:42px 36px;" align="center">
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+            <tr><td align="center" style="padding-bottom:18px;">
+              <table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="height:1px;width:44px;background-color:#c09047;font-size:0;line-height:0;">&nbsp;</td></tr></table>
+            </td></tr>
+            <tr><td align="center" style="font-family:${font};font-size:11px;letter-spacing:2px;color:#f2d592;padding-bottom:16px;">${t.eyebrow}</td></tr>
+            <tr><td align="center" style="font-family:${font};font-size:30px;line-height:1.2;font-weight:bold;color:#ffffff;padding-bottom:16px;">${t.heading}</td></tr>
+            <tr><td align="center" style="font-family:${font};font-size:15px;line-height:1.7;color:#b8b2a6;padding-bottom:30px;">${t.body}</td></tr>
+            <tr><td align="center" style="padding-bottom:28px;">
+              <a href="https://aptelle.com" style="display:inline-block;background-color:#c09047;color:#08080b;font-family:${font};font-size:15px;font-weight:bold;text-decoration:none;padding:14px 30px;border-radius:8px;">${t.cta}</a>
+            </td></tr>
+            <tr><td align="center" style="font-family:${font};font-size:12px;line-height:1.6;color:#6f6a60;">${t.ignore}</td></tr>
+          </table>
+        </td></tr>
+        <tr><td align="center" style="padding-top:22px;font-family:${font};font-size:12px;color:#6f6a60;">
+          <a href="https://aptelle.com" style="color:#f2d592;text-decoration:none;">aptelle.com</a> &middot; A <a href="https://cognielevate.co" style="color:#f2d592;text-decoration:none;">CogniElevate</a> project
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+}
 
 async function sendAcknowledgement(email: string, lang: string): Promise<void> {
   const apiKey = Deno.env.get("RESEND_API_KEY");
   if (!apiKey) return; // dormant until Resend is configured
 
   const t = ACK[lang] || ACK.en;
+  const dir = lang === "ar" ? "rtl" : "ltr";
+  const text = `${t.heading}. ${t.body}\n\n${t.ignore}\n\nAptelle\nhttps://aptelle.com`;
   try {
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -60,7 +122,8 @@ async function sendAcknowledgement(email: string, lang: string): Promise<void> {
         from: "Aptelle <hello@aptelle.com>",
         to: [email],
         subject: t.subject,
-        text: t.text,
+        text,
+        html: ackHtml(t, dir),
       }),
     });
     if (!res.ok) console.error("ack email failed", res.status);
