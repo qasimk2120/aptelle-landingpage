@@ -1043,11 +1043,17 @@ footer {
   flex-wrap: wrap;
 }
 
-/* .legal sits inside .wrap (max-width: var(--maxw), same full site width as every
-   other section) — it used to hard-override that down to a boxed 760px column,
-   which is why the page read narrow/centered instead of edge-to-edge like the
-   rest of the site. Reading-length is constrained per-paragraph below instead. */
+/* Previous fix was wrong: dropping .legal's max-width let it inherit .wrap's
+   full var(--maxw) (1760px) with no centering on the text itself, so the
+   heading/paragraphs just hugged the left padding and left a huge dead void
+   on the right — worse than the original boxed-760px version, not better.
+   Centering a wider (not edge-to-edge-literal, that breaks readability for
+   paragraphs) column instead: balanced margins on both sides, framed by the
+   gold-dust edges either side, matching how the rest of the site actually
+   reads rather than a lopsided-left dead-space layout. */
 .legal {
+  max-width: 900px;
+  margin-inline: auto;
   padding-block: clamp(128px, 12vw, 168px) 78px;
 }
 
@@ -1075,7 +1081,6 @@ footer {
 
 .legal p,
 .legal li {
-  max-width: 720px;
   margin-bottom: 12px;
   color: var(--muted-strong);
   font-size: 1.02rem;
@@ -1083,7 +1088,6 @@ footer {
 }
 
 .legal ul {
-  max-width: 720px;
   margin-bottom: 12px;
   padding-inline-start: 22px;
 }
