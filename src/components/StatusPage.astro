@@ -13,14 +13,19 @@ interface Props {
   icon?: string;
   subHref?: string;
   subLabel?: string;
+  big?: boolean; // render the eyebrow as a large display code (404)
 }
-const { eyebrow, h1, h1accent = "", body, ctaHref, ctaLabel, icon = "lucide:arrow-left", subHref = "", subLabel = "" } = Astro.props;
+const { eyebrow, h1, h1accent = "", body, ctaHref, ctaLabel, icon = "lucide:arrow-left", subHref = "", subLabel = "", big = false } = Astro.props;
 ---
 <section class="statusPage">
   <div class="wrap">
-    <div class="kicker">
-      <span class="ktext">{eyebrow}</span>
-    </div>
+    {big ? (
+      <div class="bigCode" aria-hidden="true">{eyebrow}</div>
+    ) : (
+      <div class="kicker">
+        <span class="ktext">{eyebrow}</span>
+      </div>
+    )}
     <h1>{h1}{h1accent && <span class="accent"> {h1accent}</span>}</h1>
     <p class="lead">{body}</p>
     <a class="statusCta" href={ctaHref}><Icon name={icon} aria-hidden="true" />{ctaLabel}</a>
@@ -31,3 +36,18 @@ const { eyebrow, h1, h1accent = "", body, ctaHref, ctaLabel, icon = "lucide:arro
     )}
   </div>
 </section>
+
+<style>
+  .bigCode {
+    font-weight: 800;
+    font-size: clamp(6rem, 20vw, 14rem);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--soft-gold), var(--gold) 45%, var(--bronze));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+</style>

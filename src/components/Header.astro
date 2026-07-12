@@ -11,6 +11,7 @@ const s = t(lang);
     <a class="brand" href={localeHref(lang)} aria-label="Aptelle home" translate="no"><span class="word">Apt<span class="elle">Elle</span></span></a>
     <div class="navright">
       <a class="navlink" href={localeHref(lang)}>{s.home ?? "Home"}</a>
+      <a class="navlink" href="/team">Team</a>
       <LangSwitcher lang={lang} path={path} />
       <a class="navcta" href="#waitlist">{s.navCta}</a>
       <button class="menubtn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu">
@@ -20,6 +21,7 @@ const s = t(lang);
   </div>
   <nav id="mnav" class="mnav" aria-label="Mobile">
     <a href={localeHref(lang)}>{s.home ?? "Home"}</a>
+    <a href="/team">Team</a>
     <a href="#waitlist">{s.navCta}</a>
   </nav>
 </header>
