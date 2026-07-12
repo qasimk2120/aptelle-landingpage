@@ -30,7 +30,7 @@ const team = [
   <main id="main" class="team-page">
     <section class="wrap team">
       <p class="eyebrow">The people building it</p>
-      <h1>Two people, building in the <span class="accent">open</span></h1>
+      <h1>Meet the <span class="accent">Team</span></h1>
       <p class="lead">Aptelle is small on purpose. No committee, no filler. Just the two of us shipping the fit layer for online fashion.</p>
 
       <div class="grid">
@@ -66,10 +66,12 @@ const team = [
     margin-bottom: 14px;
   }
   h1 {
+    max-width: none;
     font-size: clamp(2.1rem, 5vw, 3.4rem);
     line-height: 1.06;
     font-weight: 700;
     letter-spacing: -0.02em;
+    text-wrap: nowrap;
   }
   h1 .accent {
     color: var(--champagne);
@@ -77,10 +79,11 @@ const team = [
   }
   .lead {
     margin-top: 18px;
-    max-width: 60ch;
+    max-width: 72ch;
     color: var(--muted);
     font-size: clamp(1.02rem, 1.6vw, 1.2rem);
     line-height: 1.6;
+    text-wrap: pretty;
   }
   .grid {
     margin-top: clamp(40px, 7vh, 72px);
