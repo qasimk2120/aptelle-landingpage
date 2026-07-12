@@ -1,0 +1,92 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+const lang = "en" as const;
+
+// Paste the JotForm share URL (or the numeric form ID) here. Leave empty and the
+// page shows a placeholder note instead of a broken embed.
+const formUrl = "https://form.jotform.com/261875609426063";
+---
+<Base
+  lang={lang}
+  path="validate"
+  localized={false}
+  title="Shape Aptelle | 2 minute survey"
+  description="Tell us how you buy clothes online. Every answer shapes what we build first."
+  noindex
+>
+  <Header lang={lang} path="validate" />
+  <main id="main" class="validate-page legal-page">
+    <section class="wrap legal">
+      <p class="eyebrow">Help shape what we build</p>
+      <h1>Two minutes, <span class="accent">real influence</span></h1>
+      <p class="lead">A few questions about how you actually buy clothes online. Where it goes wrong, what you do when a size fails, what would make you trust a recommendation. Everyone who answers shapes the first version and gets early access.</p>
+
+      {formUrl ? (
+        <div class="formWrap">
+          <iframe
+            src={formUrl}
+            title="Aptelle validation survey"
+            loading="lazy"
+            allow="geolocation; microphone; camera"
+          ></iframe>
+        </div>
+      ) : (
+        <p class="pending">Survey link goes here. Drop the JotForm URL into <code>formUrl</code> in <code>src/pages/validate.astro</code>.</p>
+      )}
+    </section>
+  </main>
+  <Footer lang={lang} />
+</Base>
+
+<style>
+  .validate-page .legal {
+    max-width: 860px;
+  }
+  .eyebrow {
+    color: var(--champagne);
+    font-size: 0.86rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .validate-page h1 .accent {
+    color: var(--champagne);
+    font-style: italic;
+  }
+  .validate-page .lead {
+    max-width: 66ch;
+    margin: 16px 0 8px;
+    color: var(--muted);
+    font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+    line-height: 1.65;
+  }
+  .formWrap {
+    margin-top: clamp(28px, 4vh, 48px);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface-2);
+  }
+  .formWrap iframe {
+    display: block;
+    width: 100%;
+    min-height: 1000px;
+    border: 0;
+  }
+  .pending {
+    margin-top: 28px;
+    padding: 18px 20px;
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 0.98rem;
+  }
+  .pending code {
+    color: var(--champagne);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+</style>

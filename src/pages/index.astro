@@ -11,8 +11,53 @@ const lang = "en" as const;
   <Header lang={lang} />
   <main id="main">
     <Hero lang={lang} />
+    <aside class="shapeStrip">
+      <div class="wrap shapeRow">
+        <p class="shapeText">Help shape Aptelle. <span>Two minutes on how you buy clothes online.</span></p>
+        <a class="shapeLink" href="/validate">Take the survey <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </aside>
     <Values lang={lang} />
     <Vision lang={lang} />
   </main>
   <Footer lang={lang} />
 </Base>
+
+<style>
+  .shapeStrip {
+    position: relative;
+    z-index: 2;
+    margin: clamp(8px, 3vw, 32px) auto clamp(24px, 5vw, 56px);
+  }
+  .shapeRow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 28px;
+    padding: clamp(16px, 2.4vw, 22px) clamp(18px, 2.6vw, 28px);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(26, 26, 29, 0.7), rgba(17, 17, 20, 0.7));
+  }
+  .shapeText {
+    margin: 0;
+    color: var(--text);
+    font-size: clamp(1rem, 1.6vw, 1.12rem);
+    font-weight: 600;
+  }
+  .shapeText span {
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .shapeLink {
+    color: var(--champagne);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.18s ease;
+  }
+  .shapeLink:hover {
+    color: var(--soft-gold);
+  }
+</style>
