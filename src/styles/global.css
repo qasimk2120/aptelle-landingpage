@@ -1326,6 +1326,7 @@ footer {
 .legal-page {
   position: relative;
   isolation: isolate;
+  min-height: calc(100vh - 120px);
 }
 
 .legal-page::before,
@@ -1363,6 +1364,7 @@ footer {
 
 /* Status pages also get the hero's center glow so the headline sits in the
    same warm pool of light as the homepage */
+.legal-page::after,
 .statusPage::after {
   content: "";
   position: absolute;
