@@ -60,6 +60,10 @@ type Strings = {
   contactH1: string;
   contactBody: string;
   contactCta: string;
+  cookieText: string;
+  cookieAccept: string;
+  cookieReject: string;
+  surveyTab: string;
 };
 
 export const ui: Record<Lang, Strings> = {
@@ -117,6 +121,10 @@ export const ui: Record<Lang, Strings> = {
     contactH1: "Contact",
     contactBody: "Questions, feedback or press. One inbox, read by the founder",
     contactCta: "Write to us",
+    cookieText: "We use cookies to run this site and to load our survey form. Accept to enable the embedded survey.",
+    cookieAccept: "Accept",
+    cookieReject: "Reject",
+    surveyTab: "Shape Aptelle",
   },
   fr: {
     title: "Aptelle | Trouvez votre bonne taille dans chaque marque",
@@ -176,6 +184,10 @@ export const ui: Record<Lang, Strings> = {
     contactH1: "Contact",
     contactBody: "Questions, retours ou presse. Une seule boîte, lue par le fondateur",
     contactCta: "Écrivez-nous",
+    cookieText: "Nous utilisons des cookies pour faire fonctionner ce site et charger notre formulaire. Acceptez pour activer le sondage intégré.",
+    cookieAccept: "Accepter",
+    cookieReject: "Refuser",
+    surveyTab: "Façonner Aptelle",
   },
   de: {
     title: "Aptelle | Finde deine richtige Größe in jeder Marke",
@@ -231,6 +243,10 @@ export const ui: Record<Lang, Strings> = {
     contactH1: "Kontakt",
     contactBody: "Fragen, Feedback oder Presse. Ein Postfach, gelesen vom Gründer",
     contactCta: "Schreib uns",
+    cookieText: "Wir verwenden Cookies, um diese Seite zu betreiben und unser Formular zu laden. Akzeptiere, um die eingebettete Umfrage zu aktivieren.",
+    cookieAccept: "Akzeptieren",
+    cookieReject: "Ablehnen",
+    surveyTab: "Aptelle mitgestalten",
   },
   ar: {
     title: "Aptelle | اعرف مقاسك الصحيح في أي علامة تجارية",
@@ -286,6 +302,10 @@ export const ui: Record<Lang, Strings> = {
     contactH1: "تواصل معنا",
     contactBody: "أسئلة أو ملاحظات أو صحافة. بريد واحد يقرأه المؤسس",
     contactCta: "راسلنا",
+    cookieText: "نستخدم ملفات تعريف الارتباط لتشغيل هذا الموقع وتحميل نموذج الاستبيان. اقبل لتفعيل الاستبيان المضمّن.",
+    cookieAccept: "قبول",
+    cookieReject: "رفض",
+    surveyTab: "شارك في تشكيل Aptelle",
   },
 };
 

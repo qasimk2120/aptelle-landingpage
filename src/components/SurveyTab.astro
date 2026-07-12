@@ -1,0 +1,68 @@
+---
+import { Icon } from "astro-icon/components";
+import { t, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+---
+<div id="surveyTab" class="surveyTab" hidden>
+  <a class="surveyTabLink" href="/validate">
+    <Icon name="lucide:clipboard-list" aria-hidden="true" />
+    <span>{s.surveyTab}</span>
+  </a>
+  <button type="button" id="surveyTabClose" class="surveyTabClose" aria-label="Dismiss">
+    <Icon name="lucide:x" aria-hidden="true" />
+  </button>
+</div>
+
+<script>
+  const KEY = "aptelle-survey-tab";
+  const tab = document.getElementById("surveyTab");
+  const dismissed = (() => { try { return localStorage.getItem(KEY); } catch (e) { return null; } })();
+  if (tab && dismissed !== "dismissed") tab.hidden = false;
+  document.getElementById("surveyTabClose")?.addEventListener("click", () => {
+    if (tab) tab.hidden = true;
+    try { localStorage.setItem(KEY, "dismissed"); } catch (e) {}
+  });
+</script>
+
+<style>
+  .surveyTab {
+    position: fixed;
+    inset-inline-end: clamp(14px, 3vw, 26px);
+    bottom: clamp(14px, 3vw, 26px);
+    z-index: 55;
+    display: flex;
+    align-items: stretch;
+    border: 1px solid rgba(255, 232, 179, 0.5);
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(118deg, var(--bronze) 0%, var(--gold) 52%, var(--soft-gold) 100%);
+    box-shadow: 0 12px 34px -14px rgba(192, 144, 71, 0.7);
+  }
+  .surveyTabLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 12px 14px;
+    color: var(--bg);
+    font-weight: 700;
+    font-size: 0.96rem;
+    text-decoration: none;
+  }
+  .surveyTabLink svg { width: 18px; height: 18px; flex: none; }
+  .surveyTabClose {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    border: 0;
+    border-inline-start: 1px solid rgba(11, 9, 6, 0.25);
+    background: transparent;
+    color: var(--bg);
+    cursor: pointer;
+    transition: background 0.18s ease;
+  }
+  .surveyTabClose:hover { background: rgba(11, 9, 6, 0.14); }
+  .surveyTabClose svg { width: 15px; height: 15px; }
+</style>

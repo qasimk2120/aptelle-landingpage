@@ -26,11 +26,16 @@ const formUrl = "https://form.jotform.com/261875609426063";
       {formUrl ? (
         <div class="formWrap">
           <iframe
-            src={formUrl}
+            data-consent-src={formUrl}
             title="Aptelle validation survey"
             loading="lazy"
-            allow="geolocation; microphone; camera"
+            allow="geolocation"
+            hidden
           ></iframe>
+          <div class="consentGate" data-consent-hide id="surveyGate">
+            <p>The survey is embedded from JotForm, which sets cookies. Accept to load it.</p>
+            <button type="button" id="surveyGateAccept" class="gateBtn">Accept and load the survey</button>
+          </div>
         </div>
       ) : (
         <p class="pending">Survey link goes here. Drop the JotForm URL into <code>formUrl</code> in <code>src/pages/validate.astro</code>.</p>
@@ -79,6 +84,28 @@ const formUrl = "https://form.jotform.com/261875609426063";
     min-height: 1000px;
     border: 0;
   }
+  .consentGate {
+    padding: clamp(28px, 5vw, 56px) 24px;
+    text-align: center;
+  }
+  .consentGate p {
+    margin: 0 auto 18px;
+    max-width: 46ch;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .gateBtn {
+    min-height: 46px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 232, 179, 0.5);
+    background: linear-gradient(118deg, var(--bronze) 0%, var(--gold) 52%, var(--soft-gold) 100%);
+    color: var(--bg);
+    font-weight: 700;
+    cursor: pointer;
+    transition: filter 0.18s ease;
+  }
+  .gateBtn:hover { filter: brightness(1.08); }
   .pending {
     margin-top: 28px;
     padding: 18px 20px;
@@ -93,3 +120,17 @@ const formUrl = "https://form.jotform.com/261875609426063";
     font-size: 0.9em;
   }
 </style>
+
+<script>
+  document.getElementById("surveyGateAccept")?.addEventListener("click", () => {
+    try { localStorage.setItem("aptelle-cookie-consent", "accepted"); } catch (e) {}
+    document.querySelectorAll<HTMLIFrameElement>("[data-consent-src]").forEach((el) => {
+      if (!el.getAttribute("src")) el.setAttribute("src", el.dataset.consentSrc || "");
+      el.hidden = false;
+    });
+    const gate = document.getElementById("surveyGate");
+    if (gate) gate.hidden = true;
+    const banner = document.getElementById("cookieBanner");
+    if (banner) banner.hidden = true;
+  });
+</script>

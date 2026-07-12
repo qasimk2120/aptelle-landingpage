@@ -1,6 +1,8 @@
 ---
 import "../styles/global.css";
 import { t, dir, type Lang, localeHref } from "../i18n/ui";
+import ConsentBanner from "../components/ConsentBanner.astro";
+import SurveyTab from "../components/SurveyTab.astro";
 
 interface Props {
   lang: Lang;
@@ -79,5 +81,7 @@ const ogImage = `${site}/og-image.png`;
   <body>
     <a class="skip" href="#main">{s.skip}</a>
     <slot />
+    {path !== "validate" && <SurveyTab lang={lang} />}
+    <ConsentBanner lang={lang} />
   </body>
 </html>
