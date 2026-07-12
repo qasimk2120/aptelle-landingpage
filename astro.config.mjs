@@ -15,6 +15,9 @@ export default defineConfig({
   integrations: [
     icon(),
     sitemap({
+      // Keep noindex pages out of the sitemap so it does not contradict the
+      // robots meta on /validate and /joined.
+      filter: (page) => !/\/(validate|joined)\/?$/.test(page),
       i18n: {
         defaultLocale: "en",
         locales: { en: "en", fr: "fr", de: "de", ar: "ar" },

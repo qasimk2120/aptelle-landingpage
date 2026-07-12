@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import Base from "../layouts/Base.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -24,22 +25,31 @@ const team = [
   path="team"
   localized={false}
   title="Team | Aptelle"
-  description="The two people building Aptelle, the fit intelligence layer for online fashion."
+  description="The two people building Aptelle, the fit intelligence layer for online fashion, and why we started it."
 >
   <Header lang={lang} path="team" />
   <main id="main" class="team-page legal-page">
     <section class="wrap team">
-      <p class="eyebrow">The people building it</p>
-      <h1>Meet the <span class="accent">Team</span></h1>
-      <p class="lead">Aptelle is small on purpose. No committee, no filler. Just the two of us shipping the fit layer for online fashion.</p>
+      <p class="eyebrow">Meet the team</p>
+      <h1>The people behind <span class="accent">your right size</span></h1>
+
+      <div class="story">
+        <p>Buying clothes online is a gamble. Every brand sizes differently, so an M in one place is an L in another, and you only find out after it lands at your door.</p>
+        <p>So we are building the fit layer. Tell Aptelle the sizes you already own and it tells you your size in any brand before you buy, with a confidence score you can trust. Small team on purpose, building in the open. Here is who is behind it.</p>
+      </div>
 
       <div class="grid">
         {team.map((m) => (
-          <article class="member">
-            <div class="tile" aria-hidden="true"><span translate="no">{m.initials}</span></div>
-            <h2 translate="no">{m.name}</h2>
-            <p class="role">{m.title}</p>
-            <p class="bio">{m.bio}</p>
+          <article class="person">
+            <div class="photo" aria-hidden="true">
+              <Icon name="lucide:user-round" />
+              <span class="badge" translate="no">{m.initials}</span>
+            </div>
+            <div class="pbody">
+              <h2 translate="no">{m.name}</h2>
+              <p class="role">{m.title}</p>
+              <p class="bio">{m.bio}</p>
+            </div>
           </article>
         ))}
       </div>
@@ -57,7 +67,7 @@ const team = [
     padding-block: clamp(64px, 12vh, 140px) clamp(48px, 10vh, 120px);
   }
   .team {
-    max-width: 1100px;
+    max-width: 1080px;
   }
   .eyebrow {
     color: var(--champagne);
@@ -67,56 +77,83 @@ const team = [
     text-transform: uppercase;
     margin-bottom: 14px;
   }
-  h1 {
+  .team-page h1 {
     max-width: none;
     font-size: clamp(2.1rem, 5vw, 3.4rem);
     line-height: 1.06;
     font-weight: 700;
     letter-spacing: -0.02em;
-    text-wrap: nowrap;
   }
-  h1 .accent {
+  .team-page h1 .accent {
     color: var(--champagne);
     font-style: italic;
   }
-  .lead {
-    margin-top: 18px;
-    max-width: 72ch;
+  .story {
+    margin-top: 20px;
+    max-width: 66ch;
+    display: grid;
+    gap: 14px;
+  }
+  .story p {
     color: var(--muted);
-    font-size: clamp(1.02rem, 1.6vw, 1.2rem);
-    line-height: 1.6;
-    text-wrap: pretty;
+    font-size: clamp(1.02rem, 1.6vw, 1.18rem);
+    line-height: 1.65;
   }
   .grid {
     margin-top: clamp(40px, 7vh, 72px);
     display: grid;
-    gap: clamp(20px, 3vw, 32px);
+    gap: clamp(20px, 3vw, 30px);
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  @media (max-width: 640px) {
+  @media (max-width: 620px) {
     .grid { grid-template-columns: 1fr; }
   }
-  .member {
+  .person {
     background: var(--surface-2);
     border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: clamp(24px, 3vw, 36px);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.18s ease, border-color 0.18s ease;
   }
-  .tile {
-    width: 72px;
-    height: 72px;
-    border-radius: 8px;
+  .person:hover {
+    transform: translateY(-3px);
+    border-color: rgba(242, 213, 146, 0.4);
+  }
+  .photo {
+    position: relative;
+    aspect-ratio: 4 / 3;
     display: grid;
     place-items: center;
-    margin-bottom: 22px;
+    background:
+      radial-gradient(120% 120% at 50% 30%, rgba(242, 213, 146, 0.16), transparent 60%),
+      linear-gradient(160deg, #17140d, #0c0b08);
+    border-bottom: 1px solid var(--line);
+  }
+  .photo svg {
+    width: 34%;
+    height: auto;
+    color: rgba(242, 213, 146, 0.55);
+  }
+  .badge {
+    position: absolute;
+    inset-inline-end: 14px;
+    bottom: 14px;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
     background: linear-gradient(135deg, var(--bronze), var(--gold) 55%, var(--champagne));
     color: #0b0906;
     font-weight: 800;
-    font-size: 1.5rem;
+    font-size: 0.95rem;
     letter-spacing: 0.02em;
   }
-  .member h2 {
-    font-size: 1.4rem;
+  .pbody {
+    padding: clamp(20px, 2.6vw, 28px);
+  }
+  .person h2 {
+    font-size: 1.35rem;
     font-weight: 700;
     letter-spacing: -0.01em;
   }
