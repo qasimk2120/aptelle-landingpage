@@ -100,10 +100,16 @@ const team = [
     font-style: italic;
   }
   .story {
-    margin-top: 20px;
-    max-width: 66ch;
+    margin-top: 22px;
     display: grid;
-    gap: 14px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px clamp(32px, 5vw, 64px);
+  }
+  @media (max-width: 720px) {
+    .story {
+      grid-template-columns: 1fr;
+      max-width: 66ch;
+    }
   }
   .story p {
     color: var(--muted);
