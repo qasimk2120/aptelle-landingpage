@@ -52,7 +52,6 @@ const team = [
                 src={m.photo}
                 alt={`${m.name}, ${m.title}`}
                 loading="lazy"
-                onerror="this.remove()"
               />
               <span class="badge" translate="no" aria-hidden="true">{m.initials}</span>
             </div>
@@ -70,6 +69,16 @@ const team = [
   </main>
   <Footer lang={lang} />
 </Base>
+
+<script>
+  // CSP-clean photo fallback: if a headshot file is missing, drop the <img> so
+  // the gold silhouette placeholder shows through. Replaces an inline onerror.
+  document.querySelectorAll<HTMLImageElement>(".person img").forEach((img) => {
+    const drop = () => img.remove();
+    if (img.complete && img.naturalWidth === 0) drop();
+    else img.addEventListener("error", drop);
+  });
+</script>
 
 <style>
   /* Background dust + gold-wash + min-height come from the shared .legal-page
