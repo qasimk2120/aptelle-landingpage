@@ -22,10 +22,17 @@ html, body { min-width: 0; max-width: 100%; overflow-x: clip; }
 body {
   min-height: 100vh;
   background-color: var(--bg);
-  background-image: url("/gold-fleck.svg"), url("/gold-fleck.svg"), url("/gold-fleck.svg");
-  background-position: 0 0, 240px 170px, 510px 420px;
-  background-repeat: repeat, repeat, repeat;
-  background-size: 520px 520px, 720px 720px, 880px 880px;
+  background-image:
+    url("/gold-fleck.svg"),
+    url("/gold-fleck.svg"),
+    url("/gold-fleck.svg"),
+    radial-gradient(1100px 560px at 50% -10%, rgba(192, 144, 71, .24), transparent 60%),
+    radial-gradient(900px 520px at 92% 22%, rgba(134, 81, 28, .16), transparent 62%),
+    radial-gradient(780px 500px at 0% 94%, rgba(134, 81, 28, .18), transparent 60%),
+    linear-gradient(180deg, #0B0A07 0%, #08080B 46%, #0B0906 100%);
+  background-position: 0 0, 240px 170px, 510px 420px, center, center, center, center;
+  background-repeat: repeat, repeat, repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 520px 520px, 720px 720px, 880px 880px, auto, auto, auto, auto;
   color: var(--text);
   font-family: var(--body);
   line-height: 1.6;
