@@ -74,7 +74,7 @@ const formUrl = "https://form.jotform.com/261875609426063";
   .formWrap {
     margin-top: clamp(28px, 4vh, 48px);
     border: 1px solid var(--line);
-    border-radius: 8px;
+    border-radius: 0;
     overflow: hidden;
     background: var(--surface-2);
   }
@@ -100,20 +100,19 @@ const formUrl = "https://form.jotform.com/261875609426063";
   .gateBtn {
     min-height: 46px;
     padding: 12px 24px;
-    border-radius: 8px;
     border: 1px solid rgba(255, 232, 179, 0.5);
-    background: linear-gradient(118deg, var(--bronze) 0%, var(--gold) 52%, var(--soft-gold) 100%);
-    color: var(--bg);
+    background: transparent;
+    color: var(--champagne);
     font-weight: 700;
     cursor: pointer;
     transition: filter 0.18s ease;
   }
-  .gateBtn:hover { filter: brightness(1.08); }
+  .gateBtn:hover { color: var(--soft-gold); }
   .pending {
     margin-top: 28px;
     padding: 18px 20px;
     border: 1px dashed var(--line);
-    border-radius: 8px;
+    border-radius: 0;
     color: var(--muted);
     font-size: 0.98rem;
   }

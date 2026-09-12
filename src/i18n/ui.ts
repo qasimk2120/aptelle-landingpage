@@ -42,6 +42,9 @@ type Strings = {
   chips: [string, string, string];
   featuresTitle: string;
   values: { t: string; p: string }[];
+  answersLabel: string;
+  answersTitle: string;
+  faqs: { q: string; a: string }[];
   visionPre: string;
   visionEm: string;
   visionPost: string;
@@ -68,14 +71,14 @@ type Strings = {
 
 export const ui: Record<Lang, Strings> = {
   en: {
-    title: "Aptelle | Find your right size in any brand",
+    title: "Aptelle | Fit intelligence for finding your size",
     description:
-      "Aptelle helps you find the right size in any brand before you buy, powered by your body profile and real fit data. Join the waitlist",
+      "Aptelle is building fit intelligence to help you find your likely size across clothing brands before you buy. Join the pre-launch waitlist.",
     eyebrow: "Fit intelligence, launching soon",
     h1a: "Your ",
     h1accent: "right size",
     h1b: " in any brand",
-    lead: "Aptelle helps you find the right size in any brand before you buy, powered by your body profile and real fit data",
+    lead: "Aptelle is being built to help you find your likely size in any brand before you buy, using your body profile and real fit data",
     home: "Home",
     navCta: "Join the Waitlist",
     emailPlaceholder: "you@email.com",
@@ -102,6 +105,13 @@ export const ui: Record<Lang, Strings> = {
         p: "Every recommendation comes with a clear confidence score, so you know when to buy and when to size up or down",
       },
     ],
+    answersLabel: "Aptelle, clearly",
+    answersTitle: "Questions, answered",
+    faqs: [
+      { q: "What is Aptelle?", a: "Aptelle is a pre-launch fit-intelligence platform for online clothing. It is being built to recommend the size most likely to fit you in a new brand before you buy." },
+      { q: "How will Aptelle recommend a size?", a: "Aptelle combines your body profile, the sizes you already wear, fit preferences and real fit outcomes from similar shoppers. Each recommendation is designed to include a confidence score." },
+      { q: "Can I use Aptelle today?", a: "Not yet. Aptelle is in development. Joining the waitlist means we can tell you when early access opens. It does not guarantee access or a specific feature." },
+    ],
     visionPre: "We are building the ",
     visionEm: "fit layer",
     visionPost:
@@ -127,14 +137,14 @@ export const ui: Record<Lang, Strings> = {
     surveyTab: "Shape Aptelle",
   },
   fr: {
-    title: "Aptelle | Trouvez votre bonne taille dans chaque marque",
+    title: "Aptelle | L’intelligence d’ajustement pour votre taille",
     description:
-      "Aptelle vous aide à trouver la bonne taille dans chaque marque avant d'acheter, grâce à votre profil corporel et à des données d'ajustement réelles. Rejoignez la liste d'attente",
+      "Aptelle développe une intelligence d’ajustement pour vous aider à trouver votre taille probable dans chaque marque avant l’achat. Rejoignez la liste d’attente.",
     eyebrow: "Intelligence d'ajustement, bientôt disponible",
     h1a: "Votre ",
     h1accent: "bonne taille",
     h1b: " dans chaque marque",
-    lead: "Aptelle vous aide à trouver la bonne taille dans chaque marque avant d'acheter, grâce à votre profil corporel et à des données d'ajustement réelles",
+    lead: "Aptelle est conçu pour vous aider à trouver votre taille probable dans chaque marque avant l’achat, grâce à votre profil corporel et à des données d’ajustement réelles",
     home: "Accueil",
     navCta: "Rejoindre la liste d'attente",
     emailPlaceholder: "vous@email.com",
@@ -165,6 +175,13 @@ export const ui: Record<Lang, Strings> = {
         p: "Chaque recommandation s'accompagne d'un indice de confiance clair, pour savoir quand acheter et quand prendre une taille au-dessus ou en dessous",
       },
     ],
+    answersLabel: "Aptelle, clairement",
+    answersTitle: "Vos questions, nos réponses",
+    faqs: [
+      { q: "Qu’est-ce qu’Aptelle ?", a: "Aptelle est une plateforme d’intelligence d’ajustement pour les vêtements en ligne, actuellement en pré-lancement. Elle est conçue pour recommander la taille la plus susceptible de vous convenir dans une nouvelle marque avant l’achat." },
+      { q: "Comment Aptelle recommandera-t-elle une taille ?", a: "Aptelle combinera votre profil corporel, les tailles que vous portez déjà, vos préférences d’ajustement et les résultats réels d’acheteurs similaires. Chaque recommandation devrait inclure un indice de confiance." },
+      { q: "Puis-je utiliser Aptelle aujourd’hui ?", a: "Pas encore. Aptelle est en développement. Rejoindre la liste d’attente nous permet de vous prévenir à l’ouverture de l’accès anticipé. Cela ne garantit pas l’accès ni une fonctionnalité précise." },
+    ],
     visionPre: "Nous construisons la ",
     visionEm: "couche d'ajustement",
     visionPost:
@@ -190,14 +207,14 @@ export const ui: Record<Lang, Strings> = {
     surveyTab: "Façonner Aptelle",
   },
   de: {
-    title: "Aptelle | Finde deine richtige Größe in jeder Marke",
+    title: "Aptelle | Passform-Intelligenz für deine Größe",
     description:
-      "Aptelle hilft dir, in jeder Marke die richtige Größe zu finden, bevor du kaufst, auf Basis deines Körperprofils und echter Passform-Daten. Trag dich in die Warteliste ein",
+      "Aptelle entwickelt Passform-Intelligenz, die dir vor dem Kauf deine wahrscheinliche Größe in verschiedenen Marken empfehlen soll. Jetzt auf die Warteliste.",
     eyebrow: "Passform-Intelligenz, bald verfügbar",
     h1a: "Deine ",
     h1accent: "richtige Größe",
     h1b: " in jeder Marke",
-    lead: "Aptelle hilft dir, in jeder Marke die richtige Größe zu finden, bevor du kaufst, auf Basis deines Körperprofils und echter Passform-Daten",
+    lead: "Aptelle wird entwickelt, um dir vor dem Kauf deine wahrscheinliche Größe in jeder Marke auf Basis deines Körperprofils und echter Passform-Daten zu empfehlen",
     home: "Startseite",
     navCta: "Zur Warteliste",
     emailPlaceholder: "du@email.com",
@@ -224,6 +241,13 @@ export const ui: Record<Lang, Strings> = {
         p: "Jede Empfehlung kommt mit einem klaren Konfidenzwert, damit du weißt, wann du kaufen und wann du eine Größe größer oder kleiner wählen solltest",
       },
     ],
+    answersLabel: "Aptelle, klar erklärt",
+    answersTitle: "Fragen, beantwortet",
+    faqs: [
+      { q: "Was ist Aptelle?", a: "Aptelle ist eine Fit-Intelligence-Plattform für Online-Mode in der Vorbereitungsphase. Sie wird entwickelt, um dir vor dem Kauf die Größe zu empfehlen, die in einer neuen Marke am wahrscheinlichsten passt." },
+      { q: "Wie wird Aptelle eine Größe empfehlen?", a: "Aptelle kombiniert dein Körperprofil, die Größen, die du bereits trägst, deine Passformvorlieben und echte Passformergebnisse ähnlicher Käufer. Jede Empfehlung soll einen Konfidenzwert enthalten." },
+      { q: "Kann ich Aptelle heute nutzen?", a: "Noch nicht. Aptelle befindet sich in Entwicklung. Mit der Warteliste können wir dich informieren, wenn der frühe Zugang öffnet. Sie garantiert keinen Zugang und keine bestimmte Funktion." },
+    ],
     visionPre: "Wir bauen die ",
     visionEm: "Passform-Ebene",
     visionPost:
@@ -249,14 +273,14 @@ export const ui: Record<Lang, Strings> = {
     surveyTab: "Aptelle mitgestalten",
   },
   ar: {
-    title: "Aptelle | اعرف مقاسك الصحيح في أي علامة تجارية",
+    title: "Aptelle | ذكاء المقاسات لمعرفة مقاسك",
     description:
-      "يساعدك Aptelle على معرفة المقاس الصحيح في أي علامة تجارية قبل الشراء، اعتمادًا على ملف جسمك وبيانات قياس حقيقية. انضم إلى قائمة الانتظار",
+      "يعمل Aptelle على بناء ذكاء للمقاسات لمساعدتك على معرفة مقاسك المحتمل عبر علامات الملابس قبل الشراء. انضم إلى قائمة الانتظار قبل الإطلاق.",
     eyebrow: "ذكاء المقاسات، قريبًا",
     h1a: "",
     h1accent: "مقاسك الصحيح",
     h1b: " في أي علامة تجارية",
-    lead: "يساعدك Aptelle على معرفة المقاس الصحيح في أي علامة تجارية قبل الشراء، اعتمادًا على ملف جسمك وبيانات قياس حقيقية",
+    lead: "يجري تطوير Aptelle لمساعدتك على معرفة مقاسك المحتمل في أي علامة تجارية قبل الشراء، اعتمادًا على ملف جسمك وبيانات قياس حقيقية",
     home: "الرئيسية",
     navCta: "انضم إلى قائمة الانتظار",
     emailPlaceholder: "you@email.com",
@@ -282,6 +306,13 @@ export const ui: Record<Lang, Strings> = {
         t: "درجة ثقة",
         p: "تأتي كل توصية بدرجة ثقة واضحة، لتعرف متى تشتري ومتى تختار مقاسًا أكبر أو أصغر.",
       },
+    ],
+    answersLabel: "Aptelle بوضوح",
+    answersTitle: "إجابات واضحة",
+    faqs: [
+      { q: "ما هو Aptelle؟", a: "Aptelle منصة لذكاء المقاسات للملابس عبر الإنترنت وما زالت قبل الإطلاق. يجري تطويرها لترشيح المقاس الأكثر احتمالًا لأن يناسبك في علامة جديدة قبل الشراء." },
+      { q: "كيف سيرشّح Aptelle مقاسًا؟", a: "سيجمع Aptelle ملف جسمك والمقاسات التي ترتديها بالفعل وتفضيلاتك للملاءمة ونتائج ملاءمة حقيقية لمتسوقين مشابهين. صُممت كل توصية لتشمل درجة ثقة." },
+      { q: "هل يمكنني استخدام Aptelle اليوم؟", a: "ليس بعد. Aptelle قيد التطوير. الانضمام إلى قائمة الانتظار يتيح لنا إبلاغك عند فتح الوصول المبكر. لا يضمن ذلك الوصول أو ميزة محددة." },
     ],
     visionPre: "نحن نبني ",
     visionEm: "طبقة المقاسات",

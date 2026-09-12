@@ -1,0 +1,23 @@
+---
+import { t, type Lang } from "../i18n/ui";
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang);
+---
+<section class="answers" aria-labelledby="answers-title">
+  <div class="wrap">
+    <p class="kicker">{s.answersLabel}</p>
+    <h2 id="answers-title">{s.answersTitle}</h2>
+    <div class="answerList">
+      {s.faqs.map((faq, index) => (
+        <article class="answer">
+          <p class="index" aria-hidden="true">0{index + 1}</p>
+          <div>
+            <h3>{faq.q}</h3>
+            <p>{faq.a}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

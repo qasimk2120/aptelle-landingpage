@@ -1,10 +1,8 @@
 ---
-import { Icon } from "astro-icon/components";
 import { t, type Lang } from "../i18n/ui";
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
-const icons = ["lucide:ruler", "lucide:shirt", "lucide:gauge"];
 ---
 <section class="values" aria-label="How Aptelle works">
   <div class="wrap">
@@ -12,7 +10,7 @@ const icons = ["lucide:ruler", "lucide:shirt", "lucide:gauge"];
     <div class="vgrid">
       {s.values.map((v, idx) => (
         <article class="v">
-          <div class="ic" aria-hidden="true"><Icon name={icons[idx]} /></div>
+          <p class="index" aria-hidden="true">0{idx + 1}</p>
           <h3>{v.t}</h3>
           <p>{v.p}</p>
         </article>

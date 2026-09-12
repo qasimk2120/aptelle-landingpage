@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Aptelle">
-  <rect width="64" height="64" rx="14" fill="#17130E"/>
-  <text x="50%" y="53%" text-anchor="middle" dominant-baseline="central"
-        font-family="Georgia, 'Times New Roman', serif" font-size="38" font-weight="600" fill="#F6F3EC">A</text>
-  <circle cx="46" cy="20" r="5" fill="#C0492B"/>
+  <rect width="64" height="64" fill="#08080B"/>
+  <path d="M13 49 31 12 51 49M20 35h23" fill="none" stroke="#F2D592" stroke-width="4" stroke-linecap="square"/>
+  <path d="M10 54h44M15 51v6M24 51v3M33 51v6M42 51v3M51 51v6" fill="none" stroke="#C09047" stroke-width="2"/>
 </svg>

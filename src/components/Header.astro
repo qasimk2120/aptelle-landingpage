@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-icon/components";
+import BrandMark from "./BrandMark.astro";
 import LangSwitcher from "./LangSwitcher.astro";
 import { t, localeHref, type Lang } from "../i18n/ui";
 interface Props { lang: Lang; path?: string }
@@ -8,15 +8,13 @@ const s = t(lang);
 ---
 <header>
   <div class="wrap nav">
-    <a class="brand" href={localeHref(lang)} aria-label="Aptelle home" translate="no"><span class="word">Apt<span class="elle">Elle</span></span></a>
+    <a class="brand" href={localeHref(lang)} aria-label="Aptelle home" translate="no"><BrandMark /><span class="word">Apt<span class="elle">Elle</span></span></a>
     <div class="navright">
       <a class="navlink" href={localeHref(lang)}>{s.home ?? "Home"}</a>
       <a class="navlink" href="/team">Team</a>
       <LangSwitcher lang={lang} path={path} />
       <a class="navcta" href="#waitlist">{s.navCta}</a>
-      <button class="menubtn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu">
-        <Icon name="lucide:menu" aria-hidden="true" />
-      </button>
+      <button class="menubtn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span><span></span></button>
     </div>
   </div>
   <nav id="mnav" class="mnav" aria-label="Mobile">

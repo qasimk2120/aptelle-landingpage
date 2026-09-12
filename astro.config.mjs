@@ -1,5 +1,4 @@
 import { defineConfig } from "astro/config";
-import icon from "astro-icon";
 import sitemap from "@astrojs/sitemap";
 import robotsTxt from "astro-robots-txt";
 
@@ -13,7 +12,6 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   integrations: [
-    icon(),
     sitemap({
       // Keep noindex pages out of the sitemap so it does not contradict the
       // robots meta on /validate and /joined.

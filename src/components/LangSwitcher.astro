@@ -1,5 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
 import { languages, localeHref, type Lang } from "../i18n/ui";
 interface Props { lang: Lang; path?: string }
 const { lang, path = "" } = Astro.props;
@@ -7,7 +6,6 @@ const locales: Lang[] = ["en", "fr", "de", "ar"];
 ---
 <details class="lang">
   <summary aria-label="Change language">
-    <Icon name="lucide:languages" aria-hidden="true" />
     <span>{languages[lang]}</span>
   </summary>
   <ul>

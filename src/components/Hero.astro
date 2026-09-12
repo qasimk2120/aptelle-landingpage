@@ -1,5 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
 import ConfidenceCard from "./ConfidenceCard.astro";
 import { t, type Lang } from "../i18n/ui";
 interface Props { lang: Lang }
@@ -10,18 +9,14 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
 <section class="hero">
   <div class="wrap grid">
     <div class="heroCopy">
-      <div class="kicker">
-        <span class="kdot" aria-hidden="true"></span>
-        <span class="ktext">{s.eyebrow}</span>
-        <span class="kline" aria-hidden="true"></span>
-      </div>
+      <p class="kicker">{s.eyebrow}</p>
       <h1>{s.h1a}<span class="accent">{s.h1accent}</span>{s.h1b}</h1>
       <p class="lead">{s.lead}</p>
 
       <form class="signup" id="waitlist" data-lang={lang} data-ok={s.ok} data-err={s.err} novalidate>
         <label for="email" class="skip">Email</label>
         <input id="email" name="email" type="email" inputmode="email" autocomplete="email" spellcheck="false" autocapitalize="off" placeholder={s.emailPlaceholder} required />
-        <button type="submit"><Icon name="lucide:bell" aria-hidden="true" />{s.cta}</button>
+        <button type="submit">{s.cta}</button>
         {turnstileSiteKey && (
           <div
             class="cf-turnstile"
@@ -39,36 +34,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
       )}
     </div>
     <div class="heroVisual">
-      <svg class="garment" viewBox="0 0 360 440" aria-hidden="true" fill="none">
-        <!-- tailored shirt outline -->
-        <path d="M150 42 Q180 58 210 42 L262 60 Q292 76 300 122 L276 168 L252 150 L252 392 Q216 404 180 404 Q144 404 108 392 L108 150 L84 168 L60 122 Q68 76 98 60 Z" stroke="#C09047" stroke-width="1.4" stroke-linejoin="round"/>
-        <path d="M150 42 Q166 74 180 76 Q194 74 210 42" stroke="#C09047" stroke-width="1.2"/>
-        <path d="M180 84 L180 396" stroke="#C09047" stroke-width="1" stroke-dasharray="1 7" opacity=".7"/>
-        <!-- measurement guides -->
-        <g stroke="#F2D592" stroke-width="1" stroke-dasharray="5 6" opacity=".85">
-          <path d="M108 186 L252 186"/>
-          <path d="M112 296 L248 296"/>
-        </g>
-        <g stroke="#F2D592" stroke-width="1.2" opacity=".9">
-          <path d="M108 180 L108 192"/><path d="M252 180 L252 192"/>
-          <path d="M112 290 L112 302"/><path d="M248 290 L248 302"/>
-        </g>
-        <!-- fit graph nodes: spread wide of the shirt, hidden on mobile where
-             they poke out around the card -->
-        <g class="fitgraph" stroke="#C09047" stroke-width=".8" opacity=".65">
-          <path d="M108 186 L52 236"/><path d="M252 186 L316 148"/>
-          <path d="M248 296 L312 336"/><path d="M112 296 L48 348"/>
-          <path d="M316 148 L312 336"/>
-        </g>
-        <g class="fitgraph" fill="#F2D592">
-          <circle cx="108" cy="186" r="3.2"/><circle cx="252" cy="186" r="3.2"/>
-          <circle cx="112" cy="296" r="3.2"/><circle cx="248" cy="296" r="3.2"/>
-        </g>
-        <g class="fitgraph" fill="#C09047">
-          <circle cx="52" cy="236" r="2.4"/><circle cx="316" cy="148" r="2.4"/>
-          <circle cx="312" cy="336" r="2.4"/><circle cx="48" cy="348" r="2.4"/>
-        </g>
-      </svg>
+      <p class="visualLabel">A working fit recommendation, not a generic size chart</p>
       <ConfidenceCard lang={lang} />
     </div>
   </div>

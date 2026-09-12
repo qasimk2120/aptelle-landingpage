@@ -2,7 +2,6 @@
 // Shared centered page for /joined, /contact and the 404. Same canvas as the
 // hero: kicker, big headline with a gold accent, one line of body copy and a
 // gold CTA. No new visual language, just the existing one.
-import { Icon } from "astro-icon/components";
 interface Props {
   eyebrow: string;
   h1: string;
@@ -10,12 +9,11 @@ interface Props {
   body: string;
   ctaHref: string;
   ctaLabel: string;
-  icon?: string;
   subHref?: string;
   subLabel?: string;
   big?: boolean; // render the eyebrow as a large display code (404)
 }
-const { eyebrow, h1, h1accent = "", body, ctaHref, ctaLabel, icon = "lucide:arrow-left", subHref = "", subLabel = "", big = false } = Astro.props;
+const { eyebrow, h1, h1accent = "", body, ctaHref, ctaLabel, subHref = "", subLabel = "", big = false } = Astro.props;
 ---
 <section class="statusPage">
   <div class="wrap">
@@ -28,7 +26,7 @@ const { eyebrow, h1, h1accent = "", body, ctaHref, ctaLabel, icon = "lucide:arro
     )}
     <h1>{h1}{h1accent && <span class="accent"> {h1accent}</span>}</h1>
     <p class="lead">{body}</p>
-    <a class="statusCta" href={ctaHref}><Icon name={icon} aria-hidden="true" />{ctaLabel}</a>
+    <a class="statusCta" href={ctaHref}>{ctaLabel}</a>
     {subLabel && (
       <p class="statusSub">
         {subHref ? <a href={subHref}>{subLabel}</a> : subLabel}
@@ -44,10 +42,6 @@ const { eyebrow, h1, h1accent = "", body, ctaHref, ctaLabel, icon = "lucide:arro
     line-height: 0.9;
     letter-spacing: -0.03em;
     margin-bottom: 8px;
-    background: linear-gradient(135deg, var(--soft-gold), var(--gold) 45%, var(--bronze));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
+    color: var(--champagne);
   }
 </style>
