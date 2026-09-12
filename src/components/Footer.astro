@@ -1,5 +1,6 @@
 ---
 import { t, localeHref, type Lang } from "../i18n/ui";
+import BrandMark from "./BrandMark.astro";
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
@@ -9,11 +10,11 @@ const year = new Date().getFullYear();
   <div class="wrap footerInner">
     <div class="footerTop">
       <div class="footerBrand">
-        <a class="footerWordmark" href={localeHref(lang)} aria-label="Aptelle home" translate="no">Apt<span class="elle">Elle</span></a>
+        <a class="footerWordmark" href={localeHref(lang)} aria-label="Aptelle home" translate="no"><BrandMark compact />Apt<span class="elle">Elle</span></a>
         <p>{s.eyebrow}</p>
         <p class="fproj">{s.projectPre}<a href="https://cognielevate.co" rel="noopener" translate="no">CogniElevate</a>{s.projectPost}</p>
       </div>
-      <nav class="footerLinks" aria-label="Footer">
+      <nav class="footerLinks" aria-label="Footer navigation">
         <a href={localeHref(lang)}>{s.home ?? "Home"}</a>
         <a href={`${localeHref(lang)}#faq`}>FAQ</a>
         <a href="/team">Team</a>

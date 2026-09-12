@@ -127,27 +127,28 @@ form.signup { display: grid; grid-template-columns: minmax(0, 1fr) auto; max-wid
 .vision p { max-width: 17ch; color: var(--text); font-family: var(--display); font-size: clamp(3.2rem, 7.2vw, 7.8rem); font-weight: 500; letter-spacing: -.065em; line-height: .78; }
 .vision .em { color: var(--champagne); font-style: italic; }
 .answers { border-top: 1px solid var(--line); padding-block: clamp(70px, 10vw, 130px); }
+.answersGrid { display: grid; grid-template-columns: minmax(250px, .72fr) minmax(0, 1.28fr); gap: clamp(42px, 8vw, 120px); align-items: start; }
+.answersIntro { position: sticky; top: 40px; }
 .answers h2 { max-width: 10ch; font-size: clamp(2.7rem, 5vw, 5.25rem); letter-spacing: -.06em; line-height: .84; }
-.answerList { margin-top: clamp(42px, 7vw, 88px); }
-.answer { display: grid; grid-template-columns: minmax(50px, .18fr) minmax(0, 1fr); gap: 20px; border-top: 1px solid var(--line); }
-.answer:last-child { border-bottom: 1px solid var(--line); }
-.answer .index { grid-row: 1 / span 2; margin: 30px 0 0; }
-.answer summary { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 25px; color: var(--champagne); cursor: pointer; font-family: var(--display); font-size: clamp(1.8rem, 3vw, 3rem); font-weight: 600; letter-spacing: -.045em; line-height: .9; list-style: none; }
+.answerList { border-top: 1px solid var(--line); }
+.answer { border-bottom: 1px solid var(--line); }
+.answer summary { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 32px; padding: 23px 2px; color: var(--text); cursor: pointer; font-family: var(--display); font-size: clamp(1.5rem, 2.15vw, 2rem); font-weight: 600; letter-spacing: -.035em; line-height: 1; list-style: none; }
 .answer summary::-webkit-details-marker { display: none; }
-.answerToggle { flex: none; color: var(--gold); font-family: var(--body); font-size: 1.4rem; font-weight: 400; line-height: 1; }
+.answerToggle { flex: none; color: var(--gold); font-family: var(--body); font-size: 1.2rem; font-weight: 400; line-height: 1; }
 .answer[open] .answerToggle { color: var(--soft-gold); transform: rotate(45deg); }
-.answer > p:last-child { grid-column: 2; max-width: 62ch; margin: -3px 0 28px; color: var(--muted); font-size: 1rem; line-height: 1.7; }
+.answer > p:last-child { max-width: 56ch; padding: 0 42px 24px 2px; color: var(--muted); font-size: .98rem; line-height: 1.7; }
 
 .footer { border-top: 1px solid var(--line); padding-block: clamp(42px, 7vw, 82px) 23px; }
 .footerInner { display: grid; gap: clamp(42px, 7vw, 76px); }
-.footerTop { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(42px, 10vw, 150px); }
+.footerTop { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 36px clamp(42px, 8vw, 120px); }
 .footerBrand { max-width: 30ch; }
-.footerWordmark { color: var(--text); font-family: var(--display); font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 600; letter-spacing: -.055em; text-decoration: none; }
+.footerWordmark { display: inline-flex; align-items: center; gap: 12px; color: var(--text); font-family: var(--display); font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 600; letter-spacing: -.055em; text-decoration: none; }
+.footerWordmark .brandmark { width: 32px; height: 32px; }
 .footerBrand > p { margin-top: 13px; color: var(--muted); font-size: .86rem; line-height: 1.55; }
 .footerBrand > p:first-of-type { color: var(--gold); font-size: .72rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; }
 .fproj a, .footerBottom a, .footerLinks a { color: var(--muted-strong); text-decoration: none; }
 .fproj a:hover, .footerBottom a:hover, .footerLinks a:hover { color: var(--champagne); }
-.footerLinks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-content: start; gap: 17px 24px; font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; }
+.footerLinks { display: flex; max-width: 560px; justify-content: flex-end; flex-wrap: wrap; gap: 13px 25px; font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; }
 .footerBottom { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: .76rem; letter-spacing: .03em; }
 
 /* Supporting pages use the same sparse, typographic frame. */
@@ -192,9 +193,9 @@ form.signup { display: grid; grid-template-columns: minmax(0, 1fr) auto; max-wid
   .v, .v:first-child { min-height: auto; padding: 28px 0 45px; border-top: 1px solid var(--line); border-left: 0; }
   .index { margin-bottom: 30px; }
   .vision p { max-width: 12ch; }
-  .answer { grid-template-columns: 40px minmax(0, 1fr); }
-  .footerTop { grid-template-columns: 1fr; gap: 36px; }
-  .footerLinks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .answersGrid { grid-template-columns: 1fr; gap: 42px; }
+  .answersIntro { position: static; }
+  .footerLinks { justify-content: flex-start; }
   .footerBottom { align-items: flex-start; flex-direction: column; }
 }
 @media (max-width: 460px) {

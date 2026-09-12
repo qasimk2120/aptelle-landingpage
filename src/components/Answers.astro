@@ -4,14 +4,15 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const s = t(lang);
 ---
-<section class="answers" aria-labelledby="answers-title">
-  <div class="wrap">
-    <p class="kicker">{s.answersLabel}</p>
-    <h2 id="answers-title">{s.answersTitle}</h2>
+<section class="answers" id="faq" aria-labelledby="answers-title">
+  <div class="wrap answersGrid">
+    <div class="answersIntro">
+      <p class="kicker">{s.answersLabel}</p>
+      <h2 id="answers-title">{s.answersTitle}</h2>
+    </div>
     <div class="answerList">
-      {s.faqs.map((faq, index) => (
+      {s.faqs.map((faq) => (
         <details class="answer">
-          <p class="index" aria-hidden="true">0{index + 1}</p>
           <summary>
             <span>{faq.q}</span>
             <span class="answerToggle" aria-hidden="true">+</span>
