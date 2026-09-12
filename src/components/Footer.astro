@@ -5,15 +5,26 @@ const { lang } = Astro.props;
 const s = t(lang);
 const year = new Date().getFullYear();
 ---
-<footer>
-  <div class="wrap frow">
-    <div class="fcopy">&copy; {year} <span translate="no">Apt<span class="elle">Elle</span></span>. {s.rights}</div>
-    <div class="fproj">{s.projectPre}<a href="https://cognielevate.co" rel="noopener" translate="no">CogniElevate</a>{s.projectPost}</div>
-    <nav class="fnav" aria-label="Footer">
-      <a href="/team">Team</a>
-      <a href="/privacy">{s.privacy}</a>
-      <a href="/terms">{s.terms}</a>
-      <a href={localeHref(lang, "contact")}>{s.contactNav}</a>
-    </nav>
+<footer class="footer" role="contentinfo">
+  <div class="wrap footerInner">
+    <div class="footerTop">
+      <div class="footerBrand">
+        <a class="footerWordmark" href={localeHref(lang)} aria-label="Aptelle home" translate="no">Apt<span class="elle">Elle</span></a>
+        <p>{s.eyebrow}</p>
+        <p class="fproj">{s.projectPre}<a href="https://cognielevate.co" rel="noopener" translate="no">CogniElevate</a>{s.projectPost}</p>
+      </div>
+      <nav class="footerLinks" aria-label="Footer">
+        <a href={localeHref(lang)}>{s.home ?? "Home"}</a>
+        <a href={`${localeHref(lang)}#faq`}>FAQ</a>
+        <a href="/team">Team</a>
+        <a href={localeHref(lang, "contact")}>{s.contactNav}</a>
+        <a href="/privacy">{s.privacy}</a>
+        <a href="/terms">{s.terms}</a>
+      </nav>
+    </div>
+    <div class="footerBottom">
+      <div>&copy; {year} <span translate="no">Apt<span class="elle">Elle</span></span>. {s.rights}</div>
+      <a href="https://cognielevate.co" rel="noopener" translate="no">CogniElevate</a>
+    </div>
   </div>
 </footer>

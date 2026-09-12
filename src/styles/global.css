@@ -124,18 +124,26 @@ form.signup { display: grid; grid-template-columns: minmax(0, 1fr) auto; max-wid
 .answers { border-top: 1px solid var(--line); padding-block: clamp(70px, 10vw, 130px); }
 .answers h2 { max-width: 10ch; font-size: clamp(2.7rem, 5vw, 5.25rem); letter-spacing: -.06em; line-height: .84; }
 .answerList { margin-top: clamp(42px, 7vw, 88px); }
-.answer { display: grid; grid-template-columns: minmax(50px, .18fr) minmax(0, 1fr); gap: 20px; padding-block: 28px; border-top: 1px solid var(--line); }
+.answer { display: grid; grid-template-columns: minmax(50px, .18fr) minmax(0, 1fr); gap: 20px; border-top: 1px solid var(--line); }
 .answer:last-child { border-bottom: 1px solid var(--line); }
-.answer .index { margin: 3px 0 0; }
-.answer h3 { max-width: 22ch; color: var(--champagne); font-size: clamp(1.8rem, 3vw, 3rem); letter-spacing: -.045em; line-height: .9; }
-.answer h3 + p { max-width: 62ch; margin-top: 15px; color: var(--muted); font-size: 1rem; line-height: 1.7; }
+.answer .index { grid-row: 1 / span 2; margin: 30px 0 0; }
+.answer summary { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 25px; color: var(--champagne); cursor: pointer; font-family: var(--display); font-size: clamp(1.8rem, 3vw, 3rem); font-weight: 600; letter-spacing: -.045em; line-height: .9; list-style: none; }
+.answer summary::-webkit-details-marker { display: none; }
+.answerToggle { flex: none; color: var(--gold); font-family: var(--body); font-size: 1.4rem; font-weight: 400; line-height: 1; }
+.answer[open] .answerToggle { color: var(--soft-gold); transform: rotate(45deg); }
+.answer > p:last-child { grid-column: 2; max-width: 62ch; margin: -3px 0 28px; color: var(--muted); font-size: 1rem; line-height: 1.7; }
 
-footer { border-top: 1px solid var(--line); }
-.frow { display: grid; grid-template-columns: 1.1fr .8fr auto; align-items: center; gap: 28px; padding-block: 25px; color: var(--muted); font-family: var(--body); font-size: .76rem; letter-spacing: .03em; }
-.fcopy { font-family: var(--display); font-size: 1.05rem; letter-spacing: -.01em; }
-.fproj a, .fnav a { color: var(--muted-strong); text-decoration: none; }
-.fproj a:hover, .fnav a:hover { color: var(--champagne); }
-.fnav { display: flex; justify-content: flex-end; gap: 18px; }
+.footer { border-top: 1px solid var(--line); padding-block: clamp(42px, 7vw, 82px) 23px; }
+.footerInner { display: grid; gap: clamp(42px, 7vw, 76px); }
+.footerTop { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(42px, 10vw, 150px); }
+.footerBrand { max-width: 30ch; }
+.footerWordmark { color: var(--text); font-family: var(--display); font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 600; letter-spacing: -.055em; text-decoration: none; }
+.footerBrand > p { margin-top: 13px; color: var(--muted); font-size: .86rem; line-height: 1.55; }
+.footerBrand > p:first-of-type { color: var(--gold); font-size: .72rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; }
+.fproj a, .footerBottom a, .footerLinks a { color: var(--muted-strong); text-decoration: none; }
+.fproj a:hover, .footerBottom a:hover, .footerLinks a:hover { color: var(--champagne); }
+.footerLinks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-content: start; gap: 17px 24px; font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; }
+.footerBottom { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: .76rem; letter-spacing: .03em; }
 
 /* Supporting pages use the same sparse, typographic frame. */
 .legal-page { min-height: 70vh; padding-block: clamp(64px, 10vw, 132px); }
@@ -180,8 +188,9 @@ footer { border-top: 1px solid var(--line); }
   .index { margin-bottom: 30px; }
   .vision p { max-width: 12ch; }
   .answer { grid-template-columns: 40px minmax(0, 1fr); }
-  .frow { grid-template-columns: 1fr; gap: 13px; }
-  .fnav { justify-content: flex-start; flex-wrap: wrap; }
+  .footerTop { grid-template-columns: 1fr; gap: 36px; }
+  .footerLinks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footerBottom { align-items: flex-start; flex-direction: column; }
 }
 @media (max-width: 460px) {
   form.signup { grid-template-columns: 1fr; }
