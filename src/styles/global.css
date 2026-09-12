@@ -19,7 +19,19 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; background: var(--bg); }
 html, body { min-width: 0; max-width: 100%; overflow-x: clip; }
-body { min-height: 100vh; background: var(--bg); color: var(--text); font-family: var(--body); line-height: 1.6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+  background-image: url("/gold-fleck.svg"), url("/gold-fleck.svg"), url("/gold-fleck.svg");
+  background-position: 0 0, 240px 170px, 510px 420px;
+  background-repeat: repeat, repeat, repeat;
+  background-size: 520px 520px, 720px 720px, 880px 880px;
+  color: var(--text);
+  font-family: var(--body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
 a { color: inherit; }
 button, input, summary { font: inherit; }
 button, a, summary { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
